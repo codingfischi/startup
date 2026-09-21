@@ -5,185 +5,237 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>VORLAUF — Die Wartezeit vor der Therapie nutzbar machen</title>
 <meta name="description" content="VORLAUF entwickelt eine digitale Begleitung für die Wartezeit zwischen Therapieentscheidung und Therapiebeginn bei Opioid- und Benzodiazepinabhängigkeit.">
-<meta name="theme-color" content="#07100e">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0a0a0c" media="(prefers-color-scheme: dark)">
 <meta name="robots" content="noindex">
 <!--
   ============================================================
-  VORLAUF — Landingpage v4
-  Dunkle Bildsprache, Lenis-Smooth-Scroll, Sticky-Szene,
-  Mobil-Layout inkl. Menü.
+  VORLAUF — Landingpage v5 (Glas, hell)
+  Inhalte aus v4 vollständig erhalten, ergänzt um:
+  „Die Wurzel", „Die Patientenakte", „Was wir gehört haben",
+  erweitertes Evidenz-Register.
 
-  VOR DEM LIVEGANG (DSGVO):
-  Schriften (Bricolage Grotesque, Instrument Sans, IBM Plex Mono,
-  alle SIL OFL) und lenis.min.js selbst hosten statt von
-  fonts.googleapis.com / cdn.jsdelivr.net laden
-  (LG München I, 3 O 17493/20).
-
+  Schriften: Auf Apple-Geräten SF Pro (System), sonst
+  Instrument Sans. Vor Livegang Instrument Sans und
+  lenis.min.js selbst hosten (DSGVO, LG München I, 3 O 17493/20).
   Arbeitsname "VORLAUF" ist NICHT markenrechtlich geprüft.
-  Zum Umbenennen: Suche/Ersetze VORLAUF (Text) + <title>/<meta>.
   ============================================================
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap">
 
 <style>
 /* ═══════════════════════════════════════════
-   Tokens
+   Tokens — hell ist Standard
    ═══════════════════════════════════════════ */
 :root{
-  /* Grund — tiefes Grünschwarz, aus dem Marken-Ink abgeleitet */
-  --bg:#07100E;
-  --bg-2:#0C1A17;
-  --bg-3:#12241F;
-  --line:rgba(255,255,255,.11);
-  --line-2:rgba(255,255,255,.055);
+  --bg:#F5F5F7;
+  --fg:#1D1D1F;
+  --fg-2:#48484D;
+  --fg-3:#86868B;
+  --hair:rgba(0,0,0,.085);
+  --hair-2:rgba(0,0,0,.05);
 
-  --fg:#EDF3F0;
-  --fg-2:#9CB2AC;
-  --fg-3:#67807A;
+  --glass:rgba(255,255,255,.56);
+  --glass-strong:rgba(255,255,255,.8);
+  --glass-edge:rgba(255,255,255,.78);
+  --glass-hi:rgba(255,255,255,.95);
+  --shadow:rgba(28,38,58,.16);
 
-  /* Ein warmer Akzent statt fünf bunter */
-  --amber:#F0B357;
-  --amber-2:#C98B2F;
-  --teal:#43A88F;      /* das Produkt */
-  --teal-2:#2B6F5E;
-  --coral:#FF6B52;     /* ausschließlich Krise */
+  --accent:#2E7A6B;
+  --accent-soft:rgba(46,122,107,.1);
+  --coral:#C4482F;
+  --coral-soft:rgba(196,72,47,.07);
+  --sand:#A8843F;
+  --sand-soft:rgba(168,132,63,.1);
 
-  /* Helle Flächen — nur dort, wo das Produkt zu sehen ist */
-  --paper:#FBFAF7;
-  --paper-2:#EFEEE8;
-  --paper-line:#DEDCD3;
-  --paper-ink:#0D1A17;
-  --paper-ink-2:#4A5C57;
+  --btn:#1D1D1F;
+  --btn-fg:#FFFFFF;
 
-  --f-display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
-  --f-body:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  /* Farbfelder hinter dem Glas */
+  --f1:#C9E8DE;
+  --f2:#D9E0F6;
+  --f3:#F2E5CD;
+
+  /* Handy-Bildschirm */
+  --scr:#F2F2F4;
+  --scr-card:#FFFFFF;
+  --scr-line:#E3E3E8;
+  --scr-ink:#1D1D1F;
+  --scr-ink-2:#6E6E73;
+  --bezel-1:#3A3A3E;
+  --bezel-2:#161618;
+
+  --f-sans:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Instrument Sans","Segoe UI",Roboto,sans-serif;
+  --f-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 
   --max:1200px;
   --gut:20px;
-  --r:14px;
-  --r-lg:22px;
+  --r:16px;
+  --r-lg:26px;
 
   --ease-out:cubic-bezier(.23,1,.32,1);
   --ease-in-out:cubic-bezier(.77,0,.175,1);
 }
 @media(min-width:760px){ :root{ --gut:32px } }
 
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0A0A0C; --fg:#F5F5F7; --fg-2:#A1A1A6; --fg-3:#6E6E73;
+    --hair:rgba(255,255,255,.1); --hair-2:rgba(255,255,255,.06);
+    --glass:rgba(38,38,44,.5); --glass-strong:rgba(44,44,50,.74);
+    --glass-edge:rgba(255,255,255,.1); --glass-hi:rgba(255,255,255,.13); --shadow:rgba(0,0,0,.6);
+    --accent:#5DC2AA; --accent-soft:rgba(93,194,170,.13);
+    --coral:#FF7C66; --coral-soft:rgba(255,124,102,.09);
+    --sand:#D8B46C; --sand-soft:rgba(216,180,108,.12);
+    --btn:#F5F5F7; --btn-fg:#0A0A0C;
+    --f1:#0F3A32; --f2:#1A2244; --f3:#3A2D17;
+    --scr:#1C1C1E; --scr-card:#2C2C2E; --scr-line:#3A3A3C; --scr-ink:#F5F5F7; --scr-ink-2:#A1A1A6;
+    --bezel-1:#4A4A50; --bezel-2:#1A1A1C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0A0A0C; --fg:#F5F5F7; --fg-2:#A1A1A6; --fg-3:#6E6E73;
+  --hair:rgba(255,255,255,.1); --hair-2:rgba(255,255,255,.06);
+  --glass:rgba(38,38,44,.5); --glass-strong:rgba(44,44,50,.74);
+  --glass-edge:rgba(255,255,255,.1); --glass-hi:rgba(255,255,255,.13); --shadow:rgba(0,0,0,.6);
+  --accent:#5DC2AA; --accent-soft:rgba(93,194,170,.13);
+  --coral:#FF7C66; --coral-soft:rgba(255,124,102,.09);
+  --sand:#D8B46C; --sand-soft:rgba(216,180,108,.12);
+  --btn:#F5F5F7; --btn-fg:#0A0A0C;
+  --f1:#0F3A32; --f2:#1A2244; --f3:#3A2D17;
+  --scr:#1C1C1E; --scr-card:#2C2C2E; --scr-line:#3A3A3C; --scr-ink:#F5F5F7; --scr-ink-2:#A1A1A6;
+  --bezel-1:#4A4A50; --bezel-2:#1A1A1C;
+}
+
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-padding-top:90px}
 html:not(.lenis){scroll-behavior:smooth}
-/* Lenis */
 html.lenis,html.lenis body{height:auto}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
 
 body{
   margin:0;background:var(--bg);color:var(--fg);
-  font-family:var(--f-body);font-size:17px;line-height:1.6;
+  font-family:var(--f-sans);font-size:17px;line-height:1.55;letter-spacing:-.011em;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 img,svg{max-width:100%}
-a{color:var(--amber)}
-:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
 .wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
-.narrow{max-width:62ch}
+
+/* Farbfelder — liegen fest hinter allem und schimmern durch das Glas */
+.aura{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:var(--bg)}
+.aura i{position:absolute;border-radius:50%;opacity:.9;will-change:transform}
+.aura i:nth-child(1){width:62vmax;height:62vmax;left:-18vmax;top:-22vmax;
+  background:radial-gradient(circle,var(--f1) 0%,transparent 64%);animation:aura1 38s ease-in-out infinite}
+.aura i:nth-child(2){width:58vmax;height:58vmax;right:-20vmax;top:18vh;
+  background:radial-gradient(circle,var(--f2) 0%,transparent 64%);animation:aura2 44s ease-in-out infinite}
+.aura i:nth-child(3){width:50vmax;height:50vmax;left:18vw;bottom:-26vmax;
+  background:radial-gradient(circle,var(--f3) 0%,transparent 64%);animation:aura3 50s ease-in-out infinite}
+@keyframes aura1{0%,100%{transform:translate(0,0)}50%{transform:translate(8vmax,6vmax)}}
+@keyframes aura2{0%,100%{transform:translate(0,0)}50%{transform:translate(-7vmax,-5vmax)}}
+@keyframes aura3{0%,100%{transform:translate(0,0)}50%{transform:translate(6vmax,-7vmax)}}
+
+/* ═══════════════════════════════════════════
+   Glas
+   ═══════════════════════════════════════════ */
+.glass{
+  position:relative;
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid var(--glass-edge);
+  border-radius:var(--r-lg);
+  box-shadow:0 1px 0 var(--glass-hi) inset, 0 24px 60px -34px var(--shadow);
+}
+.glass.strong{background:var(--glass-strong)}
+.glass::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(145deg,rgba(255,255,255,.34),rgba(255,255,255,0) 42%);
+  opacity:.55;
+}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .glass{background:var(--glass-strong)}
+}
 
 /* ═══════════════════════════════════════════
    Typografie
    ═══════════════════════════════════════════ */
-h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:700;line-height:1.02;
-  letter-spacing:-.035em;text-wrap:balance}
-h1{font-size:clamp(2.5rem,8.6vw,5.6rem);letter-spacing:-.045em;font-weight:800}
-h2{font-size:clamp(2rem,6vw,3.9rem);letter-spacing:-.04em}
-h3{font-size:clamp(1.2rem,3.4vw,1.5rem);letter-spacing:-.025em;line-height:1.16}
+h1,h2,h3,h4{margin:0;font-weight:700;line-height:1.04;letter-spacing:-.034em;text-wrap:balance}
+h1{font-size:clamp(2.5rem,8.2vw,5.4rem);letter-spacing:-.045em}
+h2{font-size:clamp(2rem,5.8vw,3.7rem);letter-spacing:-.04em}
+h3{font-size:clamp(1.15rem,3.2vw,1.4rem);letter-spacing:-.022em;line-height:1.18}
 p{margin:0}
 
 .kicker{
   display:inline-flex;align-items:center;gap:10px;
-  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--amber);font-weight:500;
+  font-size:.78rem;font-weight:600;letter-spacing:.04em;color:var(--accent);
 }
-.kicker::before{content:"";width:20px;height:1px;background:currentColor;flex:none}
-.sub{font-size:clamp(1.02rem,2.6vw,1.18rem);line-height:1.55;color:var(--fg-2);max-width:60ch}
-.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.sub{font-size:clamp(1.03rem,2.6vw,1.2rem);line-height:1.5;color:var(--fg-2);max-width:60ch}
+.cite{font-family:var(--f-mono);font-size:.7rem;color:var(--fg-3);letter-spacing:0}
 
-section{padding-block:clamp(72px,13vw,140px);position:relative}
-.sec-head{display:grid;gap:18px;margin-bottom:clamp(36px,6vw,64px)}
+section{padding-block:clamp(72px,12vw,132px);position:relative}
+.sec-head{display:grid;gap:16px;margin-bottom:clamp(34px,6vw,60px)}
 
-/* ═══════════════════════════════════════════
-   Reveal — nur bei aktivem JS geparkt
-   ═══════════════════════════════════════════ */
+/* Reveal — nur bei aktivem JS geparkt */
 .rv{opacity:1}
-html.js .rv{opacity:0;transform:translateY(26px);
+html.js .rv{opacity:0;transform:translateY(24px);
   transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
 html.js .rv.in{opacity:1;transform:none}
 .d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
 
 /* ═══════════════════════════════════════════
-   Fortschritt + Statusleiste + Navigation
+   Fortschritt, Status, Navigation
    ═══════════════════════════════════════════ */
 .progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:2px;z-index:80;pointer-events:none}
-.progress i{display:block;height:100%;transform:scaleX(0);transform-origin:0 50%;
-  background:linear-gradient(90deg,var(--teal),var(--amber))}
-@supports(animation-timeline:scroll()){
-  html:not(.lenis) .progress i{animation:gx linear both;animation-timeline:scroll(root block)}
-}
-@keyframes gx{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.progress i{display:block;height:100%;transform:scaleX(0);transform-origin:0 50%;background:var(--accent);opacity:.7}
 
-.statusbar{
-  background:var(--bg-2);border-bottom:1px solid var(--line-2);
-  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.02em;color:var(--fg-3);
-  position:relative;z-index:60;
-}
-.statusbar .wrap{display:flex;align-items:center;gap:10px;padding-block:9px;flex-wrap:wrap}
-.statusbar b{color:var(--fg-2);font-weight:500}
-.statusbar .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);flex:none;
+.statusbar{font-size:.76rem;color:var(--fg-3);position:relative;z-index:60;
+  border-bottom:1px solid var(--hair-2)}
+.statusbar .wrap{display:flex;align-items:center;justify-content:center;gap:9px;padding-block:9px;text-align:center}
+.statusbar b{color:var(--fg-2);font-weight:600}
+.statusbar .dot{width:6px;height:6px;border-radius:50%;background:var(--sand);flex:none;
   animation:pulse 2.4s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:70;
-  background:color-mix(in srgb,var(--bg) 78%,transparent);
-  backdrop-filter:saturate(170%) blur(18px);-webkit-backdrop-filter:saturate(170%) blur(18px);
-  border-bottom:1px solid transparent;transition:border-color .3s ease,background .3s ease}
-.nav.stuck{border-bottom-color:var(--line-2);background:color-mix(in srgb,var(--bg) 92%,transparent)}
-.nav .wrap{display:flex;align-items:center;gap:16px;height:64px}
-@media(min-width:900px){.nav .wrap{height:76px}}
+  background:transparent;border-bottom:1px solid transparent;
+  transition:background .3s ease,border-color .3s ease,-webkit-backdrop-filter .3s ease,backdrop-filter .3s ease}
+.nav.stuck{
+  background:var(--glass);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);backdrop-filter:blur(22px) saturate(180%);
+  border-bottom-color:var(--hair)}
+.nav .wrap{display:flex;align-items:center;gap:14px;height:62px}
+@media(min-width:1100px){.nav .wrap{height:70px}}
 
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg);
-  font-family:var(--f-display);font-weight:800;letter-spacing:-.02em;font-size:1.05rem;flex:none}
-.brand .glyph{width:30px;height:30px;flex:none;transition:transform .5s var(--ease-out)}
+  font-weight:700;letter-spacing:-.02em;font-size:1.04rem;flex:none}
+.brand .glyph{width:28px;height:28px;flex:none;transition:transform .5s var(--ease-out)}
+.brand .glyph rect{fill:var(--fg)}
+.brand .glyph path{stroke:var(--bg)}
+.brand .glyph circle{fill:var(--sand)}
 @media(hover:hover) and (pointer:fine){.brand:hover .glyph{transform:rotate(-8deg)}}
 
-.navlinks{display:none;gap:26px;margin-left:auto;font-size:.92rem}
-@media(min-width:1000px){.navlinks{display:flex}}
-.navlinks a{color:var(--fg-2);text-decoration:none;position:relative;padding-block:6px;
-  transition:color .2s ease}
-.navlinks a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:100%;
-  background:var(--amber);transform:scaleX(0);transform-origin:left;
-  transition:transform .34s var(--ease-out)}
-@media(hover:hover) and (pointer:fine){
-  .navlinks a:hover{color:var(--fg)}
-  .navlinks a:hover::after{transform:scaleX(1)}
-}
+.navlinks{display:none;gap:22px;margin-left:auto;font-size:.86rem}
+@media(min-width:1100px){.navlinks{display:flex}}
+.navlinks a{color:var(--fg-2);text-decoration:none;padding-block:6px;transition:color .2s ease}
+@media(hover:hover) and (pointer:fine){.navlinks a:hover{color:var(--fg)}}
 .navlinks a.crisis-link{color:var(--coral)}
-.navlinks a.crisis-link::after{background:var(--coral)}
 
 .nav-cta{display:none}
-@media(min-width:1000px){.nav-cta{display:inline-flex}}
+@media(min-width:1100px){.nav-cta{display:inline-flex}}
 
-/* Mobiles Menü */
-.burger{
-  margin-left:auto;width:44px;height:44px;flex:none;
-  display:grid;place-items:center;gap:0;
-  background:transparent;border:1px solid var(--line);border-radius:11px;
-  cursor:pointer;color:var(--fg);
-}
-@media(min-width:1000px){.burger{display:none}}
-.burger i{display:block;width:17px;height:1.5px;background:currentColor;border-radius:2px;
+.burger{margin-left:auto;width:44px;height:44px;flex:none;display:grid;place-items:center;
+  background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  border:1px solid var(--glass-edge);border-radius:12px;cursor:pointer;color:var(--fg);
+  transition:transform .15s var(--ease-out)}
+@media(min-width:1100px){.burger{display:none}}
+.burger i{display:block;width:16px;height:1.5px;background:currentColor;border-radius:2px;
   grid-area:1/1;transition:transform .32s var(--ease-out),opacity .2s ease}
 .burger i:nth-child(1){transform:translateY(-5px)}
 .burger i:nth-child(3){transform:translateY(5px)}
@@ -192,465 +244,445 @@ html.js .rv.in{opacity:1;transform:none}
 .burger[aria-expanded="true"] i:nth-child(3){transform:rotate(-45deg)}
 .burger:active{transform:scale(.95)}
 
-.menu{
-  position:fixed;inset:0;z-index:69;background:var(--bg);
-  padding:calc(env(safe-area-inset-top,0px) + 80px) var(--gut) calc(env(safe-area-inset-bottom,0px) + 32px);
-  display:flex;flex-direction:column;gap:4px;overflow-y:auto;
-}
-.menu a{
-  font-family:var(--f-display);font-weight:700;letter-spacing:-.03em;
-  font-size:clamp(1.6rem,7vw,2.2rem);color:var(--fg);text-decoration:none;
-  padding-block:14px;border-bottom:1px solid var(--line-2);
-  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
-}
-.menu a span{font-family:var(--f-mono);font-size:.68rem;color:var(--fg-3);letter-spacing:.1em}
+.menu{position:fixed;inset:0;z-index:69;
+  background:var(--glass-strong);
+  -webkit-backdrop-filter:blur(30px) saturate(180%);backdrop-filter:blur(30px) saturate(180%);
+  padding:calc(env(safe-area-inset-top,0px) + 78px) var(--gut) calc(env(safe-area-inset-bottom,0px) + 30px);
+  display:flex;flex-direction:column;gap:2px;overflow-y:auto}
+.menu a{font-weight:700;letter-spacing:-.03em;font-size:clamp(1.55rem,7vw,2.1rem);
+  color:var(--fg);text-decoration:none;padding-block:13px;border-bottom:1px solid var(--hair);
+  animation:menu-in .45s var(--ease-out) both}
 .menu a.crisis-link{color:var(--coral)}
-.menu .btn{margin-top:26px;justify-content:center}
+.menu .btn{margin-top:24px;border-bottom:0;font-size:1rem;letter-spacing:-.01em}
 html.js .menu[hidden]{display:none!important}
-.menu a{animation:menu-in .45s var(--ease-out) both}
-.menu a:nth-child(1){animation-delay:.02s}.menu a:nth-child(2){animation-delay:.05s}
-.menu a:nth-child(3){animation-delay:.08s}.menu a:nth-child(4){animation-delay:.11s}
-.menu a:nth-child(5){animation-delay:.14s}.menu a:nth-child(6){animation-delay:.17s}
-.menu a:nth-child(7){animation-delay:.2s}
-@keyframes menu-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.menu a:nth-child(2){animation-delay:.03s}.menu a:nth-child(3){animation-delay:.06s}
+.menu a:nth-child(4){animation-delay:.09s}.menu a:nth-child(5){animation-delay:.12s}
+.menu a:nth-child(6){animation-delay:.15s}.menu a:nth-child(7){animation-delay:.18s}
+.menu a:nth-child(8){animation-delay:.21s}
+@keyframes menu-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
 /* ═══════════════════════════════════════════
    Buttons
    ═══════════════════════════════════════════ */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  min-height:48px;padding:14px 26px;border-radius:999px;
-  background:var(--amber);color:#1B1206;border:1px solid var(--amber);
-  font-family:var(--f-body);font-weight:600;font-size:.97rem;letter-spacing:-.01em;
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:46px;padding:12px 24px;border-radius:999px;
+  background:var(--btn);color:var(--btn-fg);border:1px solid var(--btn);
+  font-family:inherit;font-weight:600;font-size:.95rem;letter-spacing:-.01em;
   text-decoration:none;cursor:pointer;
-  transition:transform .2s var(--ease-out),box-shadow .3s var(--ease-out),
-             background .2s ease,border-color .2s ease,color .2s ease;
-}
+  transition:transform .2s var(--ease-out),box-shadow .3s var(--ease-out),opacity .2s ease}
 @media(hover:hover) and (pointer:fine){
-  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px -14px rgba(240,179,87,.6)}
-  .btn:hover .arw{transform:translateX(4px)}
-  .btn.ghost:hover{border-color:var(--fg-2);background:rgba(255,255,255,.045)}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px -14px var(--shadow)}
+  .btn:hover .arw{transform:translateX(3px)}
 }
 .btn:active{transform:scale(.97);transition-duration:.11s}
 .btn .arw{transition:transform .2s var(--ease-out)}
-.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
-.btn.sm{min-height:40px;padding:9px 20px;font-size:.88rem}
+.btn.ghost{background:var(--glass);color:var(--fg);border-color:var(--glass-edge);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);backdrop-filter:blur(18px) saturate(180%)}
+.btn.sm{min-height:38px;padding:8px 18px;font-size:.86rem}
 
 /* ═══════════════════════════════════════════
    Hero
    ═══════════════════════════════════════════ */
-.hero{padding-block:clamp(48px,9vw,92px) clamp(56px,9vw,96px);position:relative;overflow:clip}
-.hero::before{
-  content:"";position:absolute;z-index:0;pointer-events:none;
-  width:min(900px,120vw);aspect-ratio:1;border-radius:50%;
-  left:50%;top:-58%;transform:translateX(-50%);
-  background:radial-gradient(circle,rgba(67,168,143,.16),transparent 62%);
-}
-.hero .wrap{position:relative;z-index:1}
+.hero{padding-block:clamp(40px,8vw,84px) clamp(56px,9vw,96px)}
 .hero-grid{display:grid;gap:clamp(40px,7vw,64px)}
 @media(min-width:960px){.hero-grid{grid-template-columns:1.06fr .94fr;align-items:center;gap:56px}}
 
-.tagline{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:7px 16px 7px 8px;border-radius:999px;
-  border:1px solid var(--line);background:rgba(255,255,255,.035);
-  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.09em;
-  text-transform:uppercase;color:var(--fg-2);margin-bottom:26px;
-}
-.tagline b{background:var(--teal-2);color:#EAF7F3;border-radius:999px;
-  padding:3px 9px;font-weight:500;letter-spacing:.07em}
+.tagline{display:inline-flex;align-items:center;gap:9px;padding:6px 14px 6px 7px;
+  border-radius:999px;font-size:.8rem;font-weight:500;color:var(--fg-2);margin-bottom:24px}
+.tagline b{background:var(--accent-soft);color:var(--accent);border-radius:999px;
+  padding:3px 10px;font-weight:600;font-size:.74rem}
 
-h1 .hl{color:var(--amber);position:relative;white-space:nowrap}
-h1 .hl::after{
-  content:"";position:absolute;left:0;right:0;bottom:.06em;height:.055em;
-  background:var(--amber);opacity:.28;border-radius:2px;
-  transform:scaleX(0);transform-origin:left;
-  animation:underline 1.1s .65s var(--ease-out) forwards;
-}
-@keyframes underline{to{transform:scaleX(1)}}
-
-.lead{font-size:clamp(1.05rem,3vw,1.25rem);line-height:1.52;color:var(--fg-2);
-  max-width:52ch;margin-top:26px;letter-spacing:-.01em}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
-.hero-meta{display:grid;gap:11px;margin-top:38px;
-  font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;color:var(--fg-3)}
+h1 .hl{color:var(--fg-3)}
+.lead{font-size:clamp(1.06rem,3vw,1.26rem);line-height:1.5;color:var(--fg-2);
+  max-width:50ch;margin-top:24px}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:32px}
+.hero-meta{display:grid;gap:10px;margin-top:36px;font-size:.84rem;color:var(--fg-3)}
 @media(min-width:620px){.hero-meta{grid-template-columns:repeat(3,auto);gap:22px}}
 .hero-meta span{display:flex;align-items:center;gap:8px}
-.hero-meta .tick{width:14px;height:14px;flex:none;color:var(--teal)}
+.hero-meta .tick{width:15px;height:15px;flex:none;color:var(--accent)}
 
 .lift{animation:lift .9s var(--ease-out) both}
-@keyframes lift{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes lift{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 .l1{animation-delay:.04s}.l2{animation-delay:.1s}.l3{animation-delay:.16s}
 .l4{animation-delay:.22s}.l5{animation-delay:.28s}.l6{animation-delay:.18s}
 
 /* ═══════════════════════════════════════════
-   Gerät — das helle Objekt im Dunkeln
+   Gerät
    ═══════════════════════════════════════════ */
 .device-stage{position:relative;display:flex;justify-content:center;perspective:1500px}
-.device-stage::before{
-  content:"";position:absolute;inset:6% 4% 2%;border-radius:50%;
-  background:radial-gradient(ellipse at center,rgba(67,168,143,.3),transparent 66%);
-  filter:blur(46px);z-index:0;
-}
-.device{
-  position:relative;z-index:1;
-  width:min(300px,78vw);flex:none;border-radius:clamp(34px,9vw,44px);
-  background:linear-gradient(162deg,#24413A,#0A1714 64%);
-  padding:clamp(8px,2.4vw,11px);
-  box-shadow:0 60px 110px -50px rgba(0,0,0,.9),
-             0 0 0 1px rgba(255,255,255,.1) inset,
-             0 1px 2px rgba(255,255,255,.2) inset;
-  transform:rotateY(-10deg) rotateX(3deg);
-  animation:float 7s ease-in-out infinite;
-  will-change:transform;
-}
+.device{position:relative;z-index:1;width:min(300px,78vw);flex:none;
+  border-radius:clamp(36px,9vw,46px);
+  background:linear-gradient(160deg,var(--bezel-1),var(--bezel-2) 60%);
+  padding:clamp(8px,2.4vw,10px);
+  box-shadow:0 50px 90px -46px var(--shadow),0 0 0 1px rgba(255,255,255,.12) inset,0 1px 1px rgba(255,255,255,.3) inset;
+  transform:rotateY(-10deg) rotateX(3deg);animation:float 7s ease-in-out infinite;will-change:transform}
 @media(max-width:959px){.device{transform:none;animation:none}}
-.device.tilt{
-  animation:none;
+.device.tilt{animation:none;
   transform:rotateY(calc(-10deg + var(--mx,0)*7deg)) rotateX(calc(3deg + var(--my,0)*-6deg)) translateY(var(--fy,0px));
-  transition:transform .65s var(--ease-out);
-}
+  transition:transform .65s var(--ease-out)}
 @keyframes float{0%,100%{transform:rotateY(-10deg) rotateX(3deg) translateY(0)}
-  50%{transform:rotateY(-10deg) rotateX(3deg) translateY(-13px)}}
+  50%{transform:rotateY(-10deg) rotateX(3deg) translateY(-12px)}}
 
-.screen{background:var(--paper-2);border-radius:clamp(26px,7vw,33px);
-  height:min(600px,74vh);min-height:480px;
-  overflow:hidden;position:relative;display:flex;flex-direction:column}
-.notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);
-  width:92px;height:21px;background:#0A1714;border-radius:999px;z-index:5}
-.scr-head{padding:36px 18px 13px;background:var(--paper);border-bottom:1px solid var(--paper-line)}
-.scr-head .t{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--paper-ink-2)}
-.scr-head .n{font-family:var(--f-display);font-size:1rem;font-weight:700;
-  margin-top:4px;letter-spacing:-.025em;color:var(--paper-ink)}
+.screen{background:var(--scr);border-radius:clamp(28px,7vw,37px);
+  height:min(600px,74vh);min-height:480px;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:90px;height:24px;
+  background:#000;border-radius:999px;z-index:5}
+.scr-head{padding:40px 18px 13px;background:var(--scr-card);border-bottom:1px solid var(--scr-line)}
+.scr-head .t{font-size:.66rem;font-weight:600;letter-spacing:.04em;color:var(--scr-ink-2)}
+.scr-head .n{font-size:1.02rem;font-weight:700;margin-top:3px;letter-spacing:-.025em;color:var(--scr-ink)}
 .scr-head .t,.scr-head .n{transition:opacity .28s ease,filter .28s ease}
 .scr-head.swap .t,.scr-head.swap .n{opacity:.2;filter:blur(3px)}
 .scr-body{flex:1;padding:16px;position:relative;overflow:hidden}
-.pane{position:absolute;inset:16px;opacity:0;
-  transform:translateY(12px) scale(.985);filter:blur(4px);pointer-events:none;
-  transition:opacity .55s var(--ease-out),transform .55s var(--ease-out),filter .42s ease}
+.pane{position:absolute;inset:16px;opacity:0;transform:translateY(12px) scale(.985);filter:blur(4px);
+  pointer-events:none;transition:opacity .55s var(--ease-out),transform .55s var(--ease-out),filter .42s ease}
 .pane.on{opacity:1;transform:none;filter:blur(0);pointer-events:auto}
 
-.bubble{background:var(--paper);border:1px solid var(--paper-line);border-radius:15px;
-  padding:12px 14px;font-size:.8rem;color:var(--paper-ink-2);margin-bottom:10px;line-height:1.5}
-.bubble.me{background:var(--teal-2);color:#EAF7F3;border-color:var(--teal-2)}
-.wave{display:flex;align-items:flex-end;gap:3px;height:32px;margin:13px 0 6px}
-.wave i{flex:1;background:var(--teal);border-radius:2px;opacity:.85;
-  animation:bounce 1.1s ease-in-out infinite}
+.bubble{background:var(--scr-card);border:1px solid var(--scr-line);border-radius:18px;
+  padding:11px 14px;font-size:.8rem;color:var(--scr-ink-2);margin-bottom:9px;line-height:1.48}
+.bubble.me{background:var(--accent);color:#fff;border-color:transparent;margin-left:22px}
+.wave{display:flex;align-items:flex-end;gap:3px;height:30px;margin:12px 0 6px}
+.wave i{flex:1;background:var(--accent);border-radius:2px;opacity:.75;animation:bounce 1.1s ease-in-out infinite}
 @keyframes bounce{0%,100%{height:18%}50%{height:100%}}
-.mic{width:54px;height:54px;border-radius:50%;background:var(--teal-2);
-  display:flex;align-items:center;justify-content:center;margin:14px auto 0;
-  animation:ring 2s infinite}
-@keyframes ring{0%{box-shadow:0 0 0 0 rgba(67,168,143,.42)}
-  70%{box-shadow:0 0 0 18px rgba(67,168,143,0)}100%{box-shadow:0 0 0 0 rgba(67,168,143,0)}}
+.mic{width:54px;height:54px;border-radius:50%;background:var(--accent);display:flex;align-items:center;
+  justify-content:center;margin:14px auto 0;animation:ring 2s infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 var(--accent-soft)}70%{box-shadow:0 0 0 18px transparent}100%{box-shadow:0 0 0 0 transparent}}
 
-.pat{background:var(--paper);border:1px solid var(--paper-line);border-radius:13px;
-  padding:12px;margin-bottom:9px}
-.pat .h{display:flex;justify-content:space-between;align-items:center;
-  font-size:.76rem;font-weight:600;margin-bottom:8px;color:var(--paper-ink)}
-.pat .h em{font-style:normal;font-family:var(--f-mono);color:var(--paper-ink-2);font-size:.7rem}
+.pat{background:var(--scr-card);border:1px solid var(--scr-line);border-radius:14px;padding:12px;margin-bottom:9px}
+.pat .h{display:flex;justify-content:space-between;align-items:center;font-size:.76rem;font-weight:600;
+  margin-bottom:8px;color:var(--scr-ink)}
+.pat .h em{font-style:normal;font-family:var(--f-mono);color:var(--scr-ink-2);font-size:.7rem}
 .bars{display:flex;gap:4px;align-items:flex-end;height:40px}
-.bars i{flex:1;border-radius:3px;background:var(--paper-ink);opacity:.14;
-  transform-origin:bottom;transition:opacity .4s ease}
-.pat.hot .bars i.x{opacity:1;background:var(--coral)}
+.bars i{flex:1;border-radius:3px;background:var(--scr-ink);opacity:.1;transform-origin:bottom}
+.pat.hot .bars i.x{opacity:.85;background:var(--accent)}
+.pat:not(.hot) .bars i.x{opacity:.4;background:var(--scr-ink-2)}
 .pane.on .bars i{animation:gb .55s var(--ease-out) both}
-.pane.on .bars i:nth-child(2){animation-delay:.035s}
-.pane.on .bars i:nth-child(3){animation-delay:.07s}
-.pane.on .bars i:nth-child(4){animation-delay:.105s}
-.pane.on .bars i:nth-child(5){animation-delay:.14s}
-.pane.on .bars i:nth-child(6){animation-delay:.175s}
-.pane.on .bars i:nth-child(7){animation-delay:.21s}
-.pane.on .bars i:nth-child(8){animation-delay:.245s}
-.pane.on .bars i:nth-child(9){animation-delay:.28s}
-.pane.on .bars i:nth-child(10){animation-delay:.315s}
-.pane.on .bars i:nth-child(11){animation-delay:.35s}
+.pane.on .bars i:nth-child(2){animation-delay:.035s}.pane.on .bars i:nth-child(3){animation-delay:.07s}
+.pane.on .bars i:nth-child(4){animation-delay:.105s}.pane.on .bars i:nth-child(5){animation-delay:.14s}
+.pane.on .bars i:nth-child(6){animation-delay:.175s}.pane.on .bars i:nth-child(7){animation-delay:.21s}
+.pane.on .bars i:nth-child(8){animation-delay:.245s}.pane.on .bars i:nth-child(9){animation-delay:.28s}
+.pane.on .bars i:nth-child(10){animation-delay:.315s}.pane.on .bars i:nth-child(11){animation-delay:.35s}
 .pane.on .bars i:nth-child(12){animation-delay:.385s}
 @keyframes gb{from{transform:scaleY(.18)}to{transform:scaleY(1)}}
-.pat .cap{font-size:.69rem;color:var(--paper-ink-2);margin-top:8px;line-height:1.45}
+.pat .cap{font-size:.69rem;color:var(--scr-ink-2);margin-top:8px;line-height:1.45}
 
-.rep{background:var(--paper);border:1px solid var(--paper-line);border-radius:13px;padding:14px}
-.rep .rh{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--paper-ink-2)}
-.rep .rt{font-family:var(--f-display);font-size:.92rem;font-weight:700;
-  margin:5px 0 11px;letter-spacing:-.02em;color:var(--paper-ink)}
-.rep .rr{display:flex;justify-content:space-between;gap:10px;font-size:.72rem;
-  padding:8px 0;border-top:1px solid var(--paper-line);color:var(--paper-ink-2)}
-.rep .rr b{font-weight:600;color:var(--paper-ink);font-family:var(--f-mono);font-size:.7rem}
-.stamp{margin-top:11px;display:inline-flex;align-items:center;gap:6px;
-  background:rgba(67,168,143,.14);color:var(--teal-2);
-  border-radius:999px;padding:6px 12px;font-size:.66rem;font-weight:600}
+.rep{background:var(--scr-card);border:1px solid var(--scr-line);border-radius:14px;padding:14px}
+.rep .rh{font-size:.64rem;font-weight:600;letter-spacing:.04em;color:var(--scr-ink-2)}
+.rep .rt{font-size:.92rem;font-weight:700;margin:4px 0 10px;letter-spacing:-.02em;color:var(--scr-ink)}
+.rep .rr{display:flex;justify-content:space-between;gap:10px;font-size:.72rem;padding:8px 0;
+  border-top:1px solid var(--scr-line);color:var(--scr-ink-2)}
+.rep .rr b{font-weight:600;color:var(--scr-ink);font-family:var(--f-mono);font-size:.7rem}
+.stamp{margin-top:11px;display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);
+  color:var(--accent);border-radius:999px;padding:6px 12px;font-size:.68rem;font-weight:600}
 .pane.on .stamp{animation:lift .5s .28s var(--ease-out) both}
 
-.steps-dots{display:flex;gap:6px;justify-content:center;padding:12px 0 16px;
-  background:var(--paper);border-top:1px solid var(--paper-line)}
-.steps-dots i{width:6px;height:6px;border-radius:50%;background:var(--paper-line);
+.steps-dots{display:flex;gap:6px;justify-content:center;padding:12px 0 18px;
+  background:var(--scr-card);border-top:1px solid var(--scr-line)}
+.steps-dots i{width:6px;height:6px;border-radius:50%;background:var(--scr-line);
   transition:width .45s var(--ease-out),background .3s ease}
-.steps-dots i.on{background:var(--teal-2);width:20px;border-radius:999px}
+.steps-dots i.on{background:var(--scr-ink);width:20px;border-radius:999px}
 
 /* ═══════════════════════════════════════════
-   Ausgangslage — editorial statt drei Karten
+   Ausgangslage
    ═══════════════════════════════════════════ */
-.figures{border-top:1px solid var(--line);margin-top:8px}
-.fig{
-  display:grid;gap:6px 36px;padding-block:clamp(28px,5vw,42px);
-  border-bottom:1px solid var(--line);align-items:baseline;
-}
-@media(min-width:780px){.fig{grid-template-columns:minmax(0,34%) minmax(0,1fr) auto;gap:8px 44px}}
-.fig .n{
-  font-family:var(--f-display);font-weight:800;letter-spacing:-.055em;line-height:.9;
-  font-size:clamp(3.4rem,11vw,6.2rem);font-variant-numeric:tabular-nums;
-  color:var(--fg);
-}
-.fig .n u{text-decoration:none;font-size:.32em;letter-spacing:-.02em;color:var(--fg-3);
-  margin-left:.16em;vertical-align:baseline}
-.fig .l{color:var(--fg-2);font-size:clamp(.98rem,2.4vw,1.06rem);line-height:1.5;max-width:44ch}
-.fig .s{font-family:var(--f-mono);font-size:.68rem;color:var(--fg-3);letter-spacing:.05em;
-  white-space:nowrap}
-.fig .meter{grid-column:1/-1;height:2px;background:var(--line);margin-top:16px;overflow:hidden}
-.fig .meter i{display:block;height:100%;width:0;background:var(--amber);
+.figures{padding:0 clamp(20px,4vw,40px)}
+.fig{display:grid;gap:6px 36px;padding-block:clamp(26px,4.5vw,38px);border-bottom:1px solid var(--hair);align-items:baseline}
+.fig:last-child{border-bottom:0}
+@media(min-width:780px){.fig{grid-template-columns:minmax(0,32%) minmax(0,1fr) auto;gap:8px 40px}}
+.fig .n{font-weight:700;letter-spacing:-.055em;line-height:.9;font-size:clamp(3.2rem,10vw,5.6rem);
+  font-variant-numeric:tabular-nums;color:var(--fg)}
+.fig .n u{text-decoration:none;font-size:.3em;letter-spacing:-.02em;color:var(--fg-3);margin-left:.16em;font-weight:600}
+.fig .l{color:var(--fg-2);font-size:clamp(.98rem,2.4vw,1.05rem);line-height:1.5;max-width:44ch}
+.fig .meter{grid-column:1/-1;height:3px;background:var(--hair);margin-top:14px;overflow:hidden;border-radius:2px}
+.fig .meter i{display:block;height:100%;width:0;background:var(--fg);opacity:.55;border-radius:2px;
   transition:width 1.7s var(--ease-out)}
-.fig:nth-child(2) .meter i{background:var(--coral)}
-.fig:nth-child(3) .meter i{background:var(--teal)}
+
+/* ═══════════════════════════════════════════
+   Die Wurzel — Patientenweg mit Brüchen
+   ═══════════════════════════════════════════ */
+.journey{padding:clamp(24px,4.5vw,40px);display:grid;gap:0}
+@media(min-width:860px){.journey{grid-template-columns:auto 1fr auto 1.7fr auto;align-items:center}}
+.jn{display:grid;gap:4px;justify-items:start;padding:14px 18px;border-radius:var(--r);
+  background:var(--glass-strong);border:1px solid var(--glass-edge);min-width:0}
+@media(min-width:860px){.jn{justify-items:center;text-align:center;min-width:150px}}
+.jn b{font-weight:600;font-size:.98rem;letter-spacing:-.015em}
+.jn span{font-family:var(--f-mono);font-size:.7rem;color:var(--fg-3)}
+.jn.drv span,.jn.gkv span,.jn.kom span{color:var(--fg-2)}
+
+.jb{position:relative;display:flex;align-items:center;gap:12px;min-height:56px;padding-left:26px}
+@media(min-width:860px){.jb{min-height:0;height:56px;padding-left:0;justify-content:center}}
+.jb::before{content:"";position:absolute;left:12px;top:0;bottom:0;border-left:2px dashed var(--coral);opacity:0;
+  transition:opacity .7s ease}
+@media(min-width:860px){.jb::before{left:10px;right:10px;top:50%;bottom:auto;border-left:0;border-top:2px dashed var(--coral)}}
+.jb.in::before{opacity:.5}
+.jb span{position:relative;z-index:1;font-size:.74rem;font-weight:600;color:var(--coral);
+  background:var(--bg);border:1px solid var(--coral-soft);border-radius:999px;padding:4px 11px;white-space:nowrap;
+  opacity:0;transform:translateY(4px);transition:opacity .6s .35s ease,transform .6s .35s var(--ease-out)}
+.jb.in span{opacity:1;transform:none}
+.jb.long span{background:var(--coral);color:#fff;border-color:transparent}
+
+.facts{display:grid;gap:14px;margin-top:clamp(20px,4vw,28px)}
+@media(min-width:860px){.facts{grid-template-columns:repeat(3,1fr);gap:16px}}
+.fact{padding:clamp(20px,3.5vw,28px);display:grid;gap:8px;align-content:start}
+.fact h3{font-size:1.08rem}
+.fact p{color:var(--fg-2);font-size:.94rem;line-height:1.5}
+.coda{margin-top:clamp(26px,4vw,36px);font-size:clamp(1.1rem,2.8vw,1.35rem);font-weight:600;
+  letter-spacing:-.02em;max-width:40ch;color:var(--fg)}
+.coda span{color:var(--fg-3)}
 
 /* ═══════════════════════════════════════════
    Die Lücke
    ═══════════════════════════════════════════ */
-.gapbox{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg-2);
-  padding:clamp(24px,5vw,44px);margin-top:clamp(28px,5vw,44px)}
+.gapbox{padding:clamp(24px,5vw,44px)}
 .tl-track{position:relative;height:96px;margin-top:22px}
-.tl-line{position:absolute;top:46px;left:0;right:0;height:4px;background:var(--line);border-radius:2px;overflow:hidden}
-.tl-fill{display:block;height:100%;width:0;border-radius:2px;
-  background:linear-gradient(90deg,var(--teal),var(--amber),var(--coral));
+.tl-line{position:absolute;top:46px;left:0;right:0;height:4px;background:var(--hair);border-radius:2px;overflow:hidden}
+.tl-fill{display:block;height:100%;width:0;border-radius:2px;background:var(--fg);opacity:.5;
   transition:width 2.3s var(--ease-in-out)}
 .tl-node{position:absolute;top:0;transform:translateX(-50%);text-align:center;width:104px}
 @media(min-width:620px){.tl-node{width:150px}}
-.tl-node .dot{width:13px;height:13px;border-radius:50%;background:var(--bg-2);
-  border:2.5px solid var(--fg-2);margin:40px auto 0;position:relative;z-index:2}
-.tl-node .lb{font-size:.76rem;font-weight:500;margin-top:10px;color:var(--fg-2);line-height:1.34}
+.tl-node .dot{width:14px;height:14px;border-radius:50%;background:var(--bg);border:2.5px solid var(--fg);
+  margin:39px auto 0;position:relative;z-index:2}
+.tl-node .lb{font-size:.78rem;font-weight:500;margin-top:10px;color:var(--fg-2);line-height:1.34}
 .tl-node.a{left:8%}.tl-node.b{left:50%}.tl-node.c{left:92%}
-.tl-node.b .dot{border-color:var(--amber);background:var(--amber)}
-.tl-gap{position:absolute;top:2px;left:8%;width:84%;border-top:1.5px dashed var(--coral);
-  opacity:0;transition:opacity .8s .9s ease}
-.tl-gap.in{opacity:.6}
-.tl-gap span{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
-  background:var(--coral);color:#2A0C05;font-family:var(--f-mono);font-size:.62rem;
-  font-weight:500;padding:4px 11px;border-radius:999px;white-space:nowrap}
-.gapbox .note{margin-top:30px;font-size:.93rem;color:var(--fg-3);line-height:1.6;max-width:66ch}
-.gapbox .note b{color:var(--fg-2);font-weight:500}
+.tl-node.b .dot{border-color:var(--coral);background:var(--coral)}
+.tl-gap{position:absolute;top:2px;left:8%;width:84%;border-top:1.5px dashed var(--coral);opacity:0;transition:opacity .8s .9s ease}
+.tl-gap.in{opacity:.55}
+.tl-gap span{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--coral);color:#fff;
+  font-size:.7rem;font-weight:600;padding:4px 11px;border-radius:999px;white-space:nowrap}
+.gapbox .note{margin-top:30px;font-size:.94rem;color:var(--fg-2);line-height:1.6;max-width:66ch}
+.gapbox .note b{color:var(--fg);font-weight:600}
 
 /* ═══════════════════════════════════════════
-   Sticky-Szene: Erfassen / Ordnen / Übergeben
+   Sticky-Szene
    ═══════════════════════════════════════════ */
 .scene{display:grid;gap:clamp(32px,5vw,56px)}
-@media(min-width:960px){
-  .scene{grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:72px;align-items:start}
-}
+@media(min-width:960px){.scene{grid-template-columns:minmax(0,1fr) minmax(0,330px);gap:72px;align-items:start}}
 .scene-stage{display:none}
+@media(min-width:960px){.scene-stage{display:block;position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px)}}
+.steps{display:grid;gap:clamp(16px,4vw,22px)}
+@media(min-width:960px){.steps{gap:clamp(110px,20vh,200px)}}
+.step{padding:clamp(22px,4vw,32px);display:grid;gap:12px;transition:opacity .45s ease,transform .45s var(--ease-out)}
 @media(min-width:960px){
-  .scene-stage{display:block;position:sticky;
-    top:calc(env(safe-area-inset-top,0px) + 96px)}
+  .step{opacity:.45;transform:scale(.985)}
+  .step.on{opacity:1;transform:none}
 }
-.scene-mobile{margin-bottom:8px}
-@media(min-width:960px){.scene-mobile{display:none}}
-
-.steps{display:grid;gap:clamp(28px,6vw,52px)}
-@media(min-width:960px){.steps{gap:clamp(120px,22vh,220px)}}
-.step{display:grid;gap:14px;padding-left:22px;border-left:2px solid var(--line-2);
-  transition:border-color .4s ease}
-.step.on{border-left-color:var(--amber)}
-.step .ix{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--fg-3);transition:color .4s ease}
-.step.on .ix{color:var(--amber)}
-.step h3{color:var(--fg)}
-.step p{color:var(--fg-2);font-size:1rem;line-height:1.6;max-width:46ch}
+.step .ix{font-size:.76rem;font-weight:600;color:var(--fg-3)}
+.step.on .ix{color:var(--accent)}
+.step p{color:var(--fg-2);font-size:1rem;line-height:1.55;max-width:48ch}
 
 /* ═══════════════════════════════════════════
    Artefakt
    ═══════════════════════════════════════════ */
 .split{display:grid;gap:clamp(36px,6vw,64px)}
 @media(min-width:960px){.split{grid-template-columns:1fr 1fr;gap:72px;align-items:center}}
-.split .body p{color:var(--fg-2);margin-top:16px;line-height:1.62}
-.split .body p.big{font-size:clamp(1.08rem,2.8vw,1.28rem);color:var(--fg);letter-spacing:-.015em;
-  line-height:1.45}
-.split .body .btn{margin-top:30px}
+.split .body p{color:var(--fg-2);margin-top:16px;line-height:1.58}
+.split .body p.big{font-size:clamp(1.08rem,2.8vw,1.26rem);color:var(--fg);letter-spacing:-.018em;line-height:1.42}
+.split .body .btn{margin-top:28px}
 
-.docx{background:var(--paper);color:var(--paper-ink);border-radius:var(--r-lg);
-  padding:clamp(22px,4.5vw,34px);box-shadow:0 60px 110px -56px rgba(0,0,0,.85)}
-.docx .dh{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:22px}
-.docx .dh .lbl{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--paper-ink-2)}
-.docx .dh h4{font-family:var(--f-display);font-size:clamp(1.05rem,3vw,1.2rem);
-  margin-top:8px;letter-spacing:-.03em;color:var(--paper-ink)}
-.docx .seal{width:38px;height:38px;flex:none}
-.drow{display:flex;justify-content:space-between;gap:16px;padding:13px 0;
-  border-top:1px solid var(--paper-line);font-size:.88rem;color:var(--paper-ink-2);
-  opacity:0;transform:translateX(-8px);
+.docx{padding:clamp(22px,4.5vw,34px)}
+.docx .dh{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:20px}
+.docx .dh .lbl{font-size:.72rem;font-weight:600;color:var(--fg-3)}
+.docx .dh h4{font-size:clamp(1.05rem,3vw,1.18rem);margin-top:6px;letter-spacing:-.028em}
+.docx .seal{width:36px;height:36px;flex:none}
+.docx .seal circle{fill:var(--accent-soft)}
+.docx .seal path{stroke:var(--accent)}
+.drow{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-top:1px solid var(--hair);
+  font-size:.9rem;color:var(--fg-2);opacity:0;transform:translateX(-8px);
   transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
 .drow.in{opacity:1;transform:none}
-.drow b{color:var(--paper-ink);font-weight:600;text-align:right;
-  font-family:var(--f-mono);font-size:.8rem}
-.docx .foot{margin-top:20px;font-size:.73rem;color:var(--paper-ink-2);line-height:1.5;opacity:.85}
+.drow b{color:var(--fg);font-weight:600;text-align:right}
+.docx .foot{margin-top:18px;font-size:.76rem;color:var(--fg-3);line-height:1.5}
+
+/* ═══════════════════════════════════════════
+   Patientenakte
+   ═══════════════════════════════════════════ */
+.akte-grid{display:grid;gap:clamp(28px,5vw,56px)}
+@media(min-width:960px){.akte-grid{grid-template-columns:1.05fr .95fr;gap:64px;align-items:start}}
+
+.feats{display:grid;gap:14px}
+@media(min-width:620px){.feats{grid-template-columns:1fr 1fr}}
+.feat{padding:clamp(20px,3.5vw,26px);display:grid;gap:10px;align-content:start}
+.feat .ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  background:var(--accent-soft);color:var(--accent)}
+.feat .ico svg{width:18px;height:18px}
+.feat h3{font-size:1.06rem}
+.feat p{color:var(--fg-2);font-size:.92rem;line-height:1.5}
+
+.akte{padding:clamp(20px,4vw,28px)}
+@media(min-width:960px){.akte{position:sticky;top:calc(env(safe-area-inset-top,0px) + 96px)}}
+.akte-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+.akte-head .lbl{font-size:.72rem;font-weight:600;color:var(--fg-3)}
+.akte-head h4{font-size:1.1rem;margin-top:4px}
+.akte-head .count{font-family:var(--f-mono);font-size:.72rem;color:var(--fg-3);white-space:nowrap}
+.doc{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 0;
+  border-top:1px solid var(--hair);opacity:0;transform:translateY(6px);
+  transition:opacity .5s var(--ease-out),transform .5s var(--ease-out)}
+.doc.in{opacity:1;transform:none}
+.doc .di{width:32px;height:38px;border-radius:6px;background:var(--glass-strong);border:1px solid var(--hair);
+  display:grid;place-items:center;flex:none}
+.doc .di i{display:block;width:14px;height:2px;border-radius:1px;background:var(--fg-3);opacity:.5;box-shadow:0 5px 0 var(--fg-3),0 10px 0 var(--fg-3)}
+.doc.own .di{background:var(--accent-soft);border-color:transparent}
+.doc.own .di i{background:var(--accent);box-shadow:0 5px 0 var(--accent),0 10px 0 var(--accent);opacity:.7}
+.doc b{display:block;font-size:.9rem;font-weight:600;letter-spacing:-.01em}
+.doc small{display:block;font-size:.76rem;color:var(--fg-3);margin-top:1px}
+.pill{font-size:.68rem;font-weight:600;border-radius:999px;padding:4px 10px;white-space:nowrap;
+  background:var(--hair-2);color:var(--fg-2);transition:background .4s ease,color .4s ease}
+.pill.sent{background:var(--accent-soft);color:var(--accent)}
+.pill.busy{background:var(--sand-soft);color:var(--sand)}
+.pill.busy::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;
+  margin-right:6px;vertical-align:middle;animation:pulse 1s ease-in-out infinite}
+.akte .foot{margin-top:14px;padding-top:14px;border-top:1px solid var(--hair);font-size:.76rem;color:var(--fg-3);line-height:1.5}
+.akte .share{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--fg-2);margin-top:14px}
+.akte .share svg{width:15px;height:15px;color:var(--accent);flex:none}
+
+.who{display:grid;gap:12px;margin-top:clamp(28px,5vw,44px)}
+@media(min-width:620px){.who{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.who{grid-template-columns:repeat(4,1fr)}}
+.who div{padding:18px 20px}
+.who span{font-size:.74rem;font-weight:600;color:var(--accent)}
+.who p{margin-top:6px;font-size:.92rem;color:var(--fg-2);line-height:1.45}
 
 /* ═══════════════════════════════════════════
    Ökosystem
    ═══════════════════════════════════════════ */
-.eco{background:var(--paper);border-radius:var(--r-lg);padding:clamp(20px,4vw,38px) 0;
-  margin-top:clamp(28px,5vw,48px)}
-.eco-scroll{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
-  padding-inline:clamp(16px,3vw,28px)}
+.eco{padding:clamp(18px,4vw,36px) 0}
+.eco-scroll{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;padding-inline:clamp(16px,3vw,28px)}
 .eco-scroll svg{display:block;min-width:660px;width:100%;height:auto}
-.eco .legend{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:22px;
-  padding-inline:clamp(16px,3vw,28px);
-  font-family:var(--f-mono);font-size:.68rem;color:var(--paper-ink-2)}
+.eco .n-phase{fill:var(--glass-strong);stroke:var(--hair)}
+.eco .n-edge{fill:var(--sand-soft);stroke:var(--sand);stroke-opacity:.45}
+.eco .n-core{fill:var(--accent)}
+.eco .t1{fill:var(--fg);font-size:14px;font-weight:600;font-family:var(--f-sans)}
+.eco .t2{fill:var(--fg-3);font-size:11px;font-family:var(--f-mono)}
+.eco .t2.edge{fill:var(--sand)}
+.eco .t1.core{fill:#fff}
+.eco .t2.core{fill:#fff;fill-opacity:.75}
+.eco .lines{stroke:var(--fg-3);stroke-opacity:.45}
+.eco .doc-shape{fill:var(--fg)}
+.eco .doc-line{fill:var(--bg)}
+.eco .legend{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:20px;padding-inline:clamp(16px,3vw,28px);
+  font-size:.78rem;color:var(--fg-2)}
 .eco .legend span{display:flex;align-items:center;gap:7px}
-.eco .legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
-.eco-hint{display:block;margin-top:14px;padding-inline:clamp(16px,3vw,28px);
-  font-family:var(--f-mono);font-size:.64rem;color:var(--paper-ink-2);opacity:.7}
+.eco .legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.eco-hint{display:block;margin-top:12px;padding-inline:clamp(16px,3vw,28px);font-size:.74rem;color:var(--fg-3)}
 @media(min-width:760px){.eco-hint{display:none}}
 .dash{stroke-dasharray:6 7;animation:flow 2.6s linear infinite}
 @keyframes flow{to{stroke-dashoffset:-26}}
 .travel{offset-path:path("M350 182 C 350 244, 590 244, 590 182");offset-rotate:0deg;
   animation:travel 7s var(--ease-in-out) infinite alternate}
 @keyframes travel{from{offset-distance:2%}to{offset-distance:98%}}
-.node-core{animation:breathe 4.6s ease-in-out infinite}
-.node-core.b{animation-delay:-2.3s}
-@keyframes breathe{0%,100%{opacity:1}50%{opacity:.84}}
+
+/* ═══════════════════════════════════════════
+   Was wir gehört haben
+   ═══════════════════════════════════════════ */
+.heard{display:grid;gap:14px}
+@media(min-width:760px){.heard{grid-template-columns:1fr 1fr;gap:16px}}
+.hc{padding:clamp(20px,3.8vw,30px);display:grid;gap:10px;align-content:start}
+.hc .no{font-family:var(--f-mono);font-size:.72rem;color:var(--fg-3)}
+.hc h3{font-size:clamp(1.1rem,2.8vw,1.28rem)}
+.hc p{color:var(--fg-2);font-size:.93rem;line-height:1.5}
+.voice{margin-top:clamp(18px,3vw,24px);padding:clamp(24px,4.5vw,40px);display:grid;gap:14px}
+.voice q{display:block;quotes:none;font-size:clamp(1.2rem,3.4vw,1.7rem);font-weight:600;
+  letter-spacing:-.025em;line-height:1.3;max-width:34ch}
+.voice p{color:var(--fg-2);font-size:.96rem;max-width:58ch;line-height:1.55}
+.method{margin-top:16px;font-size:.8rem;color:var(--fg-3);max-width:70ch;line-height:1.55}
 
 /* ═══════════════════════════════════════════
    Team
    ═══════════════════════════════════════════ */
-.crew{display:grid;gap:2px;margin-top:clamp(28px,5vw,44px);
-  border-top:1px solid var(--line)}
-@media(min-width:760px){.crew{grid-template-columns:repeat(3,1fr);gap:0}}
-.crew div{padding:22px 0;border-bottom:1px solid var(--line)}
-@media(min-width:760px){
-  .crew div{padding:26px 28px 26px 0;border-bottom:0;border-right:1px solid var(--line)}
-  .crew div:last-child{border-right:0;padding-right:0}
-  .crew div+div{padding-left:28px}
-}
-.crew span{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--amber)}
-.crew b{display:block;margin-top:9px;font-weight:500;color:var(--fg-2);font-size:.95rem;line-height:1.5}
+.crew{display:grid;gap:12px}
+@media(min-width:760px){.crew{grid-template-columns:repeat(3,1fr);gap:16px}}
+.crew div{padding:22px 24px}
+.crew span{font-size:.76rem;font-weight:600;color:var(--accent)}
+.crew b{display:block;margin-top:8px;font-weight:500;color:var(--fg-2);font-size:.96rem;line-height:1.45}
 
 /* ═══════════════════════════════════════════
    Fachkreise
    ═══════════════════════════════════════════ */
-.aud{display:grid;gap:18px;margin-top:clamp(28px,5vw,48px)}
-@media(min-width:880px){.aud{grid-template-columns:1fr 1fr;gap:22px}}
-.abox{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg-2);
-  padding:clamp(26px,4.5vw,38px);transition:border-color .4s ease,background .4s ease}
-@media(hover:hover) and (pointer:fine){
-  .abox:hover{border-color:var(--line);background:var(--bg-3)}
-}
-.abox h3{color:var(--fg)}
-.abox > p{color:var(--fg-2);font-size:.96rem;margin-top:12px;line-height:1.58}
-.abox ul{margin:22px 0 0;padding:0;list-style:none}
-.abox li{color:var(--fg-2);font-size:.94rem;line-height:1.52;
-  padding:13px 0 13px 26px;border-top:1px solid var(--line-2);position:relative}
-.abox li::before{content:"";position:absolute;left:0;top:20px;width:9px;height:1.5px;
-  background:var(--amber);border-radius:2px}
+.aud{display:grid;gap:16px}
+@media(min-width:880px){.aud{grid-template-columns:1fr 1fr;gap:18px}}
+.abox{padding:clamp(24px,4.5vw,36px)}
+.abox > p{color:var(--fg-2);font-size:.96rem;margin-top:12px;line-height:1.55}
+.abox ul{margin:20px 0 0;padding:0;list-style:none}
+.abox li{color:var(--fg-2);font-size:.94rem;line-height:1.5;padding:12px 0 12px 22px;border-top:1px solid var(--hair);position:relative}
+.abox li::before{content:"";position:absolute;left:2px;top:20px;width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
 /* ═══════════════════════════════════════════
-   Evidenz-Register
+   Evidenz
    ═══════════════════════════════════════════ */
-.honest{display:inline-flex;align-items:center;gap:9px;
-  background:rgba(240,179,87,.1);border:1px solid rgba(240,179,87,.32);
-  color:var(--amber);border-radius:999px;padding:9px 18px;
-  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.05em}
-.ledger{display:grid;gap:0;margin-top:clamp(28px,5vw,44px);
-  border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
-@media(min-width:820px){.ledger{grid-template-columns:1fr 1fr}}
-.ledger > div{padding:clamp(24px,4vw,34px);background:var(--bg-2)}
-.ledger > div+div{border-top:1px solid var(--line);background:var(--bg)}
-@media(min-width:820px){
-  .ledger > div+div{border-top:0;border-left:1px solid var(--line)}
-}
-.ledger h4{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--fg-3);font-weight:500;margin-bottom:20px}
-.ledger .open h4{color:var(--amber)}
-.ledger ul{margin:0;padding:0;list-style:none;display:grid;gap:15px}
-.ledger li{font-size:.92rem;line-height:1.5;color:var(--fg-2)}
-.ledger li cite{display:block;font-style:normal;font-family:var(--f-mono);
-  font-size:.66rem;color:var(--fg-3);margin-top:4px}
-.evi{margin-top:clamp(28px,5vw,44px);padding-left:22px;border-left:2px solid var(--amber);
-  max-width:68ch}
-.evi p{color:var(--fg-2);line-height:1.62}
-.evi p+p{margin-top:16px}
+.honest{display:inline-flex;align-items:center;gap:9px;background:var(--sand-soft);color:var(--sand);
+  border-radius:999px;padding:8px 16px;font-size:.8rem;font-weight:600;width:fit-content}
+.ledger{display:grid;gap:14px}
+@media(min-width:960px){.ledger{grid-template-columns:repeat(3,1fr);gap:16px}}
+.ledger > div{padding:clamp(22px,4vw,30px)}
+.ledger h4{font-size:.8rem;font-weight:600;letter-spacing:0;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.ledger h4::before{content:"";width:8px;height:8px;border-radius:50%;flex:none}
+.ledger .solid h4::before{background:var(--fg)}
+.ledger .qual h4::before{background:var(--fg-3)}
+.ledger .open h4{color:var(--sand)}
+.ledger .open h4::before{background:var(--sand)}
+.ledger ul{margin:0;padding:0;list-style:none;display:grid;gap:14px}
+.ledger li{font-size:.92rem;line-height:1.48;color:var(--fg-2)}
+.ledger li .cite{display:block;margin-top:3px}
+.borrowed{margin-top:16px;padding:18px 22px;display:flex;gap:12px;align-items:flex-start;
+  font-size:.93rem;color:var(--fg-2);line-height:1.5}
+.borrowed svg{width:18px;height:18px;flex:none;color:var(--sand);margin-top:2px}
+.borrowed b{color:var(--fg);font-weight:600}
+.evi{margin-top:clamp(26px,5vw,40px);padding-left:20px;border-left:2px solid var(--hair);max-width:68ch}
+.evi p{color:var(--fg-2);line-height:1.6}
+.evi p+p{margin-top:15px}
 .evi strong{color:var(--fg);font-weight:600}
 
 /* ═══════════════════════════════════════════
    Krise
    ═══════════════════════════════════════════ */
-.crisis{border:1px solid rgba(255,107,82,.38);border-left:3px solid var(--coral);
-  border-radius:var(--r-lg);background:rgba(255,107,82,.05);
-  padding:clamp(26px,4.5vw,38px);margin-top:clamp(36px,6vw,60px)}
+.crisis{padding:clamp(24px,4.5vw,38px);margin-top:clamp(34px,6vw,56px);border-color:var(--coral-soft)}
 .crisis h3{color:var(--coral)}
-.crisis p{color:var(--fg-2);font-size:.95rem;line-height:1.6;margin-top:12px;max-width:62ch}
-.numgrid{display:grid;gap:11px;margin:24px 0 0}
+.crisis p{color:var(--fg-2);font-size:.95rem;line-height:1.58;margin-top:10px;max-width:62ch}
+.numgrid{display:grid;gap:10px;margin:22px 0 0}
 @media(min-width:720px){.numgrid{grid-template-columns:repeat(3,1fr)}}
-.numgrid a{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);
-  padding:18px 20px;min-height:48px;text-decoration:none;color:var(--fg);display:block;
-  transition:transform .24s var(--ease-out),border-color .24s ease,background .24s ease}
-@media(hover:hover) and (pointer:fine){
-  .numgrid a:hover{transform:translateY(-3px);border-color:var(--coral);background:var(--bg-3)}
-}
+.numgrid a{background:var(--glass-strong);border:1px solid var(--glass-edge);border-radius:var(--r);
+  padding:16px 18px;min-height:48px;text-decoration:none;color:var(--fg);display:block;
+  transition:transform .24s var(--ease-out),border-color .24s ease}
+@media(hover:hover) and (pointer:fine){.numgrid a:hover{transform:translateY(-2px);border-color:var(--coral)}}
 .numgrid a:active{transform:scale(.98);transition-duration:.11s}
-.numgrid .big{font-family:var(--f-mono);font-size:1.34rem;font-weight:500;
-  letter-spacing:-.01em;color:var(--coral)}
-.numgrid .cap{font-size:.8rem;color:var(--fg-3);margin-top:6px;line-height:1.42}
-.crisis .after{margin-top:22px;font-size:.88rem}
+.numgrid .big{font-size:1.3rem;font-weight:700;letter-spacing:-.02em;color:var(--coral);font-variant-numeric:tabular-nums}
+.numgrid .cap{font-size:.8rem;color:var(--fg-3);margin-top:5px;line-height:1.42}
+.crisis .after{margin-top:20px;font-size:.88rem}
 
 /* ═══════════════════════════════════════════
    Kontakt
    ═══════════════════════════════════════════ */
-.cta{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg-2);
-  padding:clamp(28px,5vw,60px);position:relative;overflow:hidden}
-.cta::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;
-  background:radial-gradient(circle,rgba(240,179,87,.13),transparent 68%);
-  right:-190px;bottom:-250px;pointer-events:none}
-.cta > *{position:relative;z-index:1}
-.cta p.intro{color:var(--fg-2);max-width:56ch;margin-top:16px;line-height:1.6}
-form{margin-top:32px;max-width:560px}
-.f{margin-bottom:16px}
-label{display:block;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.13em;
-  text-transform:uppercase;color:var(--fg-3);margin-bottom:8px}
-input[type=email],select,textarea{
-  width:100%;min-height:50px;padding:14px 16px;border-radius:var(--r);
-  border:1px solid var(--line);background:rgba(255,255,255,.04);
-  color:var(--fg);font:inherit;font-size:16px;
-  transition:border-color .24s ease,background .24s ease}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--amber);
-  background:rgba(255,255,255,.07)}
+.cta{padding:clamp(28px,5vw,56px)}
+.cta p.intro{color:var(--fg-2);max-width:56ch;margin-top:14px;line-height:1.55}
+form{margin-top:30px;max-width:560px;position:relative}
+.f{margin-bottom:15px}
+label{display:block;font-size:.8rem;font-weight:600;color:var(--fg-2);margin-bottom:7px}
+input[type=email],select,textarea{width:100%;min-height:50px;padding:13px 15px;border-radius:14px;
+  border:1px solid var(--hair);background:var(--glass-strong);color:var(--fg);font:inherit;font-size:16px;
+  transition:border-color .24s ease,box-shadow .24s ease}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
 input::placeholder,textarea::placeholder{color:var(--fg-3)}
-select option{color:#111;background:#fff}
-textarea{min-height:100px;resize:vertical;line-height:1.55}
-.consent{display:flex;gap:12px;align-items:flex-start;font-size:.86rem;
-  color:var(--fg-2);margin:22px 0;line-height:1.5;
-  font-family:var(--f-body);letter-spacing:normal;text-transform:none}
-.consent input{margin-top:3px;flex:none;width:19px;height:19px;min-height:0;
-  accent-color:var(--amber)}
-.fnote{font-size:.8rem;color:var(--fg-3);margin-top:18px;line-height:1.5}
-#feedback{color:var(--fg);font-size:.88rem;background:rgba(255,255,255,.06);
-  border:1px solid var(--line);padding:13px 16px;border-radius:var(--r);margin-top:16px}
+textarea{min-height:100px;resize:vertical;line-height:1.5}
+.consent{display:flex;gap:11px;align-items:flex-start;font-size:.86rem;font-weight:400;color:var(--fg-2);margin:20px 0;line-height:1.5}
+.consent input{margin-top:3px;flex:none;width:19px;height:19px;accent-color:var(--accent)}
+.fnote{font-size:.8rem;color:var(--fg-3);margin-top:16px;line-height:1.5}
+#feedback{font-size:.88rem;background:var(--glass-strong);border:1px solid var(--hair);
+  padding:12px 15px;border-radius:14px;margin-top:14px}
 
 /* ═══════════════════════════════════════════
    Footer
    ═══════════════════════════════════════════ */
-footer{border-top:1px solid var(--line);padding-block:clamp(44px,7vw,68px) clamp(40px,6vw,64px);
-  font-size:.9rem;color:var(--fg-3)}
-.fcols{display:grid;gap:32px}
+footer{border-top:1px solid var(--hair);padding-block:clamp(44px,7vw,64px) clamp(40px,6vw,60px);font-size:.9rem;color:var(--fg-3)}
+.fcols{display:grid;gap:30px}
 @media(min-width:620px){.fcols{grid-template-columns:1fr 1fr}}
 @media(min-width:900px){.fcols{grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}}
-footer h4{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--fg-2);margin:0 0 15px;font-weight:500}
-footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:11px;
-  transition:color .2s ease}
-@media(hover:hover) and (pointer:fine){footer nav a:hover{color:var(--amber)}}
+footer h4{font-size:.78rem;font-weight:600;color:var(--fg-2);margin:0 0 14px;letter-spacing:0}
+footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:10px;transition:color .2s ease}
+@media(hover:hover) and (pointer:fine){footer nav a:hover{color:var(--fg)}}
 .todo{color:var(--coral)}
-.fbrand p{max-width:34ch;margin-top:16px;color:var(--fg-3);line-height:1.6}
-.legal{margin-top:clamp(36px,6vw,56px);padding-top:28px;border-top:1px solid var(--line-2);
-  font-size:.76rem;line-height:1.66;color:var(--fg-3);display:grid;gap:16px;max-width:82ch}
-.legal strong{color:var(--fg-2);font-weight:500}
+.fbrand p{max-width:34ch;margin-top:14px;line-height:1.55}
+.legal{margin-top:clamp(34px,6vw,52px);padding-top:26px;border-top:1px solid var(--hair);
+  font-size:.76rem;line-height:1.65;color:var(--fg-3);display:grid;gap:14px;max-width:82ch}
+.legal strong{color:var(--fg-2);font-weight:600}
 
 /* ═══════════════════════════════════════════
    Reduzierte Bewegung
@@ -659,16 +691,18 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
     transition-duration:.001ms!important;scroll-behavior:auto!important}
   html.js .rv{opacity:1;transform:none}
-  .drow{opacity:1;transform:none}
+  .drow,.doc{opacity:1;transform:none}
   .device,.device.tilt{transform:none}
   .pane{filter:none}
   .pane:not(.on){display:none}
-  h1 .hl::after{transform:scaleX(1)}
+  .step{opacity:1!important;transform:none!important}
+  .jb::before{opacity:.5}.jb span{opacity:1;transform:none}
 }
 </style>
 </head>
 <body>
 
+<div class="aura" aria-hidden="true"><i></i><i></i><i></i></div>
 <div class="progress" aria-hidden="true"><i id="pbar"></i></div>
 
 <div class="statusbar">
@@ -683,18 +717,19 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
   <div class="wrap">
     <a class="brand" href="#top">
       <svg class="glyph" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <rect width="40" height="40" rx="11" fill="#12322B"/>
-        <path d="M11 26.5 L17.5 13 L20 18.5 L22.5 13 L29 26.5" stroke="#EDF3F0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="20" cy="27" r="2.2" fill="#F0B357"/>
+        <rect width="40" height="40" rx="11"/>
+        <path d="M11 26.5 L17.5 13 L20 18.5 L22.5 13 L29 26.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="20" cy="27" r="2.2"/>
       </svg>
       VORLAUF
     </a>
 
     <div class="navlinks">
       <a href="#problem">Problem</a>
+      <a href="#wurzel">Wurzel</a>
       <a href="#wie">Wie es funktioniert</a>
       <a href="#artefakt">Therapie-Artefakt</a>
-      <a href="#oekosystem">Ökosystem</a>
+      <a href="#akte">Patientenakte</a>
       <a href="#evidenz">Evidenz</a>
       <a href="#krisenhilfe" class="crisis-link">Akute Hilfe</a>
     </div>
@@ -707,12 +742,13 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
 </nav>
 
 <div class="menu" id="menu" hidden>
-  <a href="#problem">Problem <span>01</span></a>
-  <a href="#wie">Wie es funktioniert <span>02</span></a>
-  <a href="#artefakt">Therapie-Artefakt <span>03</span></a>
-  <a href="#oekosystem">Ökosystem <span>04</span></a>
-  <a href="#evidenz">Evidenz <span>05</span></a>
-  <a href="#krisenhilfe" class="crisis-link">Akute Hilfe <span>SOS</span></a>
+  <a href="#problem">Problem</a>
+  <a href="#wurzel">Die Wurzel</a>
+  <a href="#wie">Wie es funktioniert</a>
+  <a href="#artefakt">Therapie-Artefakt</a>
+  <a href="#akte">Patientenakte</a>
+  <a href="#evidenz">Evidenz</a>
+  <a href="#krisenhilfe" class="crisis-link">Akute Hilfe</a>
   <a class="btn" href="#kontakt">Kontakt aufnehmen <span class="arw">→</span></a>
 </div>
 
@@ -723,8 +759,8 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="tagline lift l1"><b>In Entwicklung</b> Digitale Therapievorbereitung</span>
-        <h1 class="lift l2">Die Zeit vor der Therapie<br><span class="hl">ist nicht leer.</span></h1>
+        <span class="tagline glass lift l1"><b>In Entwicklung</b> Digitale Therapievorbereitung</span>
+        <h1 class="lift l2">Die Zeit vor der Therapie <span class="hl">ist nicht leer.</span></h1>
         <p class="lead lift l3">
           Zwischen der Entscheidung für eine Suchttherapie und dem ersten Termin liegen häufig
           Monate. VORLAUF entwickelt eine digitale Begleitung für genau diese Phase — und übergibt
@@ -741,7 +777,6 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
         </div>
       </div>
 
-      <!-- Gerät -->
       <div class="device-stage lift l6" id="stage">
         <div class="device" id="device">
           <div class="screen">
@@ -751,7 +786,6 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
               <div class="n" id="scrTitle">Heute erzählen</div>
             </div>
             <div class="scr-body">
-
               <div class="pane on" id="p1">
                 <div class="bubble">Wie war dein Tag heute? Erzähl einfach.</div>
                 <div class="bubble me">War schwierig heute Abend. Nach der Arbeit, allein zuhause.</div>
@@ -762,32 +796,21 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
                   <i style="animation-delay:.81s"></i><i style="animation-delay:.9s"></i><i style="animation-delay:.99s"></i>
                 </div>
                 <div class="mic" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <rect x="9" y="3" width="6" height="11" rx="3" fill="#EAF7F3"/>
-                    <path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3" stroke="#EAF7F3" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" fill="#fff"/><path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
                 </div>
               </div>
-
               <div class="pane" id="p2">
                 <div class="pat hot">
                   <div class="h">Abendstunden allein <em>11×</em></div>
-                  <div class="bars" aria-hidden="true">
-                    <i></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i><i class="x"></i>
-                    <i></i><i class="x"></i><i></i><i class="x"></i><i></i>
-                  </div>
+                  <div class="bars" aria-hidden="true"><i></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i></div>
                   <div class="cap">Häufigste wiederkehrende Situation im Zeitraum.</div>
                 </div>
                 <div class="pat">
                   <div class="h">Nach Konflikten <em>4×</em></div>
-                  <div class="bars" aria-hidden="true">
-                    <i></i><i class="x"></i><i></i><i></i><i></i><i class="x"></i>
-                    <i></i><i></i><i></i><i class="x"></i><i></i><i></i>
-                  </div>
+                  <div class="bars" aria-hidden="true"><i></i><i class="x"></i><i></i><i></i><i></i><i class="x"></i><i></i><i></i><i></i><i class="x"></i><i></i><i></i></div>
                   <div class="cap">Beobachtung, keine Bewertung — die Deutung bleibt bei dir.</div>
                 </div>
               </div>
-
               <div class="pane" id="p3">
                 <div class="rep">
                   <div class="rh">Vorbereitungsbericht</div>
@@ -796,21 +819,14 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
                   <div class="rr"><span>Einträge</span><b>71</b></div>
                   <div class="rr"><span>Muster</span><b>4 wiederkehrend</b></div>
                   <div class="rr"><span>Eigene Ziele</span><b>3</b></div>
-                  <div class="stamp">
-                    <svg width="12" height="12" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.4l3 3 7-7.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Von dir freigegeben
-                  </div>
+                  <div class="stamp"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.4l3 3 7-7.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Von dir freigegeben</div>
                 </div>
               </div>
-
             </div>
-            <div class="steps-dots" aria-hidden="true">
-              <i class="on"></i><i></i><i></i>
-            </div>
+            <div class="steps-dots hero-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </header>
@@ -826,27 +842,70 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
         dokumentiert wird, was in dieser Zeit geschieht.
       </p>
     </div>
-
-    <div class="figures">
-      <div class="fig rv">
+    <div class="figures glass rv">
+      <div class="fig">
         <div class="n" data-count="142">142<u>Tage</u></div>
         <p class="l">durchschnittliche Wartezeit auf einen Psychotherapieplatz in Deutschland, indikationsübergreifend</p>
-        <p class="s">BPtK 2022</p>
+        <p class="cite">BPtK 2022</p>
         <div class="meter"><i data-w="78"></i></div>
       </div>
-      <div class="fig rv">
+      <div class="fig">
         <div class="n" data-count="30" data-prefix="≈&#8239;">≈&#8239;30<u>%</u></div>
         <p class="l">Abbruchquote in der psychosozialen Suchtbehandlung</p>
-        <p class="s">Lappan et al. 2020</p>
+        <p class="cite">Lappan et al. 2020</p>
         <div class="meter"><i data-w="30"></i></div>
       </div>
-      <div class="fig rv">
+      <div class="fig">
         <div class="n" data-count="37">37<u>%</u></div>
         <p class="l">Abbruchquote speziell bei Opioidabhängigkeit</p>
-        <p class="s">Dutra et al. 2008</p>
+        <p class="cite">Dutra et al. 2008</p>
         <div class="meter"><i data-w="37"></i></div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ═══ DIE WURZEL (neu) ═══ -->
+<section id="wurzel">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">Die Wurzel</span>
+      <h2 class="rv d1">Die Versorgung endet in Episoden.<br>Die Erkrankung nicht.</h2>
+      <p class="sub rv d2">
+        Sucht verläuft chronisch. Die Versorgung dagegen ist in abgeschlossene Abschnitte mit getrennten
+        Zuständigkeiten organisiert: Den Entzug trägt die gesetzliche Krankenversicherung, die Entwöhnung
+        die Rentenversicherung, die Suchtberatung wird kommunal finanziert. An jedem Übergang wechselt der
+        Träger — und für den Übergang selbst ist niemand zuständig.
+      </p>
+    </div>
+
+    <div class="journey glass rv" id="journey" role="img" aria-label="Patientenweg: Suchtberatung, kommunal finanziert — Trägerwechsel — Entzug, gesetzliche Krankenversicherung — Wartezeit ohne Zuständigkeit — Entwöhnung und Tagesklinik, Rentenversicherung">
+      <div class="jn kom"><b>Suchtberatung</b><span>Kommune</span></div>
+      <div class="jb"><span>Trägerwechsel</span></div>
+      <div class="jn gkv"><b>Entzug</b><span>GKV</span></div>
+      <div class="jb long"><span>Wartezeit · niemand zuständig</span></div>
+      <div class="jn drv"><b>Entwöhnung / Tagesklinik</b><span>DRV</span></div>
+    </div>
+
+    <div class="facts">
+      <div class="fact glass rv d1">
+        <h3>Zwei Systeme, zwei Anträge.</h3>
+        <p>Den Entzug zahlt die gesetzliche Krankenversicherung, die Entwöhnung die Rentenversicherung.</p>
+        <span class="cite">Suchtvereinbarung GKV/DRV</span>
+      </div>
+      <div class="fact glass rv d2">
+        <h3>Planen, mitten im Entzug.</h3>
+        <p>Der Antrag auf Entwöhnung muss mindestens sieben Tage vor Entzugsende gestellt sein.</p>
+        <span class="cite">Suchtvereinbarung GKV/DRV</span>
+      </div>
+      <div class="fact glass rv d3">
+        <h3>Die Brücke steht nur halb.</h3>
+        <p>Das Nahtlosverfahren, das diesen Übergang schließen soll, ist nur teilweise umgesetzt.</p>
+        <span class="cite">Quellenangabe folgt</span>
+      </div>
+    </div>
+
+    <p class="coda rv">Die Wartezeit vor der Therapie ist der sichtbarste dieser Übergänge. <span>Sie ist nicht der einzige.</span></p>
   </div>
 </section>
 
@@ -863,8 +922,7 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
         (Ecological Momentary Assessment) dort seit Jahren erforscht werden.
       </p>
     </div>
-
-    <div class="gapbox rv d2" id="tl">
+    <div class="gapbox glass rv d2" id="tl">
       <div class="tl-track">
         <div class="tl-gap" id="tlgap"><span>Hier passiert bisher nichts</span></div>
         <div class="tl-line"><i class="tl-fill" id="tlfill"></i></div>
@@ -892,38 +950,30 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
         und übergibt — auf Wunsch der Person, die es nutzt.
       </p>
     </div>
-
     <div class="scene">
       <div class="steps">
-        <article class="step on" data-step="0">
+        <article class="step glass on" data-step="0">
           <p class="ix">01 — Erfassen</p>
           <h3>VoiceLog</h3>
-          <p>
-            Tagesnahe Erfassung per Sprache statt Formular. Die Annahme dahinter — dass Erzählen die
-            Hürde senkt — prüfen wir derzeit gemeinsam mit Fachkreisen. Mehrsprachig angelegt, weil die
-            Zielgruppe es ist.
-          </p>
+          <p>Tagesnahe Erfassung per Sprache statt Formular. Die Annahme dahinter — dass Erzählen die
+          Hürde senkt — prüfen wir derzeit gemeinsam mit Fachkreisen. Mehrsprachig angelegt, weil die
+          Zielgruppe es ist.</p>
         </article>
-        <article class="step" data-step="1">
+        <article class="step glass" data-step="1">
           <p class="ix">02 — Ordnen</p>
           <h3>PatternMind</h3>
-          <p>
-            Aus den Einträgen werden wiederkehrende Muster sichtbar: Situationen, Tageszeiten,
-            Zusammenhänge. Nicht als Bewertung, sondern als Beobachtung — die Deutung bleibt bei der
-            Person selbst.
-          </p>
+          <p>Aus den Einträgen werden wiederkehrende Muster sichtbar: Situationen, Tageszeiten,
+          Zusammenhänge. Nicht als Bewertung, sondern als Beobachtung — die Deutung bleibt bei der
+          Person selbst.</p>
         </article>
-        <article class="step" data-step="2">
+        <article class="step glass" data-step="2">
           <p class="ix">03 — Übergeben</p>
           <h3>Therapie-Artefakt</h3>
-          <p>
-            Am Ende der Wartezeit steht ein strukturiertes Dokument, das die Person zum ersten Termin
-            mitbringen kann. Freiwillig, einsehbar, jederzeit widerrufbar.
-          </p>
+          <p>Am Ende der Wartezeit steht ein strukturiertes Dokument, das die Person zum ersten Termin
+          mitbringen kann. Freiwillig, einsehbar, jederzeit widerrufbar.</p>
         </article>
       </div>
 
-      <!-- Auf Desktop bleibt hier ein zweites Gerät stehen und folgt dem Scroll -->
       <div class="scene-stage">
         <div class="device" id="device2">
           <div class="screen">
@@ -933,7 +983,6 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
               <div class="n" id="scrTitle2">Heute erzählen</div>
             </div>
             <div class="scr-body">
-
               <div class="pane on" id="q1">
                 <div class="bubble">Wie war dein Tag heute? Erzähl einfach.</div>
                 <div class="bubble me">War schwierig heute Abend. Nach der Arbeit, allein zuhause.</div>
@@ -944,32 +993,21 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
                   <i style="animation-delay:.81s"></i><i style="animation-delay:.9s"></i><i style="animation-delay:.99s"></i>
                 </div>
                 <div class="mic" aria-hidden="true">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                    <rect x="9" y="3" width="6" height="11" rx="3" fill="#EAF7F3"/>
-                    <path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3" stroke="#EAF7F3" stroke-width="2" stroke-linecap="round"/>
-                  </svg>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="9" y="3" width="6" height="11" rx="3" fill="#fff"/><path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
                 </div>
               </div>
-
               <div class="pane" id="q2">
                 <div class="pat hot">
                   <div class="h">Abendstunden allein <em>11×</em></div>
-                  <div class="bars" aria-hidden="true">
-                    <i></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i><i class="x"></i>
-                    <i></i><i class="x"></i><i></i><i class="x"></i><i></i>
-                  </div>
+                  <div class="bars" aria-hidden="true"><i></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i></div>
                   <div class="cap">Häufigste wiederkehrende Situation im Zeitraum.</div>
                 </div>
                 <div class="pat">
                   <div class="h">Nach Konflikten <em>4×</em></div>
-                  <div class="bars" aria-hidden="true">
-                    <i></i><i class="x"></i><i></i><i></i><i></i><i class="x"></i>
-                    <i></i><i></i><i></i><i class="x"></i><i></i><i></i>
-                  </div>
+                  <div class="bars" aria-hidden="true"><i></i><i class="x"></i><i></i><i></i><i></i><i class="x"></i><i></i><i></i><i></i><i class="x"></i><i></i><i></i></div>
                   <div class="cap">Beobachtung, keine Bewertung — die Deutung bleibt bei dir.</div>
                 </div>
               </div>
-
               <div class="pane" id="q3">
                 <div class="rep">
                   <div class="rh">Vorbereitungsbericht</div>
@@ -978,17 +1016,11 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
                   <div class="rr"><span>Einträge</span><b>71</b></div>
                   <div class="rr"><span>Muster</span><b>4 wiederkehrend</b></div>
                   <div class="rr"><span>Eigene Ziele</span><b>3</b></div>
-                  <div class="stamp">
-                    <svg width="12" height="12" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.4l3 3 7-7.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Von dir freigegeben
-                  </div>
+                  <div class="stamp"><svg width="12" height="12" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.4l3 3 7-7.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg> Von dir freigegeben</div>
                 </div>
               </div>
-
             </div>
-            <div class="steps-dots" aria-hidden="true">
-              <i class="on"></i><i></i><i></i>
-            </div>
+            <div class="steps-dots scene-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
           </div>
         </div>
       </div>
@@ -1005,44 +1037,89 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
           <span class="kicker rv">Das Kernstück</span>
           <h2 class="rv d1">Nicht die App ist<br>das Produkt.</h2>
         </div>
-        <p class="big rv d2">
-          Sondern das, was am Ende aus ihr herausfällt: eine strukturierte Übergabe an die behandelnde
-          Person.
-        </p>
+        <p class="big rv d2">Sondern das, was am Ende aus ihr herausfällt: eine strukturierte Übergabe an die behandelnde Person.</p>
         <p class="rv d2">
           Damit richtet sich das Produkt an zwei Seiten zugleich — an die Person in der Wartezeit und
           an die Behandelnden, die den Fall übernehmen. Ob eine solche Übergabe den Behandlungsstart
           tatsächlich verbessert, ist unsere zentrale Arbeitshypothese. Genau die Frage prüfen wir
           gerade mit Therapeut:innen, bevor wir sie behaupten.
         </p>
-        <p class="rv d3">
-          Die Hoheit über das Dokument liegt vollständig bei der Person, die es erstellt hat. Nichts
-          wird ohne aktive Freigabe geteilt.
-        </p>
+        <p class="rv d3">Die Hoheit über das Dokument liegt vollständig bei der Person, die es erstellt hat. Nichts wird ohne aktive Freigabe geteilt.</p>
         <a class="btn ghost rv d3" href="#fachkreise">Für Fachkreise <span class="arw">→</span></a>
       </div>
-
-      <div class="docx rv d2" id="docx">
+      <div class="docx glass strong rv d2" id="docx">
         <div class="dh">
-          <div>
-            <div class="lbl">Beispielhafte Darstellung</div>
-            <h4>Vorbereitungsbericht — Wartephase</h4>
-          </div>
-          <svg class="seal" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-            <circle cx="22" cy="22" r="20" fill="#E4F0EC"/>
-            <path d="M14 22.5l5.5 5.5L31 16.5" stroke="#2B6F5E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <div><div class="lbl">Beispielhafte Darstellung</div><h4>Vorbereitungsbericht — Wartephase</h4></div>
+          <svg class="seal" viewBox="0 0 44 44" fill="none" aria-hidden="true"><circle cx="22" cy="22" r="20"/><path d="M14 22.5l5.5 5.5L31 16.5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <div class="drow"><span>Erfassungszeitraum</span><b>84 Tage · 71 Einträge</b></div>
-        <div class="drow"><span>Dokumentierte Muster</span><b>4 Situationen</b></div>
+        <div class="drow"><span>Dokumentierte Muster</span><b>4 wiederkehrende Situationen</b></div>
         <div class="drow"><span>Selbstformulierte Ziele</span><b>3</b></div>
-        <div class="drow"><span>Belastungsverlauf</span><b>dokumentiert</b></div>
-        <div class="drow"><span>Freigegeben durch</span><b>Nutzer:in</b></div>
-        <p class="foot">
-          Illustration des Aufbaus. Inhalte, Instrumente und Format befinden sich in Entwicklung und
-          werden mit Fachkreisen abgestimmt.
-        </p>
+        <div class="drow"><span>Belastungsverlauf</span><b>über den Zeitraum dokumentiert</b></div>
+        <div class="drow"><span>Freigegeben durch</span><b>Nutzer:in, am Tag der Übergabe</b></div>
+        <p class="foot">Illustration des Aufbaus. Inhalte, Instrumente und Format befinden sich in Entwicklung und werden mit Fachkreisen abgestimmt.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PATIENTENAKTE (neu) ═══ -->
+<section id="akte">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">Die Patientenakte</span>
+      <h2 class="rv d1">Eine Akte für alle Stationen.</h2>
+      <p class="sub rv d2">
+        Neben dem Therapie-Artefakt führt VORLAUF eine Akte, die alle Unterlagen der Person bündelt —
+        egal, welcher Träger sie ausgestellt hat. VORLAUF wird so zur Verbindungsstelle zwischen den
+        Instanzen: Die Akte hilft der Person selbst und allen, die an ihrer Behandlung beteiligt sind.
+      </p>
+    </div>
+
+    <div class="akte-grid">
+      <div class="feats">
+        <div class="feat glass rv d1">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 011-1h3M16 4h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3M4 12h16"/></svg></span>
+          <h3>Scannen statt suchen.</h3>
+          <p>Überweisungen, Entlassbriefe, Sozialberichte und Bescheide werden mit dem Handy eingescannt und liegen danach geordnet in der Akte.</p>
+        </div>
+        <div class="feat glass rv d2">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+          <h3>Anträge direkt übermitteln.</h3>
+          <p>Beim Antrag auf Entwöhnung unterstützt VORLAUF beim Ausfüllen und übermittelt die Unterlagen direkt — statt Formularen, Post und Nachreichen.</p>
+        </div>
+        <div class="feat glass rv d1">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 11-3-6.7M21 4v5h-5"/></svg></span>
+          <h3>Einmal erzählen, nicht fünfmal.</h3>
+          <p>Wer heute Einrichtung oder Träger wechselt, beginnt oft von vorn. Die Akte zeigt den ganzen Stand — auf Freigabe der Person.</p>
+        </div>
+        <div class="feat glass rv d2">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
+          <h3>Die eigene Darstellung steht neben der fremden.</h3>
+          <p>Berichte über Patient:innen entstehen oft ohne sie. In der Akte dokumentiert die Person selbst — tagesnah, freigegeben, nachvollziehbar.</p>
+        </div>
+      </div>
+
+      <div class="akte glass strong rv d2" id="akteCard">
+        <div class="akte-head">
+          <div><div class="lbl">Beispielhafte Darstellung</div><h4>Meine Akte</h4></div>
+          <span class="count">5 Dokumente</span>
+        </div>
+        <div class="doc"><span class="di"><i></i></span><div><b>Überweisung zur Entgiftung</b><small>Hausarztpraxis</small></div><span class="pill">gescannt</span></div>
+        <div class="doc"><span class="di"><i></i></span><div><b>Entlassbrief</b><small>Entzugsklinik</small></div><span class="pill">gescannt</span></div>
+        <div class="doc"><span class="di"><i></i></span><div><b>Sozialbericht</b><small>Suchtberatung</small></div><span class="pill">gescannt</span></div>
+        <div class="doc"><span class="di"><i></i></span><div><b>Antrag auf Entwöhnung</b><small>an Deutsche Rentenversicherung</small></div><span class="pill busy" id="sendPill">wird übermittelt</span></div>
+        <div class="doc own"><span class="di"><i></i></span><div><b>Vorbereitungsbericht</b><small>eigene Einträge · VORLAUF</small></div><span class="pill sent">aktuell</span></div>
+        <p class="share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 118 0v3"/></svg> Wer was sieht, entscheidet die Person.</p>
+        <p class="foot">Illustration. Funktionsumfang, Übermittlungswege und Anbindungen befinden sich in Entwicklung.</p>
+      </div>
+    </div>
+
+    <div class="who">
+      <div class="glass rv d1"><span>Für die Person</span><p>Alle Unterlagen an einem Ort, jederzeit einsehbar.</p></div>
+      <div class="glass rv d2"><span>Für Beratungsstellen</span><p>Anträge vollständig, ohne Nachreichen per Post.</p></div>
+      <div class="glass rv d3"><span>Für Kliniken</span><p>Vorbefunde liegen bei Aufnahme bereits vor.</p></div>
+      <div class="glass rv d3"><span>Für Therapeut:innen</span><p>Ein Stand statt einer leeren Anamnese.</p></div>
     </div>
   </div>
 </section>
@@ -1056,75 +1133,68 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
       <p class="sub rv d2">
         Die Wartephase ist der Einstieg — nicht das Ende. Menschen bewegen sich durch das
         Versorgungssystem, und die Dokumentation sollte mitwandern statt bei jedem Übergang neu zu
-        beginnen. Der Fokus der ersten Ausbaustufe liegt auf den grün markierten Kontexten.
+        beginnen. Der Fokus der ersten Ausbaustufe liegt auf den hervorgehobenen Kontexten.
       </p>
     </div>
-
-    <div class="eco rv d2">
+    <div class="eco glass rv d2">
       <div class="eco-scroll">
         <svg viewBox="18 -6 904 312" role="img" aria-label="Sechs Versorgungskontexte, verbunden durch die weitergegebene Dokumentation">
-          <g stroke="#2B6F5E" stroke-width="2" fill="none" opacity=".4">
-            <path class="dash" d="M150 150 H310"/>
-            <path class="dash" d="M390 150 H550"/>
-            <path class="dash" d="M630 150 H790"/>
-            <path class="dash" d="M350 118 C 350 60, 590 60, 590 118"/>
-            <path class="dash" d="M350 182 C 350 244, 590 244, 590 182"/>
+          <g class="lines" stroke-width="2" fill="none">
+            <path class="dash" d="M150 150 H310"/><path class="dash" d="M390 150 H550"/><path class="dash" d="M630 150 H790"/>
+            <path class="dash" d="M350 118 C 350 60, 590 60, 590 118"/><path class="dash" d="M350 182 C 350 244, 590 244, 590 182"/>
           </g>
-
-          <g>
-            <rect x="30" y="118" width="120" height="64" rx="16" fill="#FBFAF7" stroke="#DEDCD3" stroke-width="2"/>
-            <text x="90" y="146" text-anchor="middle" font-size="14" font-weight="600" fill="#0D1A17" font-family="system-ui,sans-serif">Hausarzt</text>
-            <text x="90" y="164" text-anchor="middle" font-size="11" fill="#4A5C57" font-family="ui-monospace,monospace">Phase 2</text>
-          </g>
-          <g>
-            <rect x="790" y="118" width="120" height="64" rx="16" fill="#FBFAF7" stroke="#DEDCD3" stroke-width="2"/>
-            <text x="850" y="146" text-anchor="middle" font-size="14" font-weight="600" fill="#0D1A17" font-family="system-ui,sans-serif">Substitution</text>
-            <text x="850" y="164" text-anchor="middle" font-size="11" fill="#4A5C57" font-family="ui-monospace,monospace">Phase 2</text>
-          </g>
-
-          <g>
-            <rect x="290" y="30" width="120" height="64" rx="16" fill="#FDF3E2" stroke="#E5B66A" stroke-width="2"/>
-            <text x="350" y="58" text-anchor="middle" font-size="14" font-weight="600" fill="#0D1A17" font-family="system-ui,sans-serif">Entzugsklinik</text>
-            <text x="350" y="76" text-anchor="middle" font-size="11" fill="#8A6A20" font-family="ui-monospace,monospace">Schnittstelle</text>
-          </g>
-          <g>
-            <rect x="530" y="30" width="140" height="64" rx="16" fill="#FDF3E2" stroke="#E5B66A" stroke-width="2"/>
-            <text x="600" y="58" text-anchor="middle" font-size="14" font-weight="600" fill="#0D1A17" font-family="system-ui,sans-serif">Suchtberatung</text>
-            <text x="600" y="76" text-anchor="middle" font-size="11" fill="#8A6A20" font-family="ui-monospace,monospace">teilweise MVP</text>
-          </g>
-
-          <g class="node-core">
-            <rect x="310" y="118" width="140" height="64" rx="16" fill="#2B6F5E"/>
-            <text x="380" y="146" text-anchor="middle" font-size="14" font-weight="600" fill="#FBFAF7" font-family="system-ui,sans-serif">Wartephase</text>
-            <text x="380" y="164" text-anchor="middle" font-size="11" fill="#A9D5C8" font-family="ui-monospace,monospace">MVP-Kern</text>
-          </g>
-          <g class="node-core b">
-            <rect x="510" y="118" width="140" height="64" rx="16" fill="#2B6F5E"/>
-            <text x="580" y="146" text-anchor="middle" font-size="14" font-weight="600" fill="#FBFAF7" font-family="system-ui,sans-serif">Tagesklinik</text>
-            <text x="580" y="164" text-anchor="middle" font-size="11" fill="#A9D5C8" font-family="ui-monospace,monospace">MVP-Kern</text>
-          </g>
-
+          <g><rect class="n-phase" x="30" y="118" width="120" height="64" rx="16" stroke-width="1.5"/><text class="t1" x="90" y="146" text-anchor="middle">Hausarzt</text><text class="t2" x="90" y="164" text-anchor="middle">Phase 2</text></g>
+          <g><rect class="n-phase" x="790" y="118" width="120" height="64" rx="16" stroke-width="1.5"/><text class="t1" x="850" y="146" text-anchor="middle">Substitution</text><text class="t2" x="850" y="164" text-anchor="middle">Phase 2</text></g>
+          <g><rect class="n-edge" x="290" y="30" width="120" height="64" rx="16" stroke-width="1.5"/><text class="t1" x="350" y="58" text-anchor="middle">Entzugsklinik</text><text class="t2 edge" x="350" y="76" text-anchor="middle">Schnittstelle</text></g>
+          <g><rect class="n-edge" x="530" y="30" width="140" height="64" rx="16" stroke-width="1.5"/><text class="t1" x="600" y="58" text-anchor="middle">Suchtberatung</text><text class="t2 edge" x="600" y="76" text-anchor="middle">teilweise MVP</text></g>
+          <g><rect class="n-core" x="310" y="118" width="140" height="64" rx="16"/><text class="t1 core" x="380" y="146" text-anchor="middle">Wartephase</text><text class="t2 core" x="380" y="164" text-anchor="middle">MVP-Kern</text></g>
+          <g><rect class="n-core" x="510" y="118" width="140" height="64" rx="16"/><text class="t1 core" x="580" y="146" text-anchor="middle">Tagesklinik</text><text class="t2 core" x="580" y="164" text-anchor="middle">MVP-Kern</text></g>
           <g class="travel">
-            <rect x="-15" y="-19" width="30" height="38" rx="5" fill="#C98B2F"/>
-            <rect x="-8" y="-9" width="16" height="2.6" rx="1.3" fill="#FBFAF7" opacity=".92"/>
-            <rect x="-8" y="-2" width="16" height="2.6" rx="1.3" fill="#FBFAF7" opacity=".66"/>
-            <rect x="-8" y="5" width="10" height="2.6" rx="1.3" fill="#FBFAF7" opacity=".45"/>
+            <rect class="doc-shape" x="-15" y="-19" width="30" height="38" rx="5"/>
+            <rect class="doc-line" x="-8" y="-9" width="16" height="2.6" rx="1.3" opacity=".9"/>
+            <rect class="doc-line" x="-8" y="-2" width="16" height="2.6" rx="1.3" opacity=".65"/>
+            <rect class="doc-line" x="-8" y="5" width="10" height="2.6" rx="1.3" opacity=".45"/>
           </g>
-          <text x="470" y="288" text-anchor="middle" font-size="11.5" fill="#4A5C57" font-family="ui-monospace,monospace">Das Artefakt wandert mit der Person</text>
+          <text class="t2" x="470" y="288" text-anchor="middle">Die Akte wandert mit der Person</text>
         </svg>
       </div>
-
       <div class="legend">
-        <span><i style="background:#2B6F5E"></i> MVP-Kern</span>
-        <span><i style="background:#E5B66A"></i> Schnittstelle / teilweise</span>
-        <span><i style="background:#DEDCD3"></i> Phase 2</span>
+        <span><i style="background:var(--accent)"></i> MVP-Kern</span>
+        <span><i style="background:var(--sand);opacity:.6"></i> Schnittstelle / teilweise</span>
+        <span><i style="background:var(--hair);outline:1px solid var(--hair)"></i> Phase 2</span>
       </div>
       <span class="eco-hint">← seitlich scrollen</span>
     </div>
   </div>
 </section>
 
-<!-- ═══ WER DARAN ARBEITET ═══ -->
+<!-- ═══ WAS WIR GEHÖRT HABEN (neu) ═══ -->
+<section id="gehoert">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">Aus der Recherche</span>
+      <h2 class="rv d1">Was Betroffene über<br>die Übergänge berichten.</h2>
+      <p class="sub rv d2">
+        Wir haben öffentliche Erfahrungsberichte zu fünf bestehenden Angeboten ausgewertet: Sozialbericht,
+        Online-Antrag der Rentenversicherung, DigiSucht, eine DiGA und die elektronische Patientenakte.
+        Vier Muster kehren wieder.
+      </p>
+    </div>
+    <div class="heard">
+      <div class="hc glass rv d1"><span class="no">01</span><h3>Die eigene Geschichte muss immer wieder neu erzählt werden.</h3><p>Das zeigt sich bei drei der fünf Angebote.</p></div>
+      <div class="hc glass rv d2"><span class="no">02</span><h3>Berichte über Patient:innen sind teils fehlerhaft oder kommen zu spät.</h3><p>Mehrere unabhängige Berichte beschreiben das — mit rechtlichen Folgen für die Betroffenen.</p></div>
+      <div class="hc glass rv d1"><span class="no">03</span><h3>Niemand weiß, wo der eigene Vorgang steht.</h3><p>Das gilt für den Reha-Antrag genauso wie für die elektronische Patientenakte.</p></div>
+      <div class="hc glass rv d2"><span class="no">04</span><h3>Zugang allein reicht nicht.</h3><p>Rund die Hälfte der bei DigiSucht Registrierten nutzt die Beratung nie.</p><span class="cite">BMG-Sachbericht</span></div>
+    </div>
+    <div class="voice glass strong rv">
+      <q>Eine Betroffene rät anderen, schon vor der Reha mit der vorbehandelnden Person Themen zu sammeln und mitzubringen.</q>
+      <p>Diesen Schritt hat sie sich selbst gebaut, ohne Werkzeug. Wir wollen ihn zu einem machen.</p>
+    </div>
+    <p class="method rv">Qualitative Auswertung öffentlicher Erfahrungsberichte, nicht repräsentativ. Häufigkeiten lassen sich daraus nicht ableiten.</p>
+  </div>
+</section>
+
+<!-- ═══ TEAM ═══ -->
 <section id="team">
   <div class="wrap">
     <div class="sec-head">
@@ -1136,10 +1206,10 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
         das lieber jetzt wissen als nach der Zulassung.
       </p>
     </div>
-    <div class="crew rv d2">
-      <div><span>Produkt &amp; Mobile</span><b>Entwicklung der App, Kontakt zu Fachkreisen</b></div>
-      <div><span>Tech-Lead</span><b>Architektur, Datenmodell, Infrastruktur</b></div>
-      <div><span>Qualität &amp; Quellen</span><b>Prüft jede Zahl, bevor sie hier steht</b></div>
+    <div class="crew">
+      <div class="glass rv d1"><span>Produkt &amp; Mobile</span><b>Entwicklung der App, Kontakt zu Fachkreisen</b></div>
+      <div class="glass rv d2"><span>Tech-Lead</span><b>Architektur, Datenmodell, Infrastruktur</b></div>
+      <div class="glass rv d3"><span>Qualität &amp; Quellen</span><b>Prüft jede Zahl, bevor sie hier steht</b></div>
     </div>
   </div>
 </section>
@@ -1150,14 +1220,10 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
     <div class="sec-head">
       <span class="kicker rv">Mitgestalten</span>
       <h2 class="rv d1">Wir suchen Gesprächs&shy;partner,<br>keine Kunden.</h2>
-      <p class="sub rv d2">
-        Wenn Sie mit Menschen in der Wartephase arbeiten, würden wir Ihnen gern das Artefakt zeigen
-        und Sie fragen, ob es Ihnen etwas bringen würde.
-      </p>
+      <p class="sub rv d2">Wenn Sie mit Menschen in der Wartephase arbeiten, würden wir Ihnen gern das Artefakt zeigen und Sie fragen, ob es Ihnen etwas bringen würde.</p>
     </div>
-
     <div class="aud">
-      <div class="abox rv d1">
+      <div class="abox glass rv d1">
         <h3>Therapeut:innen &amp; Ärzt:innen</h3>
         <p>Wir möchten verstehen, ob eine strukturierte Vorgeschichte Ihre Erstgespräche verändert:</p>
         <ul>
@@ -1166,7 +1232,7 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
           <li>Was müsste ein solches Dokument leisten, damit Sie es aktiv einfordern würden?</li>
         </ul>
       </div>
-      <div class="abox rv d2">
+      <div class="abox glass rv d2">
         <h3>Beratungsstellen &amp; Kliniken</h3>
         <p>Wir sprechen mit Einrichtungen über frühe Pilotprojekte:</p>
         <ul>
@@ -1188,63 +1254,60 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
       <span class="honest rv d2">Kein Wirksamkeitsnachweis vorhanden</span>
     </div>
 
-    <div class="ledger rv d2">
-      <div>
-        <h4>Belegt — aus veröffentlichten Quellen</h4>
+    <div class="ledger">
+      <div class="solid glass rv d1">
+        <h4>Belegt</h4>
         <ul>
-          <li>142 Tage mittlere Wartezeit auf einen Psychotherapieplatz<cite>BPtK 2022 · indikationsübergreifend</cite></li>
-          <li>≈&#8239;30 % Abbruch in der psychosozialen Suchtbehandlung<cite>Lappan et al. 2020</cite></li>
-          <li>37 % Abbruch speziell bei Opioidabhängigkeit<cite>Dutra et al. 2008</cite></li>
-          <li>Drei Viertel der öffentlich geförderten Beratungsstellen arbeiten nicht kostendeckend<cite>Quelle noch zu ergänzen</cite></li>
-          <li>EMA ist in der Suchtforschung ein etabliertes Erhebungsverfahren<cite>Methodische Literatur</cite></li>
+          <li>142 Tage mittlere Wartezeit auf einen Psychotherapieplatz<span class="cite">BPtK 2022 · indikationsübergreifend</span></li>
+          <li>≈&#8239;30 % Abbruch in der psychosozialen Suchtbehandlung<span class="cite">Lappan et al. 2020</span></li>
+          <li>37 % Abbruch speziell bei Opioidabhängigkeit<span class="cite">Dutra et al. 2008</span></li>
+          <li>Trägerbruch: GKV zahlt den Entzug, DRV die Entwöhnung<span class="cite">Suchtvereinbarung</span></li>
+          <li>Antrag auf Entwöhnung mindestens sieben Tage vor Entzugsende<span class="cite">Suchtvereinbarung</span></li>
+          <li>Nahtlosverfahren nur teilweise umgesetzt<span class="cite">Quellenangabe folgt</span></li>
+          <li>Drei Viertel der öffentlich geförderten Beratungsstellen nicht kostendeckend<span class="cite">Quellenangabe folgt</span></li>
         </ul>
       </div>
-      <div class="open">
+      <div class="qual glass rv d2">
+        <h4>Qualitativ belegt</h4>
+        <ul>
+          <li>Die eigene Geschichte muss an Übergängen neu erzählt werden.</li>
+          <li>Berichte über Patient:innen sind teils fehlerhaft oder verspätet.</li>
+          <li>Antragstellende wissen nicht, wo ihr Vorgang steht.</li>
+          <li>Patient:innen bereiten Therapiethemen teils selbst vor — ohne Werkzeug.</li>
+        </ul>
+      </div>
+      <div class="open glass rv d3">
         <h4>Offen — unsere Arbeitshypothesen</h4>
         <ul>
           <li>Dass Erzählen statt Formular die Erfassungshürde tatsächlich senkt.</li>
           <li>Dass ein strukturiertes Artefakt das Erstgespräch messbar verbessert.</li>
+          <li>Dass eine personengeführte Akte die Übergänge zwischen den Instanzen verbessert.</li>
           <li>Dass die Wartephase ein eigener Wirkzeitraum ist und nicht nur Vorlaufzeit.</li>
           <li>Welches validierte Instrument die Qualität des Erstgesprächs abbildet.</li>
         </ul>
       </div>
     </div>
 
-    <div class="evi rv d2">
-      <p>
-        VORLAUF wird als digitale Gesundheitsanwendung nach §139e SGB V entwickelt. Der Weg dorthin
-        führt über ein Verfahren beim BfArM und über eine klinische Studie zum Nachweis positiver
-        Versorgungseffekte. Beides steht noch aus.
-      </p>
-      <p>
-        Wir sagen das bewusst deutlich: Es gibt derzeit <strong>keinen belegten Wirksamkeitsnachweis</strong>
-        für VORLAUF. Wir arbeiten mit veröffentlichten Daten zur Versorgungslage und mit validierten
-        Erhebungsinstrumenten, aber wir versprechen keine Wirkung, die wir nicht gezeigt haben.
-      </p>
-      <p>
-        Das Studiendesign entsteht in Abstimmung mit Fachleuten aus der Suchtmedizin und der
-        Biostatistik. Wenn Sie in diesem Feld forschen und Interesse an einer Kooperation haben,
-        würden wir gern mit Ihnen sprechen.
-      </p>
+    <div class="borrowed glass rv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 7v6M12 16.5v.5"/></svg>
+      <p><b>Viele Befunde zur Übergangsphase stammen aus der Alkoholversorgung.</b> Für Opioide und Benzodiazepine fehlen sie bisher weitgehend. Diese Lücke wollen wir mit eigener Forschung schließen.</p>
     </div>
 
-    <!-- KRISE -->
-    <div class="crisis rv d2" id="krisenhilfe">
+    <div class="evi rv d2">
+      <p>VORLAUF wird als digitale Gesundheitsanwendung nach §139e SGB V entwickelt. Der Weg dorthin führt über ein Verfahren beim BfArM und über eine klinische Studie zum Nachweis positiver Versorgungseffekte. Beides steht noch aus.</p>
+      <p>Wir sagen das bewusst deutlich: Es gibt derzeit <strong>keinen belegten Wirksamkeitsnachweis</strong> für VORLAUF. Wir arbeiten mit veröffentlichten Daten zur Versorgungslage und mit validierten Erhebungsinstrumenten, aber wir versprechen keine Wirkung, die wir nicht gezeigt haben.</p>
+      <p>Das Studiendesign entsteht in Abstimmung mit Fachleuten aus der Suchtmedizin und der Biostatistik. Wenn Sie in diesem Feld forschen und Interesse an einer Kooperation haben, würden wir gern mit Ihnen sprechen.</p>
+    </div>
+
+    <div class="crisis glass rv d2" id="krisenhilfe">
       <h3>Wenn Sie akut Unterstützung brauchen</h3>
-      <p>
-        VORLAUF ist kein Notfallangebot und steht noch nicht zur Verfügung. In akuten Situationen
-        erreichen Sie sofort Hilfe:
-      </p>
+      <p>VORLAUF ist kein Notfallangebot und steht noch nicht zur Verfügung. In akuten Situationen erreichen Sie sofort Hilfe:</p>
       <div class="numgrid">
         <a href="tel:112"><div class="big">112</div><div class="cap">Notruf bei medizinischen Notfällen</div></a>
         <a href="tel:116117"><div class="big">116 117</div><div class="cap">Ärztlicher Bereitschaftsdienst</div></a>
         <a href="tel:08001110111"><div class="big">0800 111 0 111</div><div class="cap">TelefonSeelsorge — rund um die Uhr, kostenfrei, anonym. Auch 0800 111 0 222 und 116 123</div></a>
       </div>
-      <p class="after">
-        Suchtberatungsstellen in Ihrer Nähe finden Sie über das Suchthilfeverzeichnis der Deutschen
-        Hauptstelle für Suchtfragen: <a href="https://www.dhs.de/suchthilfe/hilfe-suchen" rel="noopener">dhs.de/suchthilfe/hilfe-suchen</a>.
-        Sucht &amp; Drogen Hotline bundesweit: <strong>01806 313031</strong> (täglich 8–24 Uhr, 0,20 € pro Anruf).
-      </p>
+      <p class="after">Suchtberatungsstellen in Ihrer Nähe finden Sie über das Suchthilfeverzeichnis der Deutschen Hauptstelle für Suchtfragen: <a href="https://www.dhs.de/suchthilfe/hilfe-suchen" rel="noopener">dhs.de/suchthilfe/hilfe-suchen</a>. Sucht &amp; Drogen Hotline bundesweit: <strong>01806 313031</strong> (täglich 8–24 Uhr, 0,20 € pro Anruf).</p>
     </div>
   </div>
 </section>
@@ -1252,13 +1315,9 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
 <!-- ═══ KONTAKT ═══ -->
 <section id="kontakt">
   <div class="wrap">
-    <div class="cta rv">
+    <div class="cta glass rv">
       <h2>Bleiben Sie in Kontakt</h2>
-      <p class="intro">
-        Wir informieren in großen Abständen über den Projektfortschritt. Kein Newsletter, keine
-        Werbung. Wenn Sie aus Fachkreisen kommen, melden wir uns für ein Gespräch.
-      </p>
-
+      <p class="intro">Wir informieren in großen Abständen über den Projektfortschritt. Kein Newsletter, keine Werbung. Wenn Sie aus Fachkreisen kommen, melden wir uns für ein Gespräch.</p>
       <!-- TODO: Endpunkt anbinden. Bis dahin öffnet das Formular eine E-Mail. -->
       <form id="waitlist" novalidate>
         <div class="f">
@@ -1281,16 +1340,10 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
         </div>
         <label class="consent" for="consent">
           <input type="checkbox" id="consent" required>
-          <span>
-            Ich bin damit einverstanden, dass meine E-Mail-Adresse zur Kontaktaufnahme über dieses
-            Projekt gespeichert und verarbeitet wird. Ich kann diese Einwilligung jederzeit formlos
-            widerrufen. Weitere Informationen in der Datenschutzerklärung.
-          </span>
+          <span>Ich bin damit einverstanden, dass meine E-Mail-Adresse zur Kontaktaufnahme über dieses Projekt gespeichert und verarbeitet wird. Ich kann diese Einwilligung jederzeit formlos widerrufen. Weitere Informationen in der Datenschutzerklärung.</span>
         </label>
         <button class="btn" type="submit">Absenden <span class="arw">→</span></button>
-        <p class="fnote">
-          Bitte senden Sie uns keine Gesundheitsdaten oder Angaben zu Ihrem Konsum über dieses Formular.
-        </p>
+        <p class="fnote">Bitte senden Sie uns keine Gesundheitsdaten oder Angaben zu Ihrem Konsum über dieses Formular.</p>
         <p id="feedback" role="status" aria-live="polite" hidden></p>
       </form>
     </div>
@@ -1304,27 +1357,23 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
     <div class="fcols">
       <div class="fbrand">
         <a class="brand" href="#top">
-          <svg class="glyph" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <rect width="40" height="40" rx="11" fill="#12322B"/>
-            <path d="M11 26.5 L17.5 13 L20 18.5 L22.5 13 L29 26.5" stroke="#EDF3F0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <circle cx="20" cy="27" r="2.2" fill="#F0B357"/>
-          </svg>
+          <svg class="glyph" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect width="40" height="40" rx="11"/><path d="M11 26.5 L17.5 13 L20 18.5 L22.5 13 L29 26.5" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/><circle cx="20" cy="27" r="2.2"/></svg>
           VORLAUF
         </a>
-        <p>
-          Ein Vorhaben zur digitalen Therapievorbereitung bei Opioid- und Benzodiazepinabhängigkeit.
-          In Entwicklung.
-        </p>
+        <p>Ein Vorhaben zur digitalen Therapievorbereitung bei Opioid- und Benzodiazepinabhängigkeit. In Entwicklung.</p>
       </div>
       <nav>
         <h4>Projekt</h4>
         <a href="#problem">Ausgangslage</a>
+        <a href="#wurzel">Die Wurzel</a>
         <a href="#wie">Wie es funktioniert</a>
         <a href="#artefakt">Therapie-Artefakt</a>
+        <a href="#akte">Patientenakte</a>
         <a href="#oekosystem">Ökosystem</a>
       </nav>
       <nav>
         <h4>Mitwirken</h4>
+        <a href="#gehoert">Aus der Recherche</a>
         <a href="#fachkreise">Für Fachkreise</a>
         <a href="#evidenz">Evidenz</a>
         <a href="#kontakt">Kontakt</a>
@@ -1336,32 +1385,10 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
         <a href="#krisenhilfe" style="color:var(--coral)">Akute Hilfe</a>
       </nav>
     </div>
-
     <div class="legal">
-      <p>
-        <strong>Wichtiger Hinweis:</strong> VORLAUF ist ein Entwicklungsvorhaben und derzeit weder als
-        Medizinprodukt zugelassen noch als digitale Gesundheitsanwendung nach §139e SGB V im
-        DiGA-Verzeichnis des BfArM gelistet. Die Inhalte dieser Seite dienen der Information über ein
-        laufendes Projekt und stellen weder eine medizinische Beratung noch ein Heilversprechen dar.
-        Sie ersetzen keine ärztliche oder therapeutische Behandlung. Sämtliche Angaben zu Funktionen
-        beschreiben einen geplanten Entwicklungsstand, keine verfügbaren Produkteigenschaften
-        (vgl. Art. 7 MDR, §5 UWG, HWG).
-      </p>
-      <p>
-        Die angeführten Kennzahlen stammen aus veröffentlichten Quellen (BPtK 2022; Lappan et al. 2020;
-        Dutra et al. 2008) und beschreiben die allgemeine Versorgungslage — nicht die Wirkung von VORLAUF.
-        Die 142-Tage-Angabe bezieht sich auf Psychotherapieplätze indikationsübergreifend, nicht auf
-        suchtspezifische Behandlung.
-      </p>
-      <p class="todo">
-        Vor Veröffentlichung zwingend zu ergänzen: Impressum nach §5 DDG (die Pflicht greift bereits
-        durch das Kontaktformular — „noindex“ ändert daran nichts), Datenschutzerklärung nach Art. 13
-        DSGVO (ohne sie ist die Einwilligung im Formular unwirksam), Cookie-/Consent-Prüfung,
-        Formular-Endpunkt mit Auftragsverarbeitungsvertrag, echte Kontaktadresse statt des Platzhalters
-        im Script, Schriften selbst hosten statt vom Google-CDN, Prüfung des Arbeitsnamens „VORLAUF“
-        (DPMA Klassen 9/42/44 und Domainverfügbarkeit), juristische Freigabe aller Aussagen gegen HWG,
-        §5 UWG und Art. 7 MDR.
-      </p>
+      <p><strong>Wichtiger Hinweis:</strong> VORLAUF ist ein Entwicklungsvorhaben und derzeit weder als Medizinprodukt zugelassen noch als digitale Gesundheitsanwendung nach §139e SGB V im DiGA-Verzeichnis des BfArM gelistet. Die Inhalte dieser Seite dienen der Information über ein laufendes Projekt und stellen weder eine medizinische Beratung noch ein Heilversprechen dar. Sie ersetzen keine ärztliche oder therapeutische Behandlung. Sämtliche Angaben zu Funktionen beschreiben einen geplanten Entwicklungsstand, keine verfügbaren Produkteigenschaften (vgl. Art. 7 MDR, §5 UWG, HWG).</p>
+      <p>Die angeführten Kennzahlen stammen aus veröffentlichten Quellen (BPtK 2022; Lappan et al. 2020; Dutra et al. 2008) und beschreiben die allgemeine Versorgungslage — nicht die Wirkung von VORLAUF. Die 142-Tage-Angabe bezieht sich auf Psychotherapieplätze indikationsübergreifend, nicht auf suchtspezifische Behandlung.</p>
+      <p class="todo">Vor Veröffentlichung zwingend zu ergänzen: Impressum nach §5 DDG (die Pflicht greift bereits durch das Kontaktformular — „noindex“ ändert daran nichts), Datenschutzerklärung nach Art. 13 DSGVO (ohne sie ist die Einwilligung im Formular unwirksam), Cookie-/Consent-Prüfung, Formular-Endpunkt mit Auftragsverarbeitungsvertrag, echte Kontaktadresse statt des Platzhalters im Script, Schrift und Lenis selbst hosten, fehlende Quellenangaben ergänzen, Prüfung des Arbeitsnamens „VORLAUF“ (DPMA Klassen 9/42/44 und Domainverfügbarkeit), juristische Freigabe aller Aussagen gegen HWG, §5 UWG und Art. 7 MDR.</p>
     </div>
   </div>
 </footer>
@@ -1371,52 +1398,41 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
 (function(){
   "use strict";
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var root = document.documentElement;
-  root.classList.add('js');
+  document.documentElement.classList.add('js');
+  var hasIO = 'IntersectionObserver' in window;
 
-  /* ─── Smooth Scroll (Lenis) ────────────────────────────────
-     Trägheitsscroll wie auf leni.dev. Fällt ohne Lenis oder bei
-     reduzierter Bewegung auf natives scroll-behavior zurück.   */
+  /* ─── Smooth Scroll ─── */
   var lenis = null;
   if(!reduce && typeof window.Lenis === 'function'){
     try{
-      lenis = new window.Lenis({
-        duration:1.15,
-        easing:function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
-        smoothWheel:true,
-        touchMultiplier:1.6,
-        gestureOrientation:'vertical'
-      });
-      var raf = function(time){ lenis.raf(time); requestAnimationFrame(raf); };
-      requestAnimationFrame(raf);
+      lenis = new window.Lenis({duration:1.15,easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));},
+        smoothWheel:true,touchMultiplier:1.6,gestureOrientation:'vertical'});
+      var loop = function(t){ lenis.raf(t); requestAnimationFrame(loop); };
+      requestAnimationFrame(loop);
     }catch(err){ lenis = null; }
   }
-  function goTo(target){
-    if(lenis){ lenis.scrollTo(target, {offset:-88, duration:1.25}); }
-    else if(target && target.scrollIntoView){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  function goTo(el){
+    if(lenis) lenis.scrollTo(el,{offset:-80,duration:1.25});
+    else el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
   }
-  document.addEventListener('click', function(e){
+  document.addEventListener('click',function(e){
     var a = e.target.closest && e.target.closest('a[href^="#"]');
     if(!a) return;
     var id = a.getAttribute('href');
-    if(id === '#' ) { e.preventDefault(); return; }
+    if(id === '#'){ e.preventDefault(); return; }
     var el = document.querySelector(id);
     if(!el) return;
-    e.preventDefault();
-    closeMenu();
-    goTo(el);
+    e.preventDefault(); closeMenu(); goTo(el);
     if(history.replaceState) history.replaceState(null,'',id);
   });
 
-  /* ─── Nav-Zustand + Fortschrittsbalken ──────────────────── */
-  var nav = document.getElementById('nav');
-  var pbar = document.getElementById('pbar');
-  var ticking = false;
+  /* ─── Nav + Fortschritt ─── */
+  var nav = document.getElementById('nav'), pbar = document.getElementById('pbar'), ticking = false;
   function frame(){
     var y = window.scrollY || window.pageYOffset;
     nav.classList.toggle('stuck', y > 12);
     var h = document.documentElement.scrollHeight - window.innerHeight;
-    pbar.style.transform = 'scaleX(' + (h > 0 ? Math.min(y / h, 1) : 0) + ')';
+    pbar.style.transform = 'scaleX(' + (h > 0 ? Math.min(y/h,1) : 0) + ')';
     ticking = false;
   }
   function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
@@ -1424,144 +1440,96 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
   window.addEventListener('scroll', onScroll, {passive:true});
   frame();
 
-  /* ─── Mobiles Menü ──────────────────────────────────────── */
-  var burger = document.getElementById('burger');
-  var menu = document.getElementById('menu');
-  function openMenu(){
-    menu.hidden = false;
-    burger.setAttribute('aria-expanded','true');
-    burger.setAttribute('aria-label','Menü schließen');
-    if(lenis) lenis.stop(); else document.body.style.overflow = 'hidden';
-  }
-  function closeMenu(){
-    if(menu.hidden) return;
-    menu.hidden = true;
-    burger.setAttribute('aria-expanded','false');
-    burger.setAttribute('aria-label','Menü öffnen');
-    if(lenis) lenis.start(); else document.body.style.overflow = '';
-  }
-  burger.addEventListener('click', function(){
-    if(menu.hidden) openMenu(); else closeMenu();
-  });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
-  window.addEventListener('resize', function(){ if(window.innerWidth >= 1000) closeMenu(); });
+  /* ─── Menü ─── */
+  var burger = document.getElementById('burger'), menu = document.getElementById('menu');
+  function openMenu(){ menu.hidden = false; burger.setAttribute('aria-expanded','true'); burger.setAttribute('aria-label','Menü schließen');
+    if(lenis) lenis.stop(); else document.body.style.overflow = 'hidden'; }
+  function closeMenu(){ if(menu.hidden) return; menu.hidden = true; burger.setAttribute('aria-expanded','false'); burger.setAttribute('aria-label','Menü öffnen');
+    if(lenis) lenis.start(); else document.body.style.overflow = ''; }
+  burger.addEventListener('click',function(){ if(menu.hidden) openMenu(); else closeMenu(); });
+  document.addEventListener('keydown',function(e){ if(e.key === 'Escape') closeMenu(); });
+  window.addEventListener('resize',function(){ if(window.innerWidth >= 1100) closeMenu(); });
 
-  /* ─── Scroll-Reveal ─────────────────────────────────────── */
-  var revealables = document.querySelectorAll('.rv');
-  if(!('IntersectionObserver' in window) || reduce){
-    revealables.forEach(function(el){ el.classList.add('in'); });
-  } else {
+  /* ─── Einmal-Trigger beim Sichtbarwerden ─── */
+  function once(el, fn, threshold){
+    if(!el) return;
+    if(!hasIO || reduce){ fn(el); return; }
     var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
-    revealables.forEach(function(el){ io.observe(el); });
+      entries.forEach(function(e){ if(e.isIntersecting){ fn(e.target); io.unobserve(e.target); } });
+    }, {threshold: threshold || .2, rootMargin:'0px 0px -6% 0px'});
+    io.observe(el);
   }
 
-  /* ─── Kennzahlen hochzählen ─────────────────────────────── */
-  function runCounter(el){
-    var target = parseFloat(el.getAttribute('data-count'));
-    var pre = el.getAttribute('data-prefix') || '';
-    var unit = el.querySelector('u');
-    var suffix = unit ? unit.outerHTML : '';
-    if(reduce){ return; }
-    var start = performance.now(), dur = 1500;
-    function tick(now){
-      var p = Math.min((now - start) / dur, 1);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.innerHTML = pre + Math.round(target * eased) + suffix;
-      if(p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-  if('IntersectionObserver' in window && !reduce){
-    var cio = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ runCounter(e.target); cio.unobserve(e.target); }
-      });
-    }, {threshold:.55});
-    document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
-  }
+  /* Reveal */
+  document.querySelectorAll('.rv').forEach(function(el){ once(el, function(t){ t.classList.add('in'); }, .12); });
 
-  /* ─── Messbalken ────────────────────────────────────────── */
-  var meters = document.querySelectorAll('.meter i');
-  function fillMeter(el){ el.style.width = el.getAttribute('data-w') + '%'; }
-  if('IntersectionObserver' in window){
-    var mio = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){ fillMeter(e.target); mio.unobserve(e.target); }
-      });
-    }, {threshold:.5});
-    meters.forEach(function(el){ mio.observe(el); });
-  } else { meters.forEach(fillMeter); }
+  /* Kennzahlen */
+  document.querySelectorAll('[data-count]').forEach(function(el){
+    once(el, function(t){
+      if(reduce) return;
+      var target = parseFloat(t.getAttribute('data-count')), pre = t.getAttribute('data-prefix') || '';
+      var u = t.querySelector('u'), suf = u ? u.outerHTML : '', start = performance.now();
+      (function tick(now){
+        var p = Math.min((now - start)/1500, 1), e = 1 - Math.pow(1-p, 3);
+        t.innerHTML = pre + Math.round(target*e) + suf;
+        if(p < 1) requestAnimationFrame(tick);
+      })(start);
+    }, .55);
+  });
 
-  /* ─── Wartezeit-Balken ──────────────────────────────────── */
-  var tl = document.getElementById('tl');
-  function fillTl(){
+  /* Messbalken */
+  document.querySelectorAll('.meter i').forEach(function(el){ once(el, function(t){ t.style.width = t.getAttribute('data-w') + '%'; }, .5); });
+
+  /* Patientenweg */
+  var journey = document.getElementById('journey');
+  once(journey, function(j){
+    j.querySelectorAll('.jb').forEach(function(b,i){ setTimeout(function(){ b.classList.add('in'); }, reduce ? 0 : 250 + i*420); });
+  }, .35);
+
+  /* Wartezeit-Balken */
+  once(document.getElementById('tl'), function(){
     document.getElementById('tlfill').style.width = '100%';
     document.getElementById('tlgap').classList.add('in');
-  }
-  if(tl && 'IntersectionObserver' in window){
-    var lio = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){ if(e.isIntersecting){ fillTl(); lio.unobserve(e.target); } });
-    }, {threshold:.35});
-    lio.observe(tl);
-  } else if(tl){ fillTl(); }
+  }, .35);
 
-  /* ─── Berichtszeilen gestaffelt ─────────────────────────── */
-  var docx = document.getElementById('docx');
-  if(docx){
-    var rows = docx.querySelectorAll('.drow');
-    var showRows = function(){
-      rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('in'); }, reduce ? 0 : i * 70); });
-    };
-    if('IntersectionObserver' in window && !reduce){
-      var dio = new IntersectionObserver(function(entries){
-        entries.forEach(function(e){ if(e.isIntersecting){ showRows(); dio.unobserve(e.target); } });
-      }, {threshold:.3});
-      dio.observe(docx);
-    } else { showRows(); }
-  }
+  /* Berichtszeilen */
+  once(document.getElementById('docx'), function(d){
+    d.querySelectorAll('.drow').forEach(function(r,i){ setTimeout(function(){ r.classList.add('in'); }, reduce ? 0 : i*70); });
+  }, .3);
 
-  /* ─── Geräte: Panes umschalten ──────────────────────────── */
+  /* Akte: Dokumente, dann Übermittlung */
+  once(document.getElementById('akteCard'), function(c){
+    var docs = c.querySelectorAll('.doc');
+    docs.forEach(function(r,i){ setTimeout(function(){ r.classList.add('in'); }, reduce ? 0 : i*110); });
+    var pill = document.getElementById('sendPill');
+    setTimeout(function(){ pill.classList.remove('busy'); pill.classList.add('sent'); pill.textContent = 'übermittelt'; }, reduce ? 0 : 2600);
+  }, .3);
+
+  /* ─── Geräte ─── */
   var TITLES = ['Heute erzählen','Muster im Zeitraum','Bericht für das Erstgespräch'];
-
-  function makeScreen(paneIds, dotsSel, headId, kickId, titleId){
-    var panes = paneIds.map(function(id){ return document.getElementById(id); });
+  function makeScreen(ids, dotsSel, headId, kickId, titleId){
+    var panes = ids.map(function(id){ return document.getElementById(id); });
     if(!panes[0]) return null;
-    var dots  = document.querySelectorAll(dotsSel);
-    var head  = document.getElementById(headId);
-    var kick  = document.getElementById(kickId);
-    var title = document.getElementById(titleId);
-    var cur = 0;
+    var dots = document.querySelectorAll(dotsSel), head = document.getElementById(headId),
+        kick = document.getElementById(kickId), title = document.getElementById(titleId), cur = 0;
     return {
-      set: function(i){
-        if(i === cur) return;
-        cur = i;
+      set:function(i){
+        if(i === cur) return; cur = i;
         panes.forEach(function(p,k){ p.classList.toggle('on', k === i); });
         dots.forEach(function(d,k){ d.classList.toggle('on', k === i); });
         head.classList.add('swap');
-        setTimeout(function(){
-          kick.textContent  = 'Schritt ' + (i + 1) + ' von 3';
-          title.textContent = TITLES[i];
-          head.classList.remove('swap');
-        }, 200);
+        setTimeout(function(){ kick.textContent = 'Schritt ' + (i+1) + ' von 3'; title.textContent = TITLES[i]; head.classList.remove('swap'); }, 200);
       },
-      next: function(){ this.set((cur + 1) % 3); }
+      next:function(){ this.set((cur+1) % 3); }
     };
   }
-
-  /* Hero: läuft von allein */
-  var hero = makeScreen(['p1','p2','p3'], '.hero .steps-dots i', 'scrHead', 'scrKick', 'scrTitle');
+  var hero = makeScreen(['p1','p2','p3'], '.hero-dots i', 'scrHead', 'scrKick', 'scrTitle');
   if(hero && !reduce) setInterval(function(){ hero.next(); }, 4200);
 
-  /* Szene: folgt dem Scroll, auf Mobil läuft sie wie im Hero */
-  var scene = makeScreen(['q1','q2','q3'], '.scene-stage .steps-dots i', 'scrHead2', 'scrKick2', 'scrTitle2');
+  var scene = makeScreen(['q1','q2','q3'], '.scene-dots i', 'scrHead2', 'scrKick2', 'scrTitle2');
   var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
   var desktop = window.matchMedia('(min-width:960px)');
-
-  if(scene && steps.length && 'IntersectionObserver' in window){
+  if(scene && steps.length && hasIO){
     var sio = new IntersectionObserver(function(entries){
       if(!desktop.matches) return;
       entries.forEach(function(e){
@@ -1573,57 +1541,34 @@ footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:
     }, {rootMargin:'-46% 0px -46% 0px', threshold:0});
     steps.forEach(function(s){ sio.observe(s); });
   }
-  /* Auf schmalen Schirmen ist die Szenen-Bühne ausgeblendet —
-     dann markieren wir alle Schritte als aktiv, damit die Leiste steht. */
-  function syncSteps(){
-    if(!desktop.matches) steps.forEach(function(s){ s.classList.add('on'); });
-  }
-  syncSteps();
-  desktop.addEventListener('change', syncSteps);
 
-  /* ─── Zeiger-Parallaxe (nur Hero, nur Maus) ─────────────── */
-  var stage = document.getElementById('stage');
-  var device = document.getElementById('device');
+  /* Zeiger-Parallaxe */
+  var stage = document.getElementById('stage'), device = document.getElementById('device');
   if(stage && device && !reduce && window.matchMedia('(hover:hover) and (pointer:fine)').matches && desktop.matches){
     device.classList.add('tilt');
     var dir = -1;
-    setInterval(function(){ dir *= -1; device.style.setProperty('--fy', (dir * 7) + 'px'); }, 3500);
-    stage.addEventListener('pointermove', function(e){
+    setInterval(function(){ dir *= -1; device.style.setProperty('--fy', (dir*7) + 'px'); }, 3500);
+    stage.addEventListener('pointermove',function(e){
       var r = stage.getBoundingClientRect();
-      device.style.setProperty('--mx', ((e.clientX - r.left) / r.width - .5).toFixed(3));
-      device.style.setProperty('--my', ((e.clientY - r.top) / r.height - .5).toFixed(3));
+      device.style.setProperty('--mx', ((e.clientX - r.left)/r.width - .5).toFixed(3));
+      device.style.setProperty('--my', ((e.clientY - r.top)/r.height - .5).toFixed(3));
     });
-    stage.addEventListener('pointerleave', function(){
-      device.style.setProperty('--mx', 0);
-      device.style.setProperty('--my', 0);
-    });
+    stage.addEventListener('pointerleave',function(){ device.style.setProperty('--mx',0); device.style.setProperty('--my',0); });
   }
 
-  /* ─── Formular (Platzhalter ohne Backend) ───────────────── */
+  /* ─── Formular (Platzhalter ohne Backend) ─── */
   var KONTAKT_MAIL = "hallo@example.org"; // TODO: echte Adresse eintragen
-  var form = document.getElementById('waitlist');
-  var fb = document.getElementById('feedback');
+  var form = document.getElementById('waitlist'), fb = document.getElementById('feedback');
   function say(t){ fb.textContent = t; fb.hidden = false; }
-
   if(form){
-    form.addEventListener('submit', function(e){
+    form.addEventListener('submit',function(e){
       e.preventDefault();
-      var email = document.getElementById('email').value.trim();
-      var rolle = document.getElementById('rolle').value;
-      var msg   = document.getElementById('nachricht').value.trim();
-      var ok    = document.getElementById('consent').checked;
-
-      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){
-        say('Bitte geben Sie eine gültige E-Mail-Adresse an.'); return;
-      }
-      if(!ok){
-        say('Bitte bestätigen Sie die Einwilligung, damit wir Ihnen antworten dürfen.'); return;
-      }
-
+      var email = document.getElementById('email').value.trim(), rolle = document.getElementById('rolle').value,
+          msg = document.getElementById('nachricht').value.trim(), ok = document.getElementById('consent').checked;
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){ say('Bitte geben Sie eine gültige E-Mail-Adresse an.'); return; }
+      if(!ok){ say('Bitte bestätigen Sie die Einwilligung, damit wir Ihnen antworten dürfen.'); return; }
       var body = 'Rolle: ' + rolle + '\n' + 'E-Mail: ' + email + '\n\nNachricht:\n' + (msg || '—');
-      window.location.href = 'mailto:' + KONTAKT_MAIL +
-        '?subject=' + encodeURIComponent('VORLAUF — Kontaktanfrage') +
-        '&body=' + encodeURIComponent(body);
+      window.location.href = 'mailto:' + KONTAKT_MAIL + '?subject=' + encodeURIComponent('VORLAUF — Kontaktanfrage') + '&body=' + encodeURIComponent(body);
       say('Ihr E-Mail-Programm sollte sich geöffnet haben. Falls nicht, schreiben Sie an ' + KONTAKT_MAIL + '.');
     });
   }
