@@ -2,452 +2,680 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>VORLAUF — Die Wartezeit vor der Therapie nutzbar machen</title>
 <meta name="description" content="VORLAUF entwickelt eine digitale Begleitung für die Wartezeit zwischen Therapieentscheidung und Therapiebeginn bei Opioid- und Benzodiazepinabhängigkeit.">
-<meta name="theme-color" content="#0b1f1c">
+<meta name="theme-color" content="#07100e">
 <meta name="robots" content="noindex">
+<!--
+  ============================================================
+  VORLAUF — Landingpage v4
+  Dunkle Bildsprache, Lenis-Smooth-Scroll, Sticky-Szene,
+  Mobil-Layout inkl. Menü.
+
+  VOR DEM LIVEGANG (DSGVO):
+  Schriften (Bricolage Grotesque, Instrument Sans, IBM Plex Mono,
+  alle SIL OFL) und lenis.min.js selbst hosten statt von
+  fonts.googleapis.com / cdn.jsdelivr.net laden
+  (LG München I, 3 O 17493/20).
+
+  Arbeitsname "VORLAUF" ist NICHT markenrechtlich geprüft.
+  Zum Umbenennen: Suche/Ersetze VORLAUF (Text) + <title>/<meta>.
+  ============================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap">
+
 <style>
-/* ============================================================
-   VORLAUF — Landingpage v2
-   Arbeitsname "VORLAUF" ist NICHT markenrechtlich geprüft.
-   Zum Umbenennen: Suche/Ersetze VORLAUF (Text) + <title>/<meta>.
-
-   Schriften: bewusst System-Stack statt Google Fonts.
-   Google Fonts vom Google-CDN zu laden gilt in DE als
-   DSGVO-Risiko (LG München I, 3 O 17493/20). Wenn eine
-   eigene Schrift gewünscht ist: selbst hosten.
-   ============================================================ */
-
+/* ═══════════════════════════════════════════
+   Tokens
+   ═══════════════════════════════════════════ */
 :root{
-  /* Neutrale Basis */
-  --ink:#0b1f1c;
-  --ink-2:#33514c;
-  --ink-3:#6b8580;
-  --paper:#ffffff;
-  --paper-2:#f4f7f5;
-  --line:#e3ebe8;
+  /* Grund — tiefes Grünschwarz, aus dem Marken-Ink abgeleitet */
+  --bg:#07100E;
+  --bg-2:#0C1A17;
+  --bg-3:#12241F;
+  --line:rgba(255,255,255,.11);
+  --line-2:rgba(255,255,255,.055);
 
-  /* Markenquartett — trägt die farbige Bildsprache */
-  --c1:#0f6b5c;  /* teal   */
-  --c2:#2e7df7;  /* blau   */
-  --c3:#ffb020;  /* amber  */
-  --c4:#e8543f;  /* koralle*/
-  --c5:#7c5cff;  /* violett*/
+  --fg:#EDF3F0;
+  --fg-2:#9CB2AC;
+  --fg-3:#67807A;
 
-  --brand:var(--c1);
-  --r-sm:12px;
-  --r-md:20px;
-  --r-lg:32px;
-  --r-pill:999px;
-  --max:1180px;
-  --ease:cubic-bezier(.22,1,.36,1);
+  /* Ein warmer Akzent statt fünf bunter */
+  --amber:#F0B357;
+  --amber-2:#C98B2F;
+  --teal:#43A88F;      /* das Produkt */
+  --teal-2:#2B6F5E;
+  --coral:#FF6B52;     /* ausschließlich Krise */
+
+  /* Helle Flächen — nur dort, wo das Produkt zu sehen ist */
+  --paper:#FBFAF7;
+  --paper-2:#EFEEE8;
+  --paper-line:#DEDCD3;
+  --paper-ink:#0D1A17;
+  --paper-ink-2:#4A5C57;
+
+  --f-display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --f-body:"Instrument Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  --max:1200px;
+  --gut:20px;
+  --r:14px;
+  --r-lg:22px;
+
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --ease-in-out:cubic-bezier(.77,0,.175,1);
 }
+@media(min-width:760px){ :root{ --gut:32px } }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:88px}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:90px}
+html:not(.lenis){scroll-behavior:smooth}
+/* Lenis */
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+
 body{
-  margin:0;background:var(--paper);color:var(--ink);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  margin:0;background:var(--bg);color:var(--fg);
+  font-family:var(--f-body);font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-h1,h2,h3,h4{margin:0 0 .5em;line-height:1.08;letter-spacing:-.03em;font-weight:700}
-h1{font-size:clamp(2.6rem,6.4vw,5rem)}
-h2{font-size:clamp(2rem,4.4vw,3.4rem);letter-spacing:-.035em}
-h3{font-size:1.3rem;letter-spacing:-.02em}
-p{margin:0 0 1.15em}
-a{color:var(--brand)}
 img,svg{max-width:100%}
+a{color:var(--amber)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:4px}
 
-/* ---------- Buttons ---------- */
-.btn{
+.wrap{width:100%;max-width:var(--max);margin-inline:auto;padding-inline:var(--gut)}
+.narrow{max-width:62ch}
+
+/* ═══════════════════════════════════════════
+   Typografie
+   ═══════════════════════════════════════════ */
+h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:700;line-height:1.02;
+  letter-spacing:-.035em;text-wrap:balance}
+h1{font-size:clamp(2.5rem,8.6vw,5.6rem);letter-spacing:-.045em;font-weight:800}
+h2{font-size:clamp(2rem,6vw,3.9rem);letter-spacing:-.04em}
+h3{font-size:clamp(1.2rem,3.4vw,1.5rem);letter-spacing:-.025em;line-height:1.16}
+p{margin:0}
+
+.kicker{
   display:inline-flex;align-items:center;gap:10px;
-  padding:15px 30px;border-radius:var(--r-pill);
-  background:var(--ink);color:#fff;text-decoration:none;
-  font-weight:600;font-size:1rem;border:1px solid var(--ink);
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .2s;
-  will-change:transform;
+  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--amber);font-weight:500;
 }
-.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px -14px rgba(11,31,28,.6)}
-.btn .arw{transition:transform .3s var(--ease)}
-.btn:hover .arw{transform:translateX(4px)}
-.btn.light{background:#fff;color:var(--ink);border-color:var(--line)}
-.btn.light:hover{border-color:var(--ink-3)}
-.btn.sm{padding:11px 22px;font-size:.92rem}
+.kicker::before{content:"";width:20px;height:1px;background:currentColor;flex:none}
+.sub{font-size:clamp(1.02rem,2.6vw,1.18rem);line-height:1.55;color:var(--fg-2);max-width:60ch}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
 
-/* ---------- Statusleiste ---------- */
+section{padding-block:clamp(72px,13vw,140px);position:relative}
+.sec-head{display:grid;gap:18px;margin-bottom:clamp(36px,6vw,64px)}
+
+/* ═══════════════════════════════════════════
+   Reveal — nur bei aktivem JS geparkt
+   ═══════════════════════════════════════════ */
+.rv{opacity:1}
+html.js .rv{opacity:0;transform:translateY(26px);
+  transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+html.js .rv.in{opacity:1;transform:none}
+.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}
+
+/* ═══════════════════════════════════════════
+   Fortschritt + Statusleiste + Navigation
+   ═══════════════════════════════════════════ */
+.progress{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:2px;z-index:80;pointer-events:none}
+.progress i{display:block;height:100%;transform:scaleX(0);transform-origin:0 50%;
+  background:linear-gradient(90deg,var(--teal),var(--amber))}
+@supports(animation-timeline:scroll()){
+  html:not(.lenis) .progress i{animation:gx linear both;animation-timeline:scroll(root block)}
+}
+@keyframes gx{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
 .statusbar{
-  background:var(--ink);color:rgba(255,255,255,.82);
-  font-size:.82rem;text-align:center;padding:10px 20px;
+  background:var(--bg-2);border-bottom:1px solid var(--line-2);
+  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.02em;color:var(--fg-3);
   position:relative;z-index:60;
 }
-.statusbar b{color:#fff}
-.statusbar .dot{
-  display:inline-block;width:7px;height:7px;border-radius:50%;
-  background:var(--c3);margin-right:8px;vertical-align:middle;
-  animation:pulse 2.4s infinite;
-}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+.statusbar .wrap{display:flex;align-items:center;gap:10px;padding-block:9px;flex-wrap:wrap}
+.statusbar b{color:var(--fg-2);font-weight:500}
+.statusbar .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);flex:none;
+  animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* ---------- Navigation ---------- */
-.nav{
-  position:sticky;top:0;z-index:50;
-  background:rgba(255,255,255,.72);
-  backdrop-filter:saturate(180%) blur(16px);
-  -webkit-backdrop-filter:saturate(180%) blur(16px);
-  border-bottom:1px solid transparent;
-  transition:border-color .3s,background .3s;
-}
-.nav.stuck{border-bottom-color:var(--line);background:rgba(255,255,255,.9)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:20px}
-.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:var(--ink);font-weight:750;letter-spacing:-.02em;font-size:1.06rem}
-.brand .glyph{width:32px;height:32px;flex:0 0 auto}
-.navlinks{display:flex;gap:28px;font-size:.94rem}
-.navlinks a{color:var(--ink-2);text-decoration:none;position:relative;padding:4px 0}
-.navlinks a::after{
-  content:"";position:absolute;left:0;bottom:0;height:2px;width:0;
-  background:var(--brand);border-radius:2px;transition:width .3s var(--ease);
-}
-.navlinks a:hover{color:var(--ink)}
-.navlinks a:hover::after{width:100%}
-.navlinks a.crisis-link{color:var(--c4);font-weight:600}
-.navlinks a.crisis-link::after{background:var(--c4)}
-@media(max-width:960px){.navlinks{display:none}}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:70;
+  background:color-mix(in srgb,var(--bg) 78%,transparent);
+  backdrop-filter:saturate(170%) blur(18px);-webkit-backdrop-filter:saturate(170%) blur(18px);
+  border-bottom:1px solid transparent;transition:border-color .3s ease,background .3s ease}
+.nav.stuck{border-bottom-color:var(--line-2);background:color-mix(in srgb,var(--bg) 92%,transparent)}
+.nav .wrap{display:flex;align-items:center;gap:16px;height:64px}
+@media(min-width:900px){.nav .wrap{height:76px}}
 
-/* ---------- Hero ---------- */
-.hero{position:relative;padding:88px 0 60px;overflow:hidden}
-.mesh{position:absolute;inset:-20% -10% auto -10%;height:900px;z-index:-1;filter:blur(70px);opacity:.5;pointer-events:none}
-.blob{position:absolute;border-radius:50%;mix-blend-mode:multiply;animation:drift 22s ease-in-out infinite}
-.blob.b1{width:520px;height:520px;background:var(--c1);left:-4%;top:2%}
-.blob.b2{width:440px;height:440px;background:var(--c2);left:34%;top:-8%;animation-delay:-6s}
-.blob.b3{width:400px;height:400px;background:var(--c3);right:6%;top:8%;animation-delay:-12s}
-.blob.b4{width:360px;height:360px;background:var(--c5);right:26%;top:36%;animation-delay:-3s}
-@keyframes drift{
-  0%,100%{transform:translate(0,0) scale(1)}
-  33%{transform:translate(70px,-40px) scale(1.12)}
-  66%{transform:translate(-50px,50px) scale(.92)}
-}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg);
+  font-family:var(--f-display);font-weight:800;letter-spacing:-.02em;font-size:1.05rem;flex:none}
+.brand .glyph{width:30px;height:30px;flex:none;transition:transform .5s var(--ease-out)}
+@media(hover:hover) and (pointer:fine){.brand:hover .glyph{transform:rotate(-8deg)}}
 
-.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:56px;align-items:center}
-@media(max-width:980px){.hero-grid{grid-template-columns:1fr;gap:44px}}
-
-.pill{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:8px 16px 8px 10px;border-radius:var(--r-pill);
-  background:rgba(255,255,255,.75);border:1px solid var(--line);
-  font-size:.83rem;font-weight:600;color:var(--ink-2);margin-bottom:26px;
-  backdrop-filter:blur(8px);
+.navlinks{display:none;gap:26px;margin-left:auto;font-size:.92rem}
+@media(min-width:1000px){.navlinks{display:flex}}
+.navlinks a{color:var(--fg-2);text-decoration:none;position:relative;padding-block:6px;
+  transition:color .2s ease}
+.navlinks a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:100%;
+  background:var(--amber);transform:scaleX(0);transform-origin:left;
+  transition:transform .34s var(--ease-out)}
+@media(hover:hover) and (pointer:fine){
+  .navlinks a:hover{color:var(--fg)}
+  .navlinks a:hover::after{transform:scaleX(1)}
 }
-.pill .tag{
-  background:var(--c1);color:#fff;border-radius:var(--r-pill);
-  padding:3px 10px;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;
-}
+.navlinks a.crisis-link{color:var(--coral)}
+.navlinks a.crisis-link::after{background:var(--coral)}
 
-h1 .grad{
-  background:linear-gradient(100deg,var(--c1) 0%,var(--c2) 34%,var(--c5) 62%,var(--c4) 100%);
-  background-size:280% 100%;
-  -webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;color:transparent;
-  animation:sweep 9s ease-in-out infinite;
-}
-@keyframes sweep{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.nav-cta{display:none}
+@media(min-width:1000px){.nav-cta{display:inline-flex}}
 
-.lead{font-size:1.22rem;color:var(--ink-2);max-width:560px}
-.hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px}
-.hero-meta{display:flex;gap:26px;flex-wrap:wrap;margin-top:38px;font-size:.86rem;color:var(--ink-3)}
+/* Mobiles Menü */
+.burger{
+  margin-left:auto;width:44px;height:44px;flex:none;
+  display:grid;place-items:center;gap:0;
+  background:transparent;border:1px solid var(--line);border-radius:11px;
+  cursor:pointer;color:var(--fg);
+}
+@media(min-width:1000px){.burger{display:none}}
+.burger i{display:block;width:17px;height:1.5px;background:currentColor;border-radius:2px;
+  grid-area:1/1;transition:transform .32s var(--ease-out),opacity .2s ease}
+.burger i:nth-child(1){transform:translateY(-5px)}
+.burger i:nth-child(3){transform:translateY(5px)}
+.burger[aria-expanded="true"] i:nth-child(1){transform:rotate(45deg)}
+.burger[aria-expanded="true"] i:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] i:nth-child(3){transform:rotate(-45deg)}
+.burger:active{transform:scale(.95)}
+
+.menu{
+  position:fixed;inset:0;z-index:69;background:var(--bg);
+  padding:calc(env(safe-area-inset-top,0px) + 80px) var(--gut) calc(env(safe-area-inset-bottom,0px) + 32px);
+  display:flex;flex-direction:column;gap:4px;overflow-y:auto;
+}
+.menu a{
+  font-family:var(--f-display);font-weight:700;letter-spacing:-.03em;
+  font-size:clamp(1.6rem,7vw,2.2rem);color:var(--fg);text-decoration:none;
+  padding-block:14px;border-bottom:1px solid var(--line-2);
+  display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+}
+.menu a span{font-family:var(--f-mono);font-size:.68rem;color:var(--fg-3);letter-spacing:.1em}
+.menu a.crisis-link{color:var(--coral)}
+.menu .btn{margin-top:26px;justify-content:center}
+html.js .menu[hidden]{display:none!important}
+.menu a{animation:menu-in .45s var(--ease-out) both}
+.menu a:nth-child(1){animation-delay:.02s}.menu a:nth-child(2){animation-delay:.05s}
+.menu a:nth-child(3){animation-delay:.08s}.menu a:nth-child(4){animation-delay:.11s}
+.menu a:nth-child(5){animation-delay:.14s}.menu a:nth-child(6){animation-delay:.17s}
+.menu a:nth-child(7){animation-delay:.2s}
+@keyframes menu-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ═══════════════════════════════════════════
+   Buttons
+   ═══════════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:48px;padding:14px 26px;border-radius:999px;
+  background:var(--amber);color:#1B1206;border:1px solid var(--amber);
+  font-family:var(--f-body);font-weight:600;font-size:.97rem;letter-spacing:-.01em;
+  text-decoration:none;cursor:pointer;
+  transition:transform .2s var(--ease-out),box-shadow .3s var(--ease-out),
+             background .2s ease,border-color .2s ease,color .2s ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px -14px rgba(240,179,87,.6)}
+  .btn:hover .arw{transform:translateX(4px)}
+  .btn.ghost:hover{border-color:var(--fg-2);background:rgba(255,255,255,.045)}
+}
+.btn:active{transform:scale(.97);transition-duration:.11s}
+.btn .arw{transition:transform .2s var(--ease-out)}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.sm{min-height:40px;padding:9px 20px;font-size:.88rem}
+
+/* ═══════════════════════════════════════════
+   Hero
+   ═══════════════════════════════════════════ */
+.hero{padding-block:clamp(48px,9vw,92px) clamp(56px,9vw,96px);position:relative;overflow:clip}
+.hero::before{
+  content:"";position:absolute;z-index:0;pointer-events:none;
+  width:min(900px,120vw);aspect-ratio:1;border-radius:50%;
+  left:50%;top:-58%;transform:translateX(-50%);
+  background:radial-gradient(circle,rgba(67,168,143,.16),transparent 62%);
+}
+.hero .wrap{position:relative;z-index:1}
+.hero-grid{display:grid;gap:clamp(40px,7vw,64px)}
+@media(min-width:960px){.hero-grid{grid-template-columns:1.06fr .94fr;align-items:center;gap:56px}}
+
+.tagline{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:7px 16px 7px 8px;border-radius:999px;
+  border:1px solid var(--line);background:rgba(255,255,255,.035);
+  font-family:var(--f-mono);font-size:.68rem;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--fg-2);margin-bottom:26px;
+}
+.tagline b{background:var(--teal-2);color:#EAF7F3;border-radius:999px;
+  padding:3px 9px;font-weight:500;letter-spacing:.07em}
+
+h1 .hl{color:var(--amber);position:relative;white-space:nowrap}
+h1 .hl::after{
+  content:"";position:absolute;left:0;right:0;bottom:.06em;height:.055em;
+  background:var(--amber);opacity:.28;border-radius:2px;
+  transform:scaleX(0);transform-origin:left;
+  animation:underline 1.1s .65s var(--ease-out) forwards;
+}
+@keyframes underline{to{transform:scaleX(1)}}
+
+.lead{font-size:clamp(1.05rem,3vw,1.25rem);line-height:1.52;color:var(--fg-2);
+  max-width:52ch;margin-top:26px;letter-spacing:-.01em}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:34px}
+.hero-meta{display:grid;gap:11px;margin-top:38px;
+  font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;color:var(--fg-3)}
+@media(min-width:620px){.hero-meta{grid-template-columns:repeat(3,auto);gap:22px}}
 .hero-meta span{display:flex;align-items:center;gap:8px}
-.hero-meta .tick{width:16px;height:16px;flex:0 0 auto}
+.hero-meta .tick{width:14px;height:14px;flex:none;color:var(--teal)}
 
-/* ---------- Device Mockup ---------- */
-.device-stage{position:relative;display:flex;justify-content:center;perspective:1400px}
+.lift{animation:lift .9s var(--ease-out) both}
+@keyframes lift{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.l1{animation-delay:.04s}.l2{animation-delay:.1s}.l3{animation-delay:.16s}
+.l4{animation-delay:.22s}.l5{animation-delay:.28s}.l6{animation-delay:.18s}
+
+/* ═══════════════════════════════════════════
+   Gerät — das helle Objekt im Dunkeln
+   ═══════════════════════════════════════════ */
+.device-stage{position:relative;display:flex;justify-content:center;perspective:1500px}
+.device-stage::before{
+  content:"";position:absolute;inset:6% 4% 2%;border-radius:50%;
+  background:radial-gradient(ellipse at center,rgba(67,168,143,.3),transparent 66%);
+  filter:blur(46px);z-index:0;
+}
 .device{
-  width:300px;flex:0 0 auto;border-radius:42px;
-  background:linear-gradient(160deg,#16302b,#0b1f1c);
-  padding:11px;box-shadow:0 44px 90px -40px rgba(11,31,28,.62),0 0 0 1px rgba(255,255,255,.07) inset;
-  transform:rotateY(-11deg) rotateX(4deg) translateZ(0);
+  position:relative;z-index:1;
+  width:min(300px,78vw);flex:none;border-radius:clamp(34px,9vw,44px);
+  background:linear-gradient(162deg,#24413A,#0A1714 64%);
+  padding:clamp(8px,2.4vw,11px);
+  box-shadow:0 60px 110px -50px rgba(0,0,0,.9),
+             0 0 0 1px rgba(255,255,255,.1) inset,
+             0 1px 2px rgba(255,255,255,.2) inset;
+  transform:rotateY(-10deg) rotateX(3deg);
   animation:float 7s ease-in-out infinite;
+  will-change:transform;
 }
-@keyframes float{0%,100%{transform:rotateY(-11deg) rotateX(4deg) translateY(0)}50%{transform:rotateY(-11deg) rotateX(4deg) translateY(-14px)}}
-.screen{
-  background:var(--paper-2);border-radius:32px;height:600px;
-  overflow:hidden;position:relative;display:flex;flex-direction:column;
+@media(max-width:959px){.device{transform:none;animation:none}}
+.device.tilt{
+  animation:none;
+  transform:rotateY(calc(-10deg + var(--mx,0)*7deg)) rotateX(calc(3deg + var(--my,0)*-6deg)) translateY(var(--fy,0px));
+  transition:transform .65s var(--ease-out);
 }
-.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:96px;height:22px;background:#0b1f1c;border-radius:var(--r-pill);z-index:5}
-.scr-head{padding:38px 20px 14px;background:#fff;border-bottom:1px solid var(--line)}
-.scr-head .t{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
-.scr-head .n{font-size:1.02rem;font-weight:700;margin-top:5px;letter-spacing:-.02em}
-.scr-body{flex:1;padding:18px;position:relative}
-.pane{position:absolute;inset:18px;opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
-.pane.on{opacity:1;transform:none}
+@keyframes float{0%,100%{transform:rotateY(-10deg) rotateX(3deg) translateY(0)}
+  50%{transform:rotateY(-10deg) rotateX(3deg) translateY(-13px)}}
 
-.bubble{background:#fff;border:1px solid var(--line);border-radius:16px;padding:13px 15px;font-size:.83rem;color:var(--ink-2);margin-bottom:11px;line-height:1.5}
-.bubble.me{background:var(--c1);color:#fff;border-color:var(--c1)}
-.wave{display:flex;align-items:flex-end;gap:3px;height:34px;margin:14px 0 6px}
-.wave i{flex:1;background:var(--c1);border-radius:2px;opacity:.85;animation:bounce 1.1s ease-in-out infinite}
+.screen{background:var(--paper-2);border-radius:clamp(26px,7vw,33px);
+  height:min(600px,74vh);min-height:480px;
+  overflow:hidden;position:relative;display:flex;flex-direction:column}
+.notch{position:absolute;top:9px;left:50%;transform:translateX(-50%);
+  width:92px;height:21px;background:#0A1714;border-radius:999px;z-index:5}
+.scr-head{padding:36px 18px 13px;background:var(--paper);border-bottom:1px solid var(--paper-line)}
+.scr-head .t{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--paper-ink-2)}
+.scr-head .n{font-family:var(--f-display);font-size:1rem;font-weight:700;
+  margin-top:4px;letter-spacing:-.025em;color:var(--paper-ink)}
+.scr-head .t,.scr-head .n{transition:opacity .28s ease,filter .28s ease}
+.scr-head.swap .t,.scr-head.swap .n{opacity:.2;filter:blur(3px)}
+.scr-body{flex:1;padding:16px;position:relative;overflow:hidden}
+.pane{position:absolute;inset:16px;opacity:0;
+  transform:translateY(12px) scale(.985);filter:blur(4px);pointer-events:none;
+  transition:opacity .55s var(--ease-out),transform .55s var(--ease-out),filter .42s ease}
+.pane.on{opacity:1;transform:none;filter:blur(0);pointer-events:auto}
+
+.bubble{background:var(--paper);border:1px solid var(--paper-line);border-radius:15px;
+  padding:12px 14px;font-size:.8rem;color:var(--paper-ink-2);margin-bottom:10px;line-height:1.5}
+.bubble.me{background:var(--teal-2);color:#EAF7F3;border-color:var(--teal-2)}
+.wave{display:flex;align-items:flex-end;gap:3px;height:32px;margin:13px 0 6px}
+.wave i{flex:1;background:var(--teal);border-radius:2px;opacity:.85;
+  animation:bounce 1.1s ease-in-out infinite}
 @keyframes bounce{0%,100%{height:18%}50%{height:100%}}
-.mic{
-  width:58px;height:58px;border-radius:50%;background:var(--c1);
-  display:flex;align-items:center;justify-content:center;margin:16px auto 0;
-  box-shadow:0 0 0 0 rgba(15,107,92,.45);animation:ring 2s infinite;
-}
-@keyframes ring{0%{box-shadow:0 0 0 0 rgba(15,107,92,.4)}70%{box-shadow:0 0 0 20px rgba(15,107,92,0)}100%{box-shadow:0 0 0 0 rgba(15,107,92,0)}}
+.mic{width:54px;height:54px;border-radius:50%;background:var(--teal-2);
+  display:flex;align-items:center;justify-content:center;margin:14px auto 0;
+  animation:ring 2s infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(67,168,143,.42)}
+  70%{box-shadow:0 0 0 18px rgba(67,168,143,0)}100%{box-shadow:0 0 0 0 rgba(67,168,143,0)}}
 
-.pat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px}
-.pat .h{display:flex;justify-content:space-between;align-items:center;font-size:.78rem;font-weight:700;margin-bottom:9px}
-.pat .h em{font-style:normal;color:var(--ink-3);font-weight:600}
-.bars{display:flex;gap:4px;align-items:flex-end;height:42px}
-.bars i{flex:1;border-radius:3px;background:var(--c2);opacity:.25;transition:opacity .4s}
-.pat.hot .bars i.x{opacity:1;background:var(--c4)}
-.pat .cap{font-size:.72rem;color:var(--ink-3);margin-top:9px;line-height:1.45}
+.pat{background:var(--paper);border:1px solid var(--paper-line);border-radius:13px;
+  padding:12px;margin-bottom:9px}
+.pat .h{display:flex;justify-content:space-between;align-items:center;
+  font-size:.76rem;font-weight:600;margin-bottom:8px;color:var(--paper-ink)}
+.pat .h em{font-style:normal;font-family:var(--f-mono);color:var(--paper-ink-2);font-size:.7rem}
+.bars{display:flex;gap:4px;align-items:flex-end;height:40px}
+.bars i{flex:1;border-radius:3px;background:var(--paper-ink);opacity:.14;
+  transform-origin:bottom;transition:opacity .4s ease}
+.pat.hot .bars i.x{opacity:1;background:var(--coral)}
+.pane.on .bars i{animation:gb .55s var(--ease-out) both}
+.pane.on .bars i:nth-child(2){animation-delay:.035s}
+.pane.on .bars i:nth-child(3){animation-delay:.07s}
+.pane.on .bars i:nth-child(4){animation-delay:.105s}
+.pane.on .bars i:nth-child(5){animation-delay:.14s}
+.pane.on .bars i:nth-child(6){animation-delay:.175s}
+.pane.on .bars i:nth-child(7){animation-delay:.21s}
+.pane.on .bars i:nth-child(8){animation-delay:.245s}
+.pane.on .bars i:nth-child(9){animation-delay:.28s}
+.pane.on .bars i:nth-child(10){animation-delay:.315s}
+.pane.on .bars i:nth-child(11){animation-delay:.35s}
+.pane.on .bars i:nth-child(12){animation-delay:.385s}
+@keyframes gb{from{transform:scaleY(.18)}to{transform:scaleY(1)}}
+.pat .cap{font-size:.69rem;color:var(--paper-ink-2);margin-top:8px;line-height:1.45}
 
-.rep{background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px}
-.rep .rh{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
-.rep .rt{font-size:.92rem;font-weight:700;margin:6px 0 12px;letter-spacing:-.01em}
-.rep .rr{display:flex;justify-content:space-between;gap:10px;font-size:.74rem;padding:8px 0;border-top:1px solid var(--line);color:var(--ink-2)}
-.rep .rr b{font-weight:650}
-.stamp{
-  margin-top:12px;display:inline-flex;align-items:center;gap:6px;
-  background:rgba(15,107,92,.1);color:var(--c1);
-  border-radius:var(--r-pill);padding:6px 12px;font-size:.7rem;font-weight:700;
-}
+.rep{background:var(--paper);border:1px solid var(--paper-line);border-radius:13px;padding:14px}
+.rep .rh{font-family:var(--f-mono);font-size:.6rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--paper-ink-2)}
+.rep .rt{font-family:var(--f-display);font-size:.92rem;font-weight:700;
+  margin:5px 0 11px;letter-spacing:-.02em;color:var(--paper-ink)}
+.rep .rr{display:flex;justify-content:space-between;gap:10px;font-size:.72rem;
+  padding:8px 0;border-top:1px solid var(--paper-line);color:var(--paper-ink-2)}
+.rep .rr b{font-weight:600;color:var(--paper-ink);font-family:var(--f-mono);font-size:.7rem}
+.stamp{margin-top:11px;display:inline-flex;align-items:center;gap:6px;
+  background:rgba(67,168,143,.14);color:var(--teal-2);
+  border-radius:999px;padding:6px 12px;font-size:.66rem;font-weight:600}
+.pane.on .stamp{animation:lift .5s .28s var(--ease-out) both}
 
-.steps{display:flex;gap:7px;justify-content:center;padding:14px 0 18px;background:#fff;border-top:1px solid var(--line)}
-.steps i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:all .4s var(--ease)}
-.steps i.on{background:var(--c1);width:22px;border-radius:var(--r-pill)}
+.steps-dots{display:flex;gap:6px;justify-content:center;padding:12px 0 16px;
+  background:var(--paper);border-top:1px solid var(--paper-line)}
+.steps-dots i{width:6px;height:6px;border-radius:50%;background:var(--paper-line);
+  transition:width .45s var(--ease-out),background .3s ease}
+.steps-dots i.on{background:var(--teal-2);width:20px;border-radius:999px}
 
-/* ---------- Reveal ---------- */
-.rv{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
-.rv.in{opacity:1;transform:none}
-.rv.d1{transition-delay:.09s}.rv.d2{transition-delay:.18s}.rv.d3{transition-delay:.27s}.rv.d4{transition-delay:.36s}
+/* ═══════════════════════════════════════════
+   Ausgangslage — editorial statt drei Karten
+   ═══════════════════════════════════════════ */
+.figures{border-top:1px solid var(--line);margin-top:8px}
+.fig{
+  display:grid;gap:6px 36px;padding-block:clamp(28px,5vw,42px);
+  border-bottom:1px solid var(--line);align-items:baseline;
+}
+@media(min-width:780px){.fig{grid-template-columns:minmax(0,34%) minmax(0,1fr) auto;gap:8px 44px}}
+.fig .n{
+  font-family:var(--f-display);font-weight:800;letter-spacing:-.055em;line-height:.9;
+  font-size:clamp(3.4rem,11vw,6.2rem);font-variant-numeric:tabular-nums;
+  color:var(--fg);
+}
+.fig .n u{text-decoration:none;font-size:.32em;letter-spacing:-.02em;color:var(--fg-3);
+  margin-left:.16em;vertical-align:baseline}
+.fig .l{color:var(--fg-2);font-size:clamp(.98rem,2.4vw,1.06rem);line-height:1.5;max-width:44ch}
+.fig .s{font-family:var(--f-mono);font-size:.68rem;color:var(--fg-3);letter-spacing:.05em;
+  white-space:nowrap}
+.fig .meter{grid-column:1/-1;height:2px;background:var(--line);margin-top:16px;overflow:hidden}
+.fig .meter i{display:block;height:100%;width:0;background:var(--amber);
+  transition:width 1.7s var(--ease-out)}
+.fig:nth-child(2) .meter i{background:var(--coral)}
+.fig:nth-child(3) .meter i{background:var(--teal)}
 
-/* ---------- Sections ---------- */
-section{padding:104px 0;position:relative}
-.kicker{
-  display:inline-block;font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;
-  font-weight:750;color:var(--c1);margin-bottom:18px;
-}
-.sub{font-size:1.1rem;color:var(--ink-2);max-width:640px}
+/* ═══════════════════════════════════════════
+   Die Lücke
+   ═══════════════════════════════════════════ */
+.gapbox{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg-2);
+  padding:clamp(24px,5vw,44px);margin-top:clamp(28px,5vw,44px)}
+.tl-track{position:relative;height:96px;margin-top:22px}
+.tl-line{position:absolute;top:46px;left:0;right:0;height:4px;background:var(--line);border-radius:2px;overflow:hidden}
+.tl-fill{display:block;height:100%;width:0;border-radius:2px;
+  background:linear-gradient(90deg,var(--teal),var(--amber),var(--coral));
+  transition:width 2.3s var(--ease-in-out)}
+.tl-node{position:absolute;top:0;transform:translateX(-50%);text-align:center;width:104px}
+@media(min-width:620px){.tl-node{width:150px}}
+.tl-node .dot{width:13px;height:13px;border-radius:50%;background:var(--bg-2);
+  border:2.5px solid var(--fg-2);margin:40px auto 0;position:relative;z-index:2}
+.tl-node .lb{font-size:.76rem;font-weight:500;margin-top:10px;color:var(--fg-2);line-height:1.34}
+.tl-node.a{left:8%}.tl-node.b{left:50%}.tl-node.c{left:92%}
+.tl-node.b .dot{border-color:var(--amber);background:var(--amber)}
+.tl-gap{position:absolute;top:2px;left:8%;width:84%;border-top:1.5px dashed var(--coral);
+  opacity:0;transition:opacity .8s .9s ease}
+.tl-gap.in{opacity:.6}
+.tl-gap span{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:var(--coral);color:#2A0C05;font-family:var(--f-mono);font-size:.62rem;
+  font-weight:500;padding:4px 11px;border-radius:999px;white-space:nowrap}
+.gapbox .note{margin-top:30px;font-size:.93rem;color:var(--fg-3);line-height:1.6;max-width:66ch}
+.gapbox .note b{color:var(--fg-2);font-weight:500}
 
-/* ---------- Stats ---------- */
-.stats-sec{background:var(--ink);color:#fff;padding:88px 0}
-.stats-sec h2{color:#fff}
-.stats-sec .sub{color:rgba(255,255,255,.66)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:52px}
-@media(max-width:820px){.stats{grid-template-columns:1fr}}
-.st{
-  border:1px solid rgba(255,255,255,.14);border-radius:var(--r-lg);
-  padding:34px 30px;background:rgba(255,255,255,.035);
-  transition:background .35s,transform .35s var(--ease);
+/* ═══════════════════════════════════════════
+   Sticky-Szene: Erfassen / Ordnen / Übergeben
+   ═══════════════════════════════════════════ */
+.scene{display:grid;gap:clamp(32px,5vw,56px)}
+@media(min-width:960px){
+  .scene{grid-template-columns:minmax(0,1fr) minmax(0,340px);gap:72px;align-items:start}
 }
-.st:hover{background:rgba(255,255,255,.075);transform:translateY(-4px)}
-.st .n{font-size:3.2rem;font-weight:750;letter-spacing:-.045em;line-height:1;background:linear-gradient(96deg,#fff,rgba(255,255,255,.62));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.st .l{color:rgba(255,255,255,.8);margin-top:14px;font-size:.98rem;line-height:1.5}
-.st .s{color:rgba(255,255,255,.42);margin-top:14px;font-size:.78rem}
-.st .track{height:3px;background:rgba(255,255,255,.13);border-radius:2px;margin-top:20px;overflow:hidden}
-.st .track i{display:block;height:100%;width:0;border-radius:2px;transition:width 1.5s var(--ease)}
-.st:nth-child(1) .track i{background:var(--c3)}
-.st:nth-child(2) .track i{background:var(--c4)}
-.st:nth-child(3) .track i{background:var(--c5)}
+.scene-stage{display:none}
+@media(min-width:960px){
+  .scene-stage{display:block;position:sticky;
+    top:calc(env(safe-area-inset-top,0px) + 96px)}
+}
+.scene-mobile{margin-bottom:8px}
+@media(min-width:960px){.scene-mobile{display:none}}
 
-/* ---------- Wartezeit-Visualisierung ---------- */
-.timeline{
-  margin-top:46px;background:var(--paper-2);border:1px solid var(--line);
-  border-radius:var(--r-lg);padding:38px;
-}
-.tl-track{position:relative;height:74px;margin:30px 0 12px}
-.tl-line{position:absolute;top:34px;left:0;right:0;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
-.tl-fill{height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--c1),var(--c3),var(--c4));transition:width 2.1s var(--ease)}
-.tl-node{position:absolute;top:0;transform:translateX(-50%);text-align:center;width:150px}
-.tl-node .dot{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--ink);margin:29px auto 0;position:relative;z-index:2}
-.tl-node .lb{font-size:.8rem;font-weight:650;margin-top:11px;color:var(--ink-2);line-height:1.35}
-.tl-node.a{left:6%}.tl-node.b{left:50%}.tl-node.c{left:94%}
-.tl-node.b .dot{border-color:var(--c3);background:var(--c3)}
-.tl-gap{
-  position:absolute;top:-6px;left:6%;width:88%;
-  border-top:2px dashed var(--c4);opacity:0;transition:opacity .8s .9s
-}
-.tl-gap.in{opacity:.55}
-.tl-gap span{
-  position:absolute;top:-15px;left:50%;transform:translateX(-50%);
-  background:var(--c4);color:#fff;font-size:.7rem;font-weight:700;
-  padding:4px 12px;border-radius:var(--r-pill);white-space:nowrap;
-}
-@media(max-width:760px){
-  .timeline{padding:26px 18px}
-  .tl-node{width:96px}
-  .tl-node .lb{font-size:.72rem}
-}
+.steps{display:grid;gap:clamp(28px,6vw,52px)}
+@media(min-width:960px){.steps{gap:clamp(120px,22vh,220px)}}
+.step{display:grid;gap:14px;padding-left:22px;border-left:2px solid var(--line-2);
+  transition:border-color .4s ease}
+.step.on{border-left-color:var(--amber)}
+.step .ix{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--fg-3);transition:color .4s ease}
+.step.on .ix{color:var(--amber)}
+.step h3{color:var(--fg)}
+.step p{color:var(--fg-2);font-size:1rem;line-height:1.6;max-width:46ch}
 
-/* ---------- Feature Cards ---------- */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:56px}
-@media(max-width:940px){.cards{grid-template-columns:1fr}}
-.card{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:34px 30px 32px;position:relative;overflow:hidden;
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;
-}
-.card:hover{transform:translateY(-6px);box-shadow:0 30px 60px -34px rgba(11,31,28,.4);border-color:transparent}
-.card::before{
-  content:"";position:absolute;inset:0 0 auto 0;height:4px;
-  transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease);
-}
-.card:hover::before{transform:scaleX(1)}
-.card.k1::before{background:var(--c1)}
-.card.k2::before{background:var(--c2)}
-.card.k3::before{background:var(--c5)}
-.card .art{height:126px;margin-bottom:24px}
-.card .num{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:750;color:var(--ink-3);margin-bottom:10px;display:block}
-.card p{font-size:.97rem;color:var(--ink-2);margin-bottom:0}
+/* ═══════════════════════════════════════════
+   Artefakt
+   ═══════════════════════════════════════════ */
+.split{display:grid;gap:clamp(36px,6vw,64px)}
+@media(min-width:960px){.split{grid-template-columns:1fr 1fr;gap:72px;align-items:center}}
+.split .body p{color:var(--fg-2);margin-top:16px;line-height:1.62}
+.split .body p.big{font-size:clamp(1.08rem,2.8vw,1.28rem);color:var(--fg);letter-spacing:-.015em;
+  line-height:1.45}
+.split .body .btn{margin-top:30px}
 
-/* ---------- Artefakt ---------- */
-.arte{background:var(--paper-2);border-radius:var(--r-lg)}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-@media(max-width:940px){.split{grid-template-columns:1fr;gap:40px}}
-.docx{
-  background:#fff;border-radius:var(--r-md);padding:32px;
-  box-shadow:0 40px 80px -46px rgba(11,31,28,.45);
-  border:1px solid var(--line);
-}
-.docx .dh{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px}
-.docx .dh .lbl{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:750}
-.docx .dh h4{font-size:1.15rem;margin:7px 0 0;letter-spacing:-.02em}
-.docx .seal{width:42px;height:42px;flex:0 0 auto}
-.drow{
-  display:flex;justify-content:space-between;gap:18px;padding:13px 0;
-  border-top:1px solid var(--line);font-size:.9rem;color:var(--ink-2);
-  opacity:0;transform:translateX(-10px);transition:opacity .5s var(--ease),transform .5s var(--ease);
-}
+.docx{background:var(--paper);color:var(--paper-ink);border-radius:var(--r-lg);
+  padding:clamp(22px,4.5vw,34px);box-shadow:0 60px 110px -56px rgba(0,0,0,.85)}
+.docx .dh{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:22px}
+.docx .dh .lbl{font-family:var(--f-mono);font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--paper-ink-2)}
+.docx .dh h4{font-family:var(--f-display);font-size:clamp(1.05rem,3vw,1.2rem);
+  margin-top:8px;letter-spacing:-.03em;color:var(--paper-ink)}
+.docx .seal{width:38px;height:38px;flex:none}
+.drow{display:flex;justify-content:space-between;gap:16px;padding:13px 0;
+  border-top:1px solid var(--paper-line);font-size:.88rem;color:var(--paper-ink-2);
+  opacity:0;transform:translateX(-8px);
+  transition:opacity .55s var(--ease-out),transform .55s var(--ease-out)}
 .drow.in{opacity:1;transform:none}
-.drow b{color:var(--ink);font-weight:650;text-align:right}
-.docx .foot{margin-top:20px;font-size:.75rem;color:var(--ink-3);line-height:1.5}
+.drow b{color:var(--paper-ink);font-weight:600;text-align:right;
+  font-family:var(--f-mono);font-size:.8rem}
+.docx .foot{margin-top:20px;font-size:.73rem;color:var(--paper-ink-2);line-height:1.5;opacity:.85}
 
-/* ---------- Ökosystem ---------- */
-.eco{position:relative;margin-top:56px;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:40px 30px}
-.eco svg{width:100%;height:auto;display:block}
-.eco .legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;font-size:.84rem;color:var(--ink-2)}
-.eco .legend span{display:flex;align-items:center;gap:8px}
-.eco .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+/* ═══════════════════════════════════════════
+   Ökosystem
+   ═══════════════════════════════════════════ */
+.eco{background:var(--paper);border-radius:var(--r-lg);padding:clamp(20px,4vw,38px) 0;
+  margin-top:clamp(28px,5vw,48px)}
+.eco-scroll{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;
+  padding-inline:clamp(16px,3vw,28px)}
+.eco-scroll svg{display:block;min-width:660px;width:100%;height:auto}
+.eco .legend{display:flex;gap:10px 22px;flex-wrap:wrap;margin-top:22px;
+  padding-inline:clamp(16px,3vw,28px);
+  font-family:var(--f-mono);font-size:.68rem;color:var(--paper-ink-2)}
+.eco .legend span{display:flex;align-items:center;gap:7px}
+.eco .legend i{width:9px;height:9px;border-radius:2px;display:inline-block}
+.eco-hint{display:block;margin-top:14px;padding-inline:clamp(16px,3vw,28px);
+  font-family:var(--f-mono);font-size:.64rem;color:var(--paper-ink-2);opacity:.7}
+@media(min-width:760px){.eco-hint{display:none}}
 .dash{stroke-dasharray:6 7;animation:flow 2.6s linear infinite}
 @keyframes flow{to{stroke-dashoffset:-26}}
+.travel{offset-path:path("M350 182 C 350 244, 590 244, 590 182");offset-rotate:0deg;
+  animation:travel 7s var(--ease-in-out) infinite alternate}
+@keyframes travel{from{offset-distance:2%}to{offset-distance:98%}}
+.node-core{animation:breathe 4.6s ease-in-out infinite}
+.node-core.b{animation-delay:-2.3s}
+@keyframes breathe{0%,100%{opacity:1}50%{opacity:.84}}
 
-/* ---------- Zielgruppen ---------- */
-.aud{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:52px}
-@media(max-width:940px){.aud{grid-template-columns:1fr}}
-.abox{
-  border-radius:var(--r-lg);padding:38px 34px;position:relative;overflow:hidden;
-  transition:transform .4s var(--ease);
+/* ═══════════════════════════════════════════
+   Team
+   ═══════════════════════════════════════════ */
+.crew{display:grid;gap:2px;margin-top:clamp(28px,5vw,44px);
+  border-top:1px solid var(--line)}
+@media(min-width:760px){.crew{grid-template-columns:repeat(3,1fr);gap:0}}
+.crew div{padding:22px 0;border-bottom:1px solid var(--line)}
+@media(min-width:760px){
+  .crew div{padding:26px 28px 26px 0;border-bottom:0;border-right:1px solid var(--line)}
+  .crew div:last-child{border-right:0;padding-right:0}
+  .crew div+div{padding-left:28px}
 }
-.abox:hover{transform:translateY(-4px)}
-.abox.one{background:linear-gradient(150deg,#0f6b5c,#0b4f43);color:#fff}
-.abox.two{background:linear-gradient(150deg,#2e7df7,#2358c4);color:#fff}
-.abox h3{color:#fff}
-.abox p{color:rgba(255,255,255,.82);font-size:.97rem}
-.abox ul{margin:0;padding:0;list-style:none}
-.abox li{
-  color:rgba(255,255,255,.86);font-size:.95rem;padding:11px 0 11px 28px;
-  border-top:1px solid rgba(255,255,255,.16);position:relative;
-}
-.abox li::before{
-  content:"";position:absolute;left:0;top:17px;width:13px;height:13px;
-  border-radius:50%;border:2px solid rgba(255,255,255,.55);
-}
-.abox .halo{position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.09);right:-90px;top:-90px;pointer-events:none}
+.crew span{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--amber)}
+.crew b{display:block;margin-top:9px;font-weight:500;color:var(--fg-2);font-size:.95rem;line-height:1.5}
 
-/* ---------- Evidenz ---------- */
-.evi{border-left:4px solid var(--c1);padding-left:28px;max-width:760px;margin-top:16px}
-.evi p{color:var(--ink-2)}
-.honest{
-  display:inline-flex;align-items:center;gap:10px;background:rgba(255,176,32,.14);
-  border:1px solid rgba(255,176,32,.4);color:#7a5200;border-radius:var(--r-pill);
-  padding:9px 18px;font-size:.85rem;font-weight:650;margin-bottom:22px;
+/* ═══════════════════════════════════════════
+   Fachkreise
+   ═══════════════════════════════════════════ */
+.aud{display:grid;gap:18px;margin-top:clamp(28px,5vw,48px)}
+@media(min-width:880px){.aud{grid-template-columns:1fr 1fr;gap:22px}}
+.abox{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg-2);
+  padding:clamp(26px,4.5vw,38px);transition:border-color .4s ease,background .4s ease}
+@media(hover:hover) and (pointer:fine){
+  .abox:hover{border-color:var(--line);background:var(--bg-3)}
 }
+.abox h3{color:var(--fg)}
+.abox > p{color:var(--fg-2);font-size:.96rem;margin-top:12px;line-height:1.58}
+.abox ul{margin:22px 0 0;padding:0;list-style:none}
+.abox li{color:var(--fg-2);font-size:.94rem;line-height:1.52;
+  padding:13px 0 13px 26px;border-top:1px solid var(--line-2);position:relative}
+.abox li::before{content:"";position:absolute;left:0;top:20px;width:9px;height:1.5px;
+  background:var(--amber);border-radius:2px}
 
-/* ---------- Krise ---------- */
-.crisis{
-  border:2px solid var(--c4);border-radius:var(--r-lg);background:#fef6f4;
-  padding:38px 34px;margin-top:56px;
+/* ═══════════════════════════════════════════
+   Evidenz-Register
+   ═══════════════════════════════════════════ */
+.honest{display:inline-flex;align-items:center;gap:9px;
+  background:rgba(240,179,87,.1);border:1px solid rgba(240,179,87,.32);
+  color:var(--amber);border-radius:999px;padding:9px 18px;
+  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.05em}
+.ledger{display:grid;gap:0;margin-top:clamp(28px,5vw,44px);
+  border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+@media(min-width:820px){.ledger{grid-template-columns:1fr 1fr}}
+.ledger > div{padding:clamp(24px,4vw,34px);background:var(--bg-2)}
+.ledger > div+div{border-top:1px solid var(--line);background:var(--bg)}
+@media(min-width:820px){
+  .ledger > div+div{border-top:0;border-left:1px solid var(--line)}
 }
-.crisis h3{color:var(--c4)}
-.crisis p{color:var(--ink-2);font-size:.97rem}
-.numgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0}
-@media(max-width:760px){.numgrid{grid-template-columns:1fr}}
-.numgrid a{
-  background:#fff;border:1px solid rgba(232,84,63,.28);border-radius:var(--r-md);
-  padding:18px 20px;text-decoration:none;color:var(--ink);display:block;
-  transition:transform .25s var(--ease),box-shadow .25s var(--ease);
-}
-.numgrid a:hover{transform:translateY(-3px);box-shadow:0 16px 32px -20px rgba(232,84,63,.5)}
-.numgrid .big{font-size:1.5rem;font-weight:750;letter-spacing:-.03em;color:var(--c4)}
-.numgrid .cap{font-size:.82rem;color:var(--ink-2);margin-top:5px;line-height:1.4}
+.ledger h4{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fg-3);font-weight:500;margin-bottom:20px}
+.ledger .open h4{color:var(--amber)}
+.ledger ul{margin:0;padding:0;list-style:none;display:grid;gap:15px}
+.ledger li{font-size:.92rem;line-height:1.5;color:var(--fg-2)}
+.ledger li cite{display:block;font-style:normal;font-family:var(--f-mono);
+  font-size:.66rem;color:var(--fg-3);margin-top:4px}
+.evi{margin-top:clamp(28px,5vw,44px);padding-left:22px;border-left:2px solid var(--amber);
+  max-width:68ch}
+.evi p{color:var(--fg-2);line-height:1.62}
+.evi p+p{margin-top:16px}
+.evi strong{color:var(--fg);font-weight:600}
 
-/* ---------- CTA ---------- */
-.cta-sec{padding:0 0 104px}
-.cta{
-  border-radius:var(--r-lg);padding:64px 56px;color:#fff;position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#0b1f1c 0%,#0f4a41 55%,#12695a 100%);
+/* ═══════════════════════════════════════════
+   Krise
+   ═══════════════════════════════════════════ */
+.crisis{border:1px solid rgba(255,107,82,.38);border-left:3px solid var(--coral);
+  border-radius:var(--r-lg);background:rgba(255,107,82,.05);
+  padding:clamp(26px,4.5vw,38px);margin-top:clamp(36px,6vw,60px)}
+.crisis h3{color:var(--coral)}
+.crisis p{color:var(--fg-2);font-size:.95rem;line-height:1.6;margin-top:12px;max-width:62ch}
+.numgrid{display:grid;gap:11px;margin:24px 0 0}
+@media(min-width:720px){.numgrid{grid-template-columns:repeat(3,1fr)}}
+.numgrid a{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);
+  padding:18px 20px;min-height:48px;text-decoration:none;color:var(--fg);display:block;
+  transition:transform .24s var(--ease-out),border-color .24s ease,background .24s ease}
+@media(hover:hover) and (pointer:fine){
+  .numgrid a:hover{transform:translateY(-3px);border-color:var(--coral);background:var(--bg-3)}
 }
-@media(max-width:760px){.cta{padding:40px 24px}}
-.cta::after{
-  content:"";position:absolute;width:520px;height:520px;border-radius:50%;
-  background:radial-gradient(circle,rgba(124,92,255,.4),transparent 68%);
-  right:-140px;bottom:-200px;pointer-events:none;
-}
-.cta h2{color:#fff;position:relative;z-index:2}
-.cta > p{color:rgba(255,255,255,.78);max-width:560px;position:relative;z-index:2}
-form{margin-top:32px;max-width:580px;position:relative;z-index:2}
+.numgrid a:active{transform:scale(.98);transition-duration:.11s}
+.numgrid .big{font-family:var(--f-mono);font-size:1.34rem;font-weight:500;
+  letter-spacing:-.01em;color:var(--coral)}
+.numgrid .cap{font-size:.8rem;color:var(--fg-3);margin-top:6px;line-height:1.42}
+.crisis .after{margin-top:22px;font-size:.88rem}
+
+/* ═══════════════════════════════════════════
+   Kontakt
+   ═══════════════════════════════════════════ */
+.cta{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--bg-2);
+  padding:clamp(28px,5vw,60px);position:relative;overflow:hidden}
+.cta::after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,179,87,.13),transparent 68%);
+  right:-190px;bottom:-250px;pointer-events:none}
+.cta > *{position:relative;z-index:1}
+.cta p.intro{color:var(--fg-2);max-width:56ch;margin-top:16px;line-height:1.6}
+form{margin-top:32px;max-width:560px}
 .f{margin-bottom:16px}
-label{display:block;font-size:.85rem;font-weight:650;margin-bottom:8px;color:rgba(255,255,255,.92)}
+label{display:block;font-family:var(--f-mono);font-size:.66rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--fg-3);margin-bottom:8px}
 input[type=email],select,textarea{
-  width:100%;padding:15px 17px;border-radius:var(--r-sm);
-  border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.09);
-  color:#fff;font:inherit;font-size:.96rem;transition:border-color .25s,background .25s;
-}
-input:focus,select:focus,textarea:focus{outline:none;border-color:rgba(255,255,255,.65);background:rgba(255,255,255,.15)}
-input::placeholder,textarea::placeholder{color:rgba(255,255,255,.45)}
-select option{color:var(--ink)}
-textarea{min-height:96px;resize:vertical}
-.consent{display:flex;gap:12px;align-items:flex-start;font-size:.85rem;color:rgba(255,255,255,.78);margin:20px 0}
-.consent input{margin-top:4px;flex:0 0 auto;width:17px;height:17px;accent-color:var(--c3)}
-button[type=submit]{
-  background:#fff;color:var(--ink);border:none;padding:15px 32px;border-radius:var(--r-pill);
-  font:inherit;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:10px;
-  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
-}
-button[type=submit]:hover{transform:translateY(-2px);box-shadow:0 16px 34px -16px rgba(0,0,0,.6)}
-.fnote{font-size:.8rem;color:rgba(255,255,255,.6);margin-top:16px}
-#feedback{
-  color:#fff;font-weight:600;font-size:.88rem;background:rgba(0,0,0,.26);
-  padding:12px 15px;border-radius:var(--r-sm);margin-top:16px;
-}
+  width:100%;min-height:50px;padding:14px 16px;border-radius:var(--r);
+  border:1px solid var(--line);background:rgba(255,255,255,.04);
+  color:var(--fg);font:inherit;font-size:16px;
+  transition:border-color .24s ease,background .24s ease}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--amber);
+  background:rgba(255,255,255,.07)}
+input::placeholder,textarea::placeholder{color:var(--fg-3)}
+select option{color:#111;background:#fff}
+textarea{min-height:100px;resize:vertical;line-height:1.55}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:.86rem;
+  color:var(--fg-2);margin:22px 0;line-height:1.5;
+  font-family:var(--f-body);letter-spacing:normal;text-transform:none}
+.consent input{margin-top:3px;flex:none;width:19px;height:19px;min-height:0;
+  accent-color:var(--amber)}
+.fnote{font-size:.8rem;color:var(--fg-3);margin-top:18px;line-height:1.5}
+#feedback{color:var(--fg);font-size:.88rem;background:rgba(255,255,255,.06);
+  border:1px solid var(--line);padding:13px 16px;border-radius:var(--r);margin-top:16px}
 
-/* ---------- Footer ---------- */
-footer{border-top:1px solid var(--line);padding:60px 0 72px;font-size:.9rem;color:var(--ink-3)}
-.fcols{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}
-@media(max-width:860px){.fcols{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.fcols{grid-template-columns:1fr}}
-footer h4{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);margin-bottom:16px}
-footer a{color:var(--ink-2);text-decoration:none;display:block;margin-bottom:10px;transition:color .2s}
-footer a:hover{color:var(--c1)}
-.todo{color:var(--c4);font-weight:600}
-.legal{margin-top:44px;padding-top:28px;border-top:1px solid var(--line);font-size:.79rem;line-height:1.65;color:var(--ink-3)}
-.legal strong{color:var(--ink-2)}
+/* ═══════════════════════════════════════════
+   Footer
+   ═══════════════════════════════════════════ */
+footer{border-top:1px solid var(--line);padding-block:clamp(44px,7vw,68px) clamp(40px,6vw,64px);
+  font-size:.9rem;color:var(--fg-3)}
+.fcols{display:grid;gap:32px}
+@media(min-width:620px){.fcols{grid-template-columns:1fr 1fr}}
+@media(min-width:900px){.fcols{grid-template-columns:2fr 1fr 1fr 1fr;gap:36px}}
+footer h4{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fg-2);margin:0 0 15px;font-weight:500}
+footer nav a{color:var(--fg-3);text-decoration:none;display:block;margin-bottom:11px;
+  transition:color .2s ease}
+@media(hover:hover) and (pointer:fine){footer nav a:hover{color:var(--amber)}}
+.todo{color:var(--coral)}
+.fbrand p{max-width:34ch;margin-top:16px;color:var(--fg-3);line-height:1.6}
+.legal{margin-top:clamp(36px,6vw,56px);padding-top:28px;border-top:1px solid var(--line-2);
+  font-size:.76rem;line-height:1.66;color:var(--fg-3);display:grid;gap:16px;max-width:82ch}
+.legal strong{color:var(--fg-2);font-weight:500}
 
-/* ---------- Reduzierte Bewegung ---------- */
+/* ═══════════════════════════════════════════
+   Reduzierte Bewegung
+   ═══════════════════════════════════════════ */
 @media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
-  .rv{opacity:1;transform:none}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  html.js .rv{opacity:1;transform:none}
   .drow{opacity:1;transform:none}
-  .device{transform:none}
+  .device,.device.tilt{transform:none}
+  .pane{filter:none}
+  .pane:not(.on){display:none}
+  h1 .hl::after{transform:scaleX(1)}
 }
 </style>
 </head>
 <body>
 
+<div class="progress" aria-hidden="true"><i id="pbar"></i></div>
+
 <div class="statusbar">
-  <span class="dot"></span>
-  Projektstand: <b>in Entwicklung</b> — VORLAUF ist derzeit <b>kein zugelassenes Medizinprodukt</b> und keine DiGA.
+  <div class="wrap">
+    <span class="dot" aria-hidden="true"></span>
+    <span>Projektstand: <b>in Entwicklung</b> — VORLAUF ist derzeit <b>kein zugelassenes Medizinprodukt</b> und keine DiGA.</span>
+  </div>
 </div>
 
 <!-- NAV -->
@@ -455,15 +683,13 @@ footer a:hover{color:var(--c1)}
   <div class="wrap">
     <a class="brand" href="#top">
       <svg class="glyph" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-        <rect width="40" height="40" rx="11" fill="url(#lg)"/>
-        <path d="M11 26.5 L17.5 13 L20 18.5 L22.5 13 L29 26.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <circle cx="20" cy="27" r="2.2" fill="#FFB020"/>
-        <defs><linearGradient id="lg" x1="0" y1="0" x2="40" y2="40">
-          <stop stop-color="#12806E"/><stop offset="1" stop-color="#0B4A40"/>
-        </linearGradient></defs>
+        <rect width="40" height="40" rx="11" fill="#12322B"/>
+        <path d="M11 26.5 L17.5 13 L20 18.5 L22.5 13 L29 26.5" stroke="#EDF3F0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="20" cy="27" r="2.2" fill="#F0B357"/>
       </svg>
       VORLAUF
     </a>
+
     <div class="navlinks">
       <a href="#problem">Problem</a>
       <a href="#wie">Wie es funktioniert</a>
@@ -472,51 +698,60 @@ footer a:hover{color:var(--c1)}
       <a href="#evidenz">Evidenz</a>
       <a href="#krisenhilfe" class="crisis-link">Akute Hilfe</a>
     </div>
-    <a class="btn sm" href="#kontakt">Kontakt <span class="arw">→</span></a>
+    <a class="btn sm nav-cta" href="#kontakt">Kontakt <span class="arw">→</span></a>
+
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menü öffnen">
+      <i></i><i></i><i></i>
+    </button>
   </div>
 </nav>
 
+<div class="menu" id="menu" hidden>
+  <a href="#problem">Problem <span>01</span></a>
+  <a href="#wie">Wie es funktioniert <span>02</span></a>
+  <a href="#artefakt">Therapie-Artefakt <span>03</span></a>
+  <a href="#oekosystem">Ökosystem <span>04</span></a>
+  <a href="#evidenz">Evidenz <span>05</span></a>
+  <a href="#krisenhilfe" class="crisis-link">Akute Hilfe <span>SOS</span></a>
+  <a class="btn" href="#kontakt">Kontakt aufnehmen <span class="arw">→</span></a>
+</div>
+
 <main id="top">
 
-<!-- HERO -->
+<!-- ═══ HERO ═══ -->
 <header class="hero">
-  <div class="mesh" aria-hidden="true">
-    <span class="blob b1"></span><span class="blob b2"></span>
-    <span class="blob b3"></span><span class="blob b4"></span>
-  </div>
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="pill"><span class="tag">In Entwicklung</span> Digitale Therapievorbereitung</span>
-        <h1>Die Zeit vor der Therapie<br><span class="grad">ist nicht leer.</span></h1>
-        <p class="lead">
+        <span class="tagline lift l1"><b>In Entwicklung</b> Digitale Therapievorbereitung</span>
+        <h1 class="lift l2">Die Zeit vor der Therapie<br><span class="hl">ist nicht leer.</span></h1>
+        <p class="lead lift l3">
           Zwischen der Entscheidung für eine Suchttherapie und dem ersten Termin liegen häufig
           Monate. VORLAUF entwickelt eine digitale Begleitung für genau diese Phase — und übergibt
           das Dokumentierte an die spätere Behandlung.
         </p>
-        <div class="hero-cta">
+        <div class="hero-cta lift l4">
           <a class="btn" href="#kontakt">Auf dem Laufenden bleiben <span class="arw">→</span></a>
-          <a class="btn light" href="#wie">Wie es funktioniert</a>
+          <a class="btn ghost" href="#wie">Wie es funktioniert</a>
         </div>
-        <div class="hero-meta">
-          <span><svg class="tick" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#0f6b5c" stroke-width="1.6"/><path d="M6 10.4l2.6 2.6L14.2 7.4" stroke="#0f6b5c" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg> Daten bleiben bei der Person</span>
-          <span><svg class="tick" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#0f6b5c" stroke-width="1.6"/><path d="M6 10.4l2.6 2.6L14.2 7.4" stroke="#0f6b5c" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg> Übergabe nur nach Freigabe</span>
-          <span><svg class="tick" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#0f6b5c" stroke-width="1.6"/><path d="M6 10.4l2.6 2.6L14.2 7.4" stroke="#0f6b5c" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg> Entwicklung mit Fachkreisen</span>
+        <div class="hero-meta lift l5">
+          <span><svg class="tick" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M6 10.4l2.6 2.6L14.2 7.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg> Daten bleiben bei der Person</span>
+          <span><svg class="tick" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M6 10.4l2.6 2.6L14.2 7.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg> Übergabe nur nach Freigabe</span>
+          <span><svg class="tick" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M6 10.4l2.6 2.6L14.2 7.4" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg> Entwicklung mit Fachkreisen</span>
         </div>
       </div>
 
-      <!-- Gerätemockup -->
-      <div class="device-stage">
-        <div class="device">
+      <!-- Gerät -->
+      <div class="device-stage lift l6" id="stage">
+        <div class="device" id="device">
           <div class="screen">
-            <div class="notch"></div>
-            <div class="scr-head">
+            <div class="notch" aria-hidden="true"></div>
+            <div class="scr-head" id="scrHead">
               <div class="t" id="scrKick">Schritt 1 von 3</div>
               <div class="n" id="scrTitle">Heute erzählen</div>
             </div>
             <div class="scr-body">
 
-              <!-- Pane 1: VoiceLog -->
               <div class="pane on" id="p1">
                 <div class="bubble">Wie war dein Tag heute? Erzähl einfach.</div>
                 <div class="bubble me">War schwierig heute Abend. Nach der Arbeit, allein zuhause.</div>
@@ -527,14 +762,13 @@ footer a:hover{color:var(--c1)}
                   <i style="animation-delay:.81s"></i><i style="animation-delay:.9s"></i><i style="animation-delay:.99s"></i>
                 </div>
                 <div class="mic" aria-hidden="true">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <rect x="9" y="3" width="6" height="11" rx="3" fill="#fff"/>
-                    <path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <rect x="9" y="3" width="6" height="11" rx="3" fill="#EAF7F3"/>
+                    <path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3" stroke="#EAF7F3" stroke-width="2" stroke-linecap="round"/>
                   </svg>
                 </div>
               </div>
 
-              <!-- Pane 2: PatternMind -->
               <div class="pane" id="p2">
                 <div class="pat hot">
                   <div class="h">Abendstunden allein <em>11×</em></div>
@@ -554,7 +788,6 @@ footer a:hover{color:var(--c1)}
                 </div>
               </div>
 
-              <!-- Pane 3: Artefakt -->
               <div class="pane" id="p3">
                 <div class="rep">
                   <div class="rh">Vorbereitungsbericht</div>
@@ -564,14 +797,14 @@ footer a:hover{color:var(--c1)}
                   <div class="rr"><span>Muster</span><b>4 wiederkehrend</b></div>
                   <div class="rr"><span>Eigene Ziele</span><b>3</b></div>
                   <div class="stamp">
-                    <svg width="13" height="13" viewBox="0 0 20 20" fill="none"><path d="M5 10.4l3 3 7-7.4" stroke="#0f6b5c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg width="12" height="12" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.4l3 3 7-7.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     Von dir freigegeben
                   </div>
                 </div>
               </div>
 
             </div>
-            <div class="steps" aria-hidden="true">
+            <div class="steps-dots" aria-hidden="true">
               <i class="on"></i><i></i><i></i>
             </div>
           </div>
@@ -582,52 +815,56 @@ footer a:hover{color:var(--c1)}
   </div>
 </header>
 
-<!-- STATS -->
-<section class="stats-sec" id="problem">
+<!-- ═══ AUSGANGSLAGE ═══ -->
+<section id="problem">
   <div class="wrap">
-    <span class="kicker rv" style="color:var(--c3)">Die Ausgangslage</span>
-    <h2 class="rv d1">Eine Phase, in der<br>fast nichts passiert.</h2>
-    <p class="sub rv d2">
-      Wer sich für eine Behandlung entscheidet, wartet — häufig ohne feste Anbindung und ohne dass
-      dokumentiert wird, was in dieser Zeit geschieht.
-    </p>
+    <div class="sec-head">
+      <span class="kicker rv">Die Ausgangslage</span>
+      <h2 class="rv d1">Eine Phase, in der<br>fast nichts passiert.</h2>
+      <p class="sub rv d2">
+        Wer sich für eine Behandlung entscheidet, wartet — häufig ohne feste Anbindung und ohne dass
+        dokumentiert wird, was in dieser Zeit geschieht.
+      </p>
+    </div>
 
-    <div class="stats">
-      <div class="st rv d1">
-        <div class="n" data-count="142" data-suffix=" Tage">0</div>
-        <div class="l">durchschnittliche Wartezeit auf einen Psychotherapieplatz in Deutschland, indikationsübergreifend</div>
-        <div class="track"><i data-w="78"></i></div>
-        <div class="s">BPtK 2022</div>
+    <div class="figures">
+      <div class="fig rv">
+        <div class="n" data-count="142">142<u>Tage</u></div>
+        <p class="l">durchschnittliche Wartezeit auf einen Psychotherapieplatz in Deutschland, indikationsübergreifend</p>
+        <p class="s">BPtK 2022</p>
+        <div class="meter"><i data-w="78"></i></div>
       </div>
-      <div class="st rv d2">
-        <div class="n" data-count="30" data-prefix="≈ " data-suffix=" %">0</div>
-        <div class="l">Abbruchquote in der psychosozialen Suchtbehandlung</div>
-        <div class="track"><i data-w="30"></i></div>
-        <div class="s">Lappan et al. 2020</div>
+      <div class="fig rv">
+        <div class="n" data-count="30" data-prefix="≈&#8239;">≈&#8239;30<u>%</u></div>
+        <p class="l">Abbruchquote in der psychosozialen Suchtbehandlung</p>
+        <p class="s">Lappan et al. 2020</p>
+        <div class="meter"><i data-w="30"></i></div>
       </div>
-      <div class="st rv d3">
-        <div class="n" data-count="37" data-suffix=" %">0</div>
-        <div class="l">Abbruchquote speziell bei Opioidabhängigkeit</div>
-        <div class="track"><i data-w="37"></i></div>
-        <div class="s">Dutra et al. 2008</div>
+      <div class="fig rv">
+        <div class="n" data-count="37">37<u>%</u></div>
+        <p class="l">Abbruchquote speziell bei Opioidabhängigkeit</p>
+        <p class="s">Dutra et al. 2008</p>
+        <div class="meter"><i data-w="37"></i></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WARTEZEIT-TIMELINE -->
-<section>
+<!-- ═══ DIE LÜCKE ═══ -->
+<section id="luecke">
   <div class="wrap">
-    <span class="kicker rv">Die Lücke</span>
-    <h2 class="rv d1">Zwischen Entscheidung<br>und erstem Termin</h2>
-    <p class="sub rv d2">
-      Wenn die Behandlung beginnt, liegen den Behandelnden in der Regel keine Aufzeichnungen über die
-      vorangegangenen Monate vor. Die Anamnese stützt sich auf Erinnerung. Retrospektive Selbstauskunft
-      gilt in der Suchtforschung als fehleranfällig — einer der Gründe, warum tagesnahe Erfassungsverfahren
-      (Ecological Momentary Assessment) dort seit Jahren erforscht werden.
-    </p>
+    <div class="sec-head">
+      <span class="kicker rv">Die Lücke</span>
+      <h2 class="rv d1">Zwischen Entscheidung<br>und erstem Termin</h2>
+      <p class="sub rv d2">
+        Wenn die Behandlung beginnt, liegen den Behandelnden in der Regel keine Aufzeichnungen über die
+        vorangegangenen Monate vor. Die Anamnese stützt sich auf Erinnerung. Retrospektive Selbstauskunft
+        gilt in der Suchtforschung als fehleranfällig — einer der Gründe, warum tagesnahe Erfassungsverfahren
+        (Ecological Momentary Assessment) dort seit Jahren erforscht werden.
+      </p>
+    </div>
 
-    <div class="timeline rv d2" id="tl">
+    <div class="gapbox rv d2" id="tl">
       <div class="tl-track">
         <div class="tl-gap" id="tlgap"><span>Hier passiert bisher nichts</span></div>
         <div class="tl-line"><i class="tl-fill" id="tlfill"></i></div>
@@ -635,132 +872,154 @@ footer a:hover{color:var(--c1)}
         <div class="tl-node b"><div class="dot"></div><div class="lb">Wartezeit</div></div>
         <div class="tl-node c"><div class="dot"></div><div class="lb">Erstes<br>Gespräch</div></div>
       </div>
-      <p style="margin:26px 0 0;font-size:.92rem;color:var(--ink-3)">
+      <p class="note">
         Suchtberatungsstellen leisten die Arbeit in dieser Phase — unter Bedingungen, die kaum Spielraum
-        lassen. Drei Viertel der öffentlich geförderten Stellen konnten ihre Kosten zuletzt nicht decken.
+        lassen. <b>Drei Viertel der öffentlich geförderten Stellen konnten ihre Kosten zuletzt nicht decken.</b>
         Sie sind für uns Partner, nicht Wettbewerber.
       </p>
     </div>
   </div>
 </section>
 
-<!-- WIE ES FUNKTIONIERT -->
-<section id="wie" style="background:var(--paper-2)">
+<!-- ═══ WIE ES FUNKTIONIERT ═══ -->
+<section id="wie">
   <div class="wrap">
-    <span class="kicker rv">Der Ansatz</span>
-    <h2 class="rv d1">Erfassen. Ordnen. Übergeben.</h2>
-    <p class="sub rv d2">
-      VORLAUF stellt keine Diagnosen und ersetzt keine Behandlung. Es dokumentiert, strukturiert
-      und übergibt — auf Wunsch der Person, die es nutzt.
-    </p>
+    <div class="sec-head">
+      <span class="kicker rv">Der Ansatz</span>
+      <h2 class="rv d1">Erfassen. Ordnen. Übergeben.</h2>
+      <p class="sub rv d2">
+        VORLAUF stellt keine Diagnosen und ersetzt keine Behandlung. Es dokumentiert, strukturiert
+        und übergibt — auf Wunsch der Person, die es nutzt.
+      </p>
+    </div>
 
-    <div class="cards">
-      <!-- Karte 1 -->
-      <div class="card k1 rv d1">
-        <svg class="art" viewBox="0 0 240 126" fill="none" aria-hidden="true">
-          <rect x="8" y="18" width="150" height="34" rx="17" fill="#E6F1EE"/>
-          <rect x="26" y="30" width="86" height="5" rx="2.5" fill="#0f6b5c" opacity=".35"/>
-          <rect x="26" y="41" width="54" height="5" rx="2.5" fill="#0f6b5c" opacity=".22"/>
-          <rect x="70" y="64" width="150" height="34" rx="17" fill="#0f6b5c"/>
-          <rect x="88" y="76" width="94" height="5" rx="2.5" fill="#fff" opacity=".8"/>
-          <rect x="88" y="87" width="60" height="5" rx="2.5" fill="#fff" opacity=".45"/>
-          <g>
-            <circle cx="196" cy="26" r="18" fill="#FFB020"/>
-            <rect x="192" y="18" width="8" height="12" rx="4" fill="#fff"/>
-            <path d="M187 27a9 9 0 0018 0M196 34v4" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/>
-          </g>
-          <g opacity=".9">
-            <rect x="14" y="106" width="4" height="12" rx="2" fill="#0f6b5c"/>
-            <rect x="22" y="100" width="4" height="18" rx="2" fill="#0f6b5c"/>
-            <rect x="30" y="94" width="4" height="24" rx="2" fill="#0f6b5c"/>
-            <rect x="38" y="102" width="4" height="16" rx="2" fill="#0f6b5c"/>
-            <rect x="46" y="97" width="4" height="21" rx="2" fill="#0f6b5c"/>
-            <rect x="54" y="108" width="4" height="10" rx="2" fill="#0f6b5c"/>
-          </g>
-        </svg>
-        <span class="num">01 — Erfassen</span>
-        <h3>VoiceLog</h3>
-        <p>
-          Tagesnahe Erfassung per Sprache statt Formular. Die Annahme dahinter — dass Erzählen die
-          Hürde senkt — prüfen wir derzeit gemeinsam mit Fachkreisen. Mehrsprachig angelegt, weil die
-          Zielgruppe es ist.
-        </p>
+    <div class="scene">
+      <div class="steps">
+        <article class="step on" data-step="0">
+          <p class="ix">01 — Erfassen</p>
+          <h3>VoiceLog</h3>
+          <p>
+            Tagesnahe Erfassung per Sprache statt Formular. Die Annahme dahinter — dass Erzählen die
+            Hürde senkt — prüfen wir derzeit gemeinsam mit Fachkreisen. Mehrsprachig angelegt, weil die
+            Zielgruppe es ist.
+          </p>
+        </article>
+        <article class="step" data-step="1">
+          <p class="ix">02 — Ordnen</p>
+          <h3>PatternMind</h3>
+          <p>
+            Aus den Einträgen werden wiederkehrende Muster sichtbar: Situationen, Tageszeiten,
+            Zusammenhänge. Nicht als Bewertung, sondern als Beobachtung — die Deutung bleibt bei der
+            Person selbst.
+          </p>
+        </article>
+        <article class="step" data-step="2">
+          <p class="ix">03 — Übergeben</p>
+          <h3>Therapie-Artefakt</h3>
+          <p>
+            Am Ende der Wartezeit steht ein strukturiertes Dokument, das die Person zum ersten Termin
+            mitbringen kann. Freiwillig, einsehbar, jederzeit widerrufbar.
+          </p>
+        </article>
       </div>
 
-      <!-- Karte 2 -->
-      <div class="card k2 rv d2">
-        <svg class="art" viewBox="0 0 240 126" fill="none" aria-hidden="true">
-          <rect x="10" y="10" width="220" height="106" rx="16" fill="#EDF3FE"/>
-          <g>
-            <rect x="30" y="80" width="14" height="22" rx="4" fill="#2e7df7" opacity=".3"/>
-            <rect x="52" y="62" width="14" height="40" rx="4" fill="#2e7df7" opacity=".3"/>
-            <rect x="74" y="40" width="14" height="62" rx="4" fill="#E8543F"/>
-            <rect x="96" y="70" width="14" height="32" rx="4" fill="#2e7df7" opacity=".3"/>
-            <rect x="118" y="52" width="14" height="50" rx="4" fill="#E8543F" opacity=".7"/>
-            <rect x="140" y="76" width="14" height="26" rx="4" fill="#2e7df7" opacity=".3"/>
-            <rect x="162" y="46" width="14" height="56" rx="4" fill="#E8543F" opacity=".85"/>
-            <rect x="184" y="84" width="14" height="18" rx="4" fill="#2e7df7" opacity=".3"/>
-          </g>
-          <path d="M30 34c40 8 70-14 100-6s50 2 80-10" stroke="#7c5cff" stroke-width="2.6" stroke-linecap="round" fill="none" stroke-dasharray="5 6"/>
-          <circle cx="81" cy="30" r="5.5" fill="#7c5cff"/>
-          <circle cx="169" cy="24" r="5.5" fill="#7c5cff"/>
-        </svg>
-        <span class="num">02 — Ordnen</span>
-        <h3>PatternMind</h3>
-        <p>
-          Aus den Einträgen werden wiederkehrende Muster sichtbar: Situationen, Tageszeiten,
-          Zusammenhänge. Nicht als Bewertung, sondern als Beobachtung — die Deutung bleibt bei der
-          Person selbst.
-        </p>
-      </div>
+      <!-- Auf Desktop bleibt hier ein zweites Gerät stehen und folgt dem Scroll -->
+      <div class="scene-stage">
+        <div class="device" id="device2">
+          <div class="screen">
+            <div class="notch" aria-hidden="true"></div>
+            <div class="scr-head" id="scrHead2">
+              <div class="t" id="scrKick2">Schritt 1 von 3</div>
+              <div class="n" id="scrTitle2">Heute erzählen</div>
+            </div>
+            <div class="scr-body">
 
-      <!-- Karte 3 -->
-      <div class="card k3 rv d3">
-        <svg class="art" viewBox="0 0 240 126" fill="none" aria-hidden="true">
-          <rect x="34" y="8" width="118" height="110" rx="12" fill="#fff" stroke="#E3EBE8" stroke-width="2"/>
-          <rect x="50" y="26" width="60" height="6" rx="3" fill="#0b1f1c" opacity=".8"/>
-          <rect x="50" y="42" width="86" height="4" rx="2" fill="#0b1f1c" opacity=".18"/>
-          <rect x="50" y="54" width="72" height="4" rx="2" fill="#0b1f1c" opacity=".18"/>
-          <rect x="50" y="66" width="80" height="4" rx="2" fill="#0b1f1c" opacity=".18"/>
-          <rect x="50" y="78" width="56" height="4" rx="2" fill="#0b1f1c" opacity=".18"/>
-          <rect x="50" y="94" width="42" height="12" rx="6" fill="#7c5cff" opacity=".18"/>
-          <circle cx="180" cy="62" r="30" fill="#7c5cff"/>
-          <path d="M168 62l8 9 17-19" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M152 62h-4M158 46l-3-3M158 78l-3 3" stroke="#7c5cff" stroke-width="2.4" stroke-linecap="round"/>
-        </svg>
-        <span class="num">03 — Übergeben</span>
-        <h3>Therapie-Artefakt</h3>
-        <p>
-          Am Ende der Wartezeit steht ein strukturiertes Dokument, das die Person zum ersten Termin
-          mitbringen kann. Freiwillig, einsehbar, jederzeit widerrufbar.
-        </p>
+              <div class="pane on" id="q1">
+                <div class="bubble">Wie war dein Tag heute? Erzähl einfach.</div>
+                <div class="bubble me">War schwierig heute Abend. Nach der Arbeit, allein zuhause.</div>
+                <div class="wave" aria-hidden="true">
+                  <i style="animation-delay:0s"></i><i style="animation-delay:.09s"></i><i style="animation-delay:.18s"></i>
+                  <i style="animation-delay:.27s"></i><i style="animation-delay:.36s"></i><i style="animation-delay:.45s"></i>
+                  <i style="animation-delay:.54s"></i><i style="animation-delay:.63s"></i><i style="animation-delay:.72s"></i>
+                  <i style="animation-delay:.81s"></i><i style="animation-delay:.9s"></i><i style="animation-delay:.99s"></i>
+                </div>
+                <div class="mic" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <rect x="9" y="3" width="6" height="11" rx="3" fill="#EAF7F3"/>
+                    <path d="M5.5 11.5a6.5 6.5 0 0013 0M12 18v3" stroke="#EAF7F3" stroke-width="2" stroke-linecap="round"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="pane" id="q2">
+                <div class="pat hot">
+                  <div class="h">Abendstunden allein <em>11×</em></div>
+                  <div class="bars" aria-hidden="true">
+                    <i></i><i></i><i class="x"></i><i></i><i class="x"></i><i></i><i class="x"></i>
+                    <i></i><i class="x"></i><i></i><i class="x"></i><i></i>
+                  </div>
+                  <div class="cap">Häufigste wiederkehrende Situation im Zeitraum.</div>
+                </div>
+                <div class="pat">
+                  <div class="h">Nach Konflikten <em>4×</em></div>
+                  <div class="bars" aria-hidden="true">
+                    <i></i><i class="x"></i><i></i><i></i><i></i><i class="x"></i>
+                    <i></i><i></i><i></i><i class="x"></i><i></i><i></i>
+                  </div>
+                  <div class="cap">Beobachtung, keine Bewertung — die Deutung bleibt bei dir.</div>
+                </div>
+              </div>
+
+              <div class="pane" id="q3">
+                <div class="rep">
+                  <div class="rh">Vorbereitungsbericht</div>
+                  <div class="rt">Für das Erstgespräch</div>
+                  <div class="rr"><span>Zeitraum</span><b>84 Tage</b></div>
+                  <div class="rr"><span>Einträge</span><b>71</b></div>
+                  <div class="rr"><span>Muster</span><b>4 wiederkehrend</b></div>
+                  <div class="rr"><span>Eigene Ziele</span><b>3</b></div>
+                  <div class="stamp">
+                    <svg width="12" height="12" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 10.4l3 3 7-7.4" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    Von dir freigegeben
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="steps-dots" aria-hidden="true">
+              <i class="on"></i><i></i><i></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ARTEFAKT -->
+<!-- ═══ ARTEFAKT ═══ -->
 <section id="artefakt">
   <div class="wrap">
     <div class="split">
-      <div>
-        <span class="kicker rv">Das Kernstück</span>
-        <h2 class="rv d1">Nicht die App ist<br>das Produkt.</h2>
-        <p class="rv d2" style="color:var(--ink-2);font-size:1.06rem">
+      <div class="body">
+        <div class="sec-head" style="margin-bottom:0;gap:16px">
+          <span class="kicker rv">Das Kernstück</span>
+          <h2 class="rv d1">Nicht die App ist<br>das Produkt.</h2>
+        </div>
+        <p class="big rv d2">
           Sondern das, was am Ende aus ihr herausfällt: eine strukturierte Übergabe an die behandelnde
           Person.
         </p>
-        <p class="rv d2" style="color:var(--ink-2)">
+        <p class="rv d2">
           Damit richtet sich das Produkt an zwei Seiten zugleich — an die Person in der Wartezeit und
           an die Behandelnden, die den Fall übernehmen. Ob eine solche Übergabe den Behandlungsstart
           tatsächlich verbessert, ist unsere zentrale Arbeitshypothese. Genau die Frage prüfen wir
           gerade mit Therapeut:innen, bevor wir sie behaupten.
         </p>
-        <p class="rv d3" style="color:var(--ink-2)">
+        <p class="rv d3">
           Die Hoheit über das Dokument liegt vollständig bei der Person, die es erstellt hat. Nichts
           wird ohne aktive Freigabe geteilt.
         </p>
-        <a class="btn rv d3" href="#fachkreise">Für Fachkreise <span class="arw">→</span></a>
+        <a class="btn ghost rv d3" href="#fachkreise">Für Fachkreise <span class="arw">→</span></a>
       </div>
 
       <div class="docx rv d2" id="docx">
@@ -770,15 +1029,15 @@ footer a:hover{color:var(--c1)}
             <h4>Vorbereitungsbericht — Wartephase</h4>
           </div>
           <svg class="seal" viewBox="0 0 44 44" fill="none" aria-hidden="true">
-            <circle cx="22" cy="22" r="20" fill="#E6F1EE"/>
-            <path d="M14 22.5l5.5 5.5L31 16.5" stroke="#0f6b5c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="22" cy="22" r="20" fill="#E4F0EC"/>
+            <path d="M14 22.5l5.5 5.5L31 16.5" stroke="#2B6F5E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
         <div class="drow"><span>Erfassungszeitraum</span><b>84 Tage · 71 Einträge</b></div>
-        <div class="drow"><span>Dokumentierte Muster</span><b>4 wiederkehrende Situationen</b></div>
+        <div class="drow"><span>Dokumentierte Muster</span><b>4 Situationen</b></div>
         <div class="drow"><span>Selbstformulierte Ziele</span><b>3</b></div>
-        <div class="drow"><span>Belastungsverlauf</span><b>über den Zeitraum dokumentiert</b></div>
-        <div class="drow"><span>Freigegeben durch</span><b>Nutzer:in, am Tag der Übergabe</b></div>
+        <div class="drow"><span>Belastungsverlauf</span><b>dokumentiert</b></div>
+        <div class="drow"><span>Freigegeben durch</span><b>Nutzer:in</b></div>
         <p class="foot">
           Illustration des Aufbaus. Inhalte, Instrumente und Format befinden sich in Entwicklung und
           werden mit Fachkreisen abgestimmt.
@@ -788,96 +1047,117 @@ footer a:hover{color:var(--c1)}
   </div>
 </section>
 
-<!-- ÖKOSYSTEM -->
-<section id="oekosystem" style="background:var(--paper-2)">
+<!-- ═══ ÖKOSYSTEM ═══ -->
+<section id="oekosystem">
   <div class="wrap">
-    <span class="kicker rv">Der größere Rahmen</span>
-    <h2 class="rv d1">Ein Baustein,<br>sechs Kontexte.</h2>
-    <p class="sub rv d2">
-      Die Wartephase ist der Einstieg — nicht das Ende. Menschen bewegen sich durch das
-      Versorgungssystem, und die Dokumentation sollte mitwandern statt bei jedem Übergang neu zu
-      beginnen. Der Fokus der ersten Ausbaustufe liegt auf den grün markierten Kontexten.
-    </p>
+    <div class="sec-head">
+      <span class="kicker rv">Der größere Rahmen</span>
+      <h2 class="rv d1">Ein Baustein,<br>sechs Kontexte.</h2>
+      <p class="sub rv d2">
+        Die Wartephase ist der Einstieg — nicht das Ende. Menschen bewegen sich durch das
+        Versorgungssystem, und die Dokumentation sollte mitwandern statt bei jedem Übergang neu zu
+        beginnen. Der Fokus der ersten Ausbaustufe liegt auf den grün markierten Kontexten.
+      </p>
+    </div>
 
     <div class="eco rv d2">
-      <svg viewBox="18 -6 904 312" role="img" aria-label="Sechs Versorgungskontexte, verbunden durch die weitergegebene Dokumentation">
-        <!-- Verbindungen -->
-        <g stroke="#0f6b5c" stroke-width="2" fill="none" opacity=".45">
-          <path class="dash" d="M150 150 H310"/>
-          <path class="dash" d="M390 150 H550"/>
-          <path class="dash" d="M630 150 H790"/>
-          <path class="dash" d="M350 118 C 350 60, 590 60, 590 118"/>
-          <path class="dash" d="M350 182 C 350 244, 590 244, 590 182"/>
-        </g>
+      <div class="eco-scroll">
+        <svg viewBox="18 -6 904 312" role="img" aria-label="Sechs Versorgungskontexte, verbunden durch die weitergegebene Dokumentation">
+          <g stroke="#2B6F5E" stroke-width="2" fill="none" opacity=".4">
+            <path class="dash" d="M150 150 H310"/>
+            <path class="dash" d="M390 150 H550"/>
+            <path class="dash" d="M630 150 H790"/>
+            <path class="dash" d="M350 118 C 350 60, 590 60, 590 118"/>
+            <path class="dash" d="M350 182 C 350 244, 590 244, 590 182"/>
+          </g>
 
-        <!-- Knoten Phase 2 -->
-        <g>
-          <rect x="30" y="118" width="120" height="64" rx="18" fill="#fff" stroke="#E3EBE8" stroke-width="2"/>
-          <text x="90" y="146" text-anchor="middle" font-size="14" font-weight="700" fill="#0b1f1c" font-family="system-ui,sans-serif">Hausarzt</text>
-          <text x="90" y="164" text-anchor="middle" font-size="11" fill="#6b8580" font-family="system-ui,sans-serif">Phase 2</text>
-        </g>
-        <g>
-          <rect x="790" y="118" width="120" height="64" rx="18" fill="#fff" stroke="#E3EBE8" stroke-width="2"/>
-          <text x="850" y="146" text-anchor="middle" font-size="14" font-weight="700" fill="#0b1f1c" font-family="system-ui,sans-serif">Substitution</text>
-          <text x="850" y="164" text-anchor="middle" font-size="11" fill="#6b8580" font-family="system-ui,sans-serif">Phase 2</text>
-        </g>
+          <g>
+            <rect x="30" y="118" width="120" height="64" rx="16" fill="#FBFAF7" stroke="#DEDCD3" stroke-width="2"/>
+            <text x="90" y="146" text-anchor="middle" font-size="14" font-weight="600" fill="#0D1A17" font-family="system-ui,sans-serif">Hausarzt</text>
+            <text x="90" y="164" text-anchor="middle" font-size="11" fill="#4A5C57" font-family="ui-monospace,monospace">Phase 2</text>
+          </g>
+          <g>
+            <rect x="790" y="118" width="120" height="64" rx="16" fill="#FBFAF7" stroke="#DEDCD3" stroke-width="2"/>
+            <text x="850" y="146" text-anchor="middle" font-size="14" font-weight="600" fill="#0D1A17" font-family="system-ui,sans-serif">Substitution</text>
+            <text x="850" y="164" text-anchor="middle" font-size="11" fill="#4A5C57" font-family="ui-monospace,monospace">Phase 2</text>
+          </g>
 
-        <!-- Knoten Schnittstelle -->
-        <g>
-          <rect x="290" y="30" width="120" height="64" rx="18" fill="#FFF6E6" stroke="#FFB020" stroke-width="2"/>
-          <text x="350" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#0b1f1c" font-family="system-ui,sans-serif">Entzugsklinik</text>
-          <text x="350" y="76" text-anchor="middle" font-size="11" fill="#8a6a20" font-family="system-ui,sans-serif">Schnittstelle</text>
-        </g>
-        <g>
-          <rect x="530" y="30" width="140" height="64" rx="18" fill="#FFF6E6" stroke="#FFB020" stroke-width="2"/>
-          <text x="600" y="58" text-anchor="middle" font-size="14" font-weight="700" fill="#0b1f1c" font-family="system-ui,sans-serif">Suchtberatung</text>
-          <text x="600" y="76" text-anchor="middle" font-size="11" fill="#8a6a20" font-family="system-ui,sans-serif">teilweise MVP</text>
-        </g>
+          <g>
+            <rect x="290" y="30" width="120" height="64" rx="16" fill="#FDF3E2" stroke="#E5B66A" stroke-width="2"/>
+            <text x="350" y="58" text-anchor="middle" font-size="14" font-weight="600" fill="#0D1A17" font-family="system-ui,sans-serif">Entzugsklinik</text>
+            <text x="350" y="76" text-anchor="middle" font-size="11" fill="#8A6A20" font-family="ui-monospace,monospace">Schnittstelle</text>
+          </g>
+          <g>
+            <rect x="530" y="30" width="140" height="64" rx="16" fill="#FDF3E2" stroke="#E5B66A" stroke-width="2"/>
+            <text x="600" y="58" text-anchor="middle" font-size="14" font-weight="600" fill="#0D1A17" font-family="system-ui,sans-serif">Suchtberatung</text>
+            <text x="600" y="76" text-anchor="middle" font-size="11" fill="#8A6A20" font-family="ui-monospace,monospace">teilweise MVP</text>
+          </g>
 
-        <!-- Knoten MVP-Kern -->
-        <g>
-          <rect x="310" y="118" width="140" height="64" rx="18" fill="#0f6b5c"/>
-          <text x="380" y="146" text-anchor="middle" font-size="14" font-weight="700" fill="#fff" font-family="system-ui,sans-serif">Wartephase</text>
-          <text x="380" y="164" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.7)" font-family="system-ui,sans-serif">MVP-Kern</text>
-        </g>
-        <g>
-          <rect x="510" y="118" width="140" height="64" rx="18" fill="#0f6b5c"/>
-          <text x="580" y="146" text-anchor="middle" font-size="14" font-weight="700" fill="#fff" font-family="system-ui,sans-serif">Tagesklinik</text>
-          <text x="580" y="164" text-anchor="middle" font-size="11" fill="rgba(255,255,255,.7)" font-family="system-ui,sans-serif">MVP-Kern</text>
-        </g>
+          <g class="node-core">
+            <rect x="310" y="118" width="140" height="64" rx="16" fill="#2B6F5E"/>
+            <text x="380" y="146" text-anchor="middle" font-size="14" font-weight="600" fill="#FBFAF7" font-family="system-ui,sans-serif">Wartephase</text>
+            <text x="380" y="164" text-anchor="middle" font-size="11" fill="#A9D5C8" font-family="ui-monospace,monospace">MVP-Kern</text>
+          </g>
+          <g class="node-core b">
+            <rect x="510" y="118" width="140" height="64" rx="16" fill="#2B6F5E"/>
+            <text x="580" y="146" text-anchor="middle" font-size="14" font-weight="600" fill="#FBFAF7" font-family="system-ui,sans-serif">Tagesklinik</text>
+            <text x="580" y="164" text-anchor="middle" font-size="11" fill="#A9D5C8" font-family="ui-monospace,monospace">MVP-Kern</text>
+          </g>
 
-        <!-- Dokument, das wandert -->
-        <g>
-          <rect x="466" y="222" width="30" height="38" rx="5" fill="#7c5cff"/>
-          <rect x="473" y="232" width="16" height="2.6" rx="1.3" fill="#fff" opacity=".9"/>
-          <rect x="473" y="239" width="16" height="2.6" rx="1.3" fill="#fff" opacity=".65"/>
-          <rect x="473" y="246" width="10" height="2.6" rx="1.3" fill="#fff" opacity=".45"/>
-        </g>
-        <text x="481" y="286" text-anchor="middle" font-size="11.5" fill="#6b8580" font-family="system-ui,sans-serif">Das Artefakt wandert mit der Person</text>
-      </svg>
+          <g class="travel">
+            <rect x="-15" y="-19" width="30" height="38" rx="5" fill="#C98B2F"/>
+            <rect x="-8" y="-9" width="16" height="2.6" rx="1.3" fill="#FBFAF7" opacity=".92"/>
+            <rect x="-8" y="-2" width="16" height="2.6" rx="1.3" fill="#FBFAF7" opacity=".66"/>
+            <rect x="-8" y="5" width="10" height="2.6" rx="1.3" fill="#FBFAF7" opacity=".45"/>
+          </g>
+          <text x="470" y="288" text-anchor="middle" font-size="11.5" fill="#4A5C57" font-family="ui-monospace,monospace">Das Artefakt wandert mit der Person</text>
+        </svg>
+      </div>
 
       <div class="legend">
-        <span><i style="background:#0f6b5c"></i> MVP-Kern</span>
-        <span><i style="background:#FFB020"></i> Schnittstelle / teilweise</span>
-        <span><i style="background:#E3EBE8"></i> Phase 2</span>
+        <span><i style="background:#2B6F5E"></i> MVP-Kern</span>
+        <span><i style="background:#E5B66A"></i> Schnittstelle / teilweise</span>
+        <span><i style="background:#DEDCD3"></i> Phase 2</span>
       </div>
+      <span class="eco-hint">← seitlich scrollen</span>
     </div>
   </div>
 </section>
 
-<!-- FACHKREISE -->
+<!-- ═══ WER DARAN ARBEITET ═══ -->
+<section id="team">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker rv">Wer daran arbeitet</span>
+      <h2 class="rv d1">Wir sind zu dritt.</h2>
+      <p class="sub rv d2">
+        Gebaut wird aus Hannover, neben den eigentlichen Jobs. Wir haben kein Produkt zu verkaufen —
+        wir haben eine These, die wir gerade mit Fachleuten prüfen. Wenn sie nicht trägt, wollen wir
+        das lieber jetzt wissen als nach der Zulassung.
+      </p>
+    </div>
+    <div class="crew rv d2">
+      <div><span>Produkt &amp; Mobile</span><b>Entwicklung der App, Kontakt zu Fachkreisen</b></div>
+      <div><span>Tech-Lead</span><b>Architektur, Datenmodell, Infrastruktur</b></div>
+      <div><span>Qualität &amp; Quellen</span><b>Prüft jede Zahl, bevor sie hier steht</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FACHKREISE ═══ -->
 <section id="fachkreise">
   <div class="wrap">
-    <span class="kicker rv">Mitgestalten</span>
-    <h2 class="rv d1">Wir suchen Gesprächs&shy;partner,<br>keine Kunden.</h2>
-    <p class="sub rv d2">
-      Wenn Sie mit Menschen in der Wartephase arbeiten, würden wir Ihnen gern das Artefakt zeigen
-      und Sie fragen, ob es Ihnen etwas bringen würde.
-    </p>
+    <div class="sec-head">
+      <span class="kicker rv">Mitgestalten</span>
+      <h2 class="rv d1">Wir suchen Gesprächs&shy;partner,<br>keine Kunden.</h2>
+      <p class="sub rv d2">
+        Wenn Sie mit Menschen in der Wartephase arbeiten, würden wir Ihnen gern das Artefakt zeigen
+        und Sie fragen, ob es Ihnen etwas bringen würde.
+      </p>
+    </div>
 
     <div class="aud">
-      <div class="abox one rv d1">
-        <span class="halo" aria-hidden="true"></span>
+      <div class="abox rv d1">
         <h3>Therapeut:innen &amp; Ärzt:innen</h3>
         <p>Wir möchten verstehen, ob eine strukturierte Vorgeschichte Ihre Erstgespräche verändert:</p>
         <ul>
@@ -886,8 +1166,7 @@ footer a:hover{color:var(--c1)}
           <li>Was müsste ein solches Dokument leisten, damit Sie es aktiv einfordern würden?</li>
         </ul>
       </div>
-      <div class="abox two rv d2">
-        <span class="halo" aria-hidden="true"></span>
+      <div class="abox rv d2">
         <h3>Beratungsstellen &amp; Kliniken</h3>
         <p>Wir sprechen mit Einrichtungen über frühe Pilotprojekte:</p>
         <ul>
@@ -900,17 +1179,38 @@ footer a:hover{color:var(--c1)}
   </div>
 </section>
 
-<!-- EVIDENZ -->
-<section id="evidenz" style="background:var(--paper-2)">
+<!-- ═══ EVIDENZ ═══ -->
+<section id="evidenz">
   <div class="wrap">
-    <span class="kicker rv">Transparenz</span>
-    <h2 class="rv d1">Was wir wissen —<br>und was nicht.</h2>
+    <div class="sec-head">
+      <span class="kicker rv">Transparenz</span>
+      <h2 class="rv d1">Was wir wissen —<br>und was nicht.</h2>
+      <span class="honest rv d2">Kein Wirksamkeitsnachweis vorhanden</span>
+    </div>
+
+    <div class="ledger rv d2">
+      <div>
+        <h4>Belegt — aus veröffentlichten Quellen</h4>
+        <ul>
+          <li>142 Tage mittlere Wartezeit auf einen Psychotherapieplatz<cite>BPtK 2022 · indikationsübergreifend</cite></li>
+          <li>≈&#8239;30 % Abbruch in der psychosozialen Suchtbehandlung<cite>Lappan et al. 2020</cite></li>
+          <li>37 % Abbruch speziell bei Opioidabhängigkeit<cite>Dutra et al. 2008</cite></li>
+          <li>Drei Viertel der öffentlich geförderten Beratungsstellen arbeiten nicht kostendeckend<cite>Quelle noch zu ergänzen</cite></li>
+          <li>EMA ist in der Suchtforschung ein etabliertes Erhebungsverfahren<cite>Methodische Literatur</cite></li>
+        </ul>
+      </div>
+      <div class="open">
+        <h4>Offen — unsere Arbeitshypothesen</h4>
+        <ul>
+          <li>Dass Erzählen statt Formular die Erfassungshürde tatsächlich senkt.</li>
+          <li>Dass ein strukturiertes Artefakt das Erstgespräch messbar verbessert.</li>
+          <li>Dass die Wartephase ein eigener Wirkzeitraum ist und nicht nur Vorlaufzeit.</li>
+          <li>Welches validierte Instrument die Qualität des Erstgesprächs abbildet.</li>
+        </ul>
+      </div>
+    </div>
 
     <div class="evi rv d2">
-      <span class="honest">
-        <svg width="17" height="17" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8.6" stroke="#B37A00" stroke-width="1.6"/><path d="M10 5.6v5.2M10 13.9v.2" stroke="#B37A00" stroke-width="2" stroke-linecap="round"/></svg>
-        Kein Wirksamkeitsnachweis vorhanden
-      </span>
       <p>
         VORLAUF wird als digitale Gesundheitsanwendung nach §139e SGB V entwickelt. Der Weg dorthin
         führt über ein Verfahren beim BfArM und über eine klinische Studie zum Nachweis positiver
@@ -940,7 +1240,7 @@ footer a:hover{color:var(--c1)}
         <a href="tel:116117"><div class="big">116 117</div><div class="cap">Ärztlicher Bereitschaftsdienst</div></a>
         <a href="tel:08001110111"><div class="big">0800 111 0 111</div><div class="cap">TelefonSeelsorge — rund um die Uhr, kostenfrei, anonym. Auch 0800 111 0 222 und 116 123</div></a>
       </div>
-      <p>
+      <p class="after">
         Suchtberatungsstellen in Ihrer Nähe finden Sie über das Suchthilfeverzeichnis der Deutschen
         Hauptstelle für Suchtfragen: <a href="https://www.dhs.de/suchthilfe/hilfe-suchen" rel="noopener">dhs.de/suchthilfe/hilfe-suchen</a>.
         Sucht &amp; Drogen Hotline bundesweit: <strong>01806 313031</strong> (täglich 8–24 Uhr, 0,20 € pro Anruf).
@@ -949,12 +1249,12 @@ footer a:hover{color:var(--c1)}
   </div>
 </section>
 
-<!-- CTA -->
-<section class="cta-sec" id="kontakt">
+<!-- ═══ KONTAKT ═══ -->
+<section id="kontakt">
   <div class="wrap">
     <div class="cta rv">
       <h2>Bleiben Sie in Kontakt</h2>
-      <p>
+      <p class="intro">
         Wir informieren in großen Abständen über den Projektfortschritt. Kein Newsletter, keine
         Werbung. Wenn Sie aus Fachkreisen kommen, melden wir uns für ein Gespräch.
       </p>
@@ -973,13 +1273,13 @@ footer a:hover{color:var(--c1)}
         </div>
         <div class="f">
           <label for="email">E-Mail-Adresse</label>
-          <input type="email" id="email" name="email" placeholder="name@beispiel.de" required>
+          <input type="email" id="email" name="email" placeholder="name@beispiel.de" autocomplete="email" required>
         </div>
         <div class="f">
           <label for="nachricht">Nachricht (optional)</label>
           <textarea id="nachricht" name="nachricht" placeholder="Worum geht es Ihnen?"></textarea>
         </div>
-        <label class="consent">
+        <label class="consent" for="consent">
           <input type="checkbox" id="consent" required>
           <span>
             Ich bin damit einverstanden, dass meine E-Mail-Adresse zur Kontaktaufnahme über dieses
@@ -987,11 +1287,11 @@ footer a:hover{color:var(--c1)}
             widerrufen. Weitere Informationen in der Datenschutzerklärung.
           </span>
         </label>
-        <button type="submit">Absenden <span class="arw">→</span></button>
+        <button class="btn" type="submit">Absenden <span class="arw">→</span></button>
         <p class="fnote">
           Bitte senden Sie uns keine Gesundheitsdaten oder Angaben zu Ihrem Konsum über dieses Formular.
         </p>
-        <p id="feedback" role="status" aria-live="polite" style="display:none"></p>
+        <p id="feedback" role="status" aria-live="polite" hidden></p>
       </form>
     </div>
   </div>
@@ -1002,41 +1302,39 @@ footer a:hover{color:var(--c1)}
 <footer>
   <div class="wrap">
     <div class="fcols">
-      <div>
-        <a class="brand" href="#top" style="margin-bottom:16px">
+      <div class="fbrand">
+        <a class="brand" href="#top">
           <svg class="glyph" viewBox="0 0 40 40" fill="none" aria-hidden="true">
-            <rect width="40" height="40" rx="11" fill="url(#lg2)"/>
-            <path d="M11 26.5 L17.5 13 L20 18.5 L22.5 13 L29 26.5" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <circle cx="20" cy="27" r="2.2" fill="#FFB020"/>
-            <defs><linearGradient id="lg2" x1="0" y1="0" x2="40" y2="40">
-              <stop stop-color="#12806E"/><stop offset="1" stop-color="#0B4A40"/>
-            </linearGradient></defs>
+            <rect width="40" height="40" rx="11" fill="#12322B"/>
+            <path d="M11 26.5 L17.5 13 L20 18.5 L22.5 13 L29 26.5" stroke="#EDF3F0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <circle cx="20" cy="27" r="2.2" fill="#F0B357"/>
           </svg>
+          VORLAUF
         </a>
-        <p style="max-width:320px;margin-top:14px">
+        <p>
           Ein Vorhaben zur digitalen Therapievorbereitung bei Opioid- und Benzodiazepinabhängigkeit.
           In Entwicklung.
         </p>
       </div>
-      <div>
+      <nav>
         <h4>Projekt</h4>
         <a href="#problem">Ausgangslage</a>
         <a href="#wie">Wie es funktioniert</a>
         <a href="#artefakt">Therapie-Artefakt</a>
         <a href="#oekosystem">Ökosystem</a>
-      </div>
-      <div>
+      </nav>
+      <nav>
         <h4>Mitwirken</h4>
         <a href="#fachkreise">Für Fachkreise</a>
         <a href="#evidenz">Evidenz</a>
         <a href="#kontakt">Kontakt</a>
-      </div>
-      <div>
+      </nav>
+      <nav>
         <h4>Rechtliches</h4>
         <a href="#" class="todo">Impressum — fehlt</a>
         <a href="#" class="todo">Datenschutz — fehlt</a>
-        <a href="#krisenhilfe" style="color:var(--c4);font-weight:600">Akute Hilfe</a>
-      </div>
+        <a href="#krisenhilfe" style="color:var(--coral)">Akute Hilfe</a>
+      </nav>
     </div>
 
     <div class="legal">
@@ -1057,27 +1355,98 @@ footer a:hover{color:var(--c1)}
       </p>
       <p class="todo">
         Vor Veröffentlichung zwingend zu ergänzen: Impressum nach §5 DDG (die Pflicht greift bereits
-        durch das Kontaktformular — „noindex" ändert daran nichts), Datenschutzerklärung nach Art. 13
+        durch das Kontaktformular — „noindex“ ändert daran nichts), Datenschutzerklärung nach Art. 13
         DSGVO (ohne sie ist die Einwilligung im Formular unwirksam), Cookie-/Consent-Prüfung,
         Formular-Endpunkt mit Auftragsverarbeitungsvertrag, echte Kontaktadresse statt des Platzhalters
-        im Script, Prüfung des Arbeitsnamens „VORLAUF" (DPMA Klassen 9/42/44 und Domainverfügbarkeit),
-        juristische Freigabe aller Aussagen gegen HWG, §5 UWG und Art. 7 MDR.
+        im Script, Schriften selbst hosten statt vom Google-CDN, Prüfung des Arbeitsnamens „VORLAUF“
+        (DPMA Klassen 9/42/44 und Domainverfügbarkeit), juristische Freigabe aller Aussagen gegen HWG,
+        §5 UWG und Art. 7 MDR.
       </p>
     </div>
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <script>
 (function(){
   "use strict";
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var root = document.documentElement;
+  root.classList.add('js');
 
-  /* ---------- Sticky-Nav Schatten ---------- */
+  /* ─── Smooth Scroll (Lenis) ────────────────────────────────
+     Trägheitsscroll wie auf leni.dev. Fällt ohne Lenis oder bei
+     reduzierter Bewegung auf natives scroll-behavior zurück.   */
+  var lenis = null;
+  if(!reduce && typeof window.Lenis === 'function'){
+    try{
+      lenis = new window.Lenis({
+        duration:1.15,
+        easing:function(t){ return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+        smoothWheel:true,
+        touchMultiplier:1.6,
+        gestureOrientation:'vertical'
+      });
+      var raf = function(time){ lenis.raf(time); requestAnimationFrame(raf); };
+      requestAnimationFrame(raf);
+    }catch(err){ lenis = null; }
+  }
+  function goTo(target){
+    if(lenis){ lenis.scrollTo(target, {offset:-88, duration:1.25}); }
+    else if(target && target.scrollIntoView){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var id = a.getAttribute('href');
+    if(id === '#' ) { e.preventDefault(); return; }
+    var el = document.querySelector(id);
+    if(!el) return;
+    e.preventDefault();
+    closeMenu();
+    goTo(el);
+    if(history.replaceState) history.replaceState(null,'',id);
+  });
+
+  /* ─── Nav-Zustand + Fortschrittsbalken ──────────────────── */
   var nav = document.getElementById('nav');
-  function onScroll(){ nav.classList.toggle('stuck', window.scrollY > 12); }
-  window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  var pbar = document.getElementById('pbar');
+  var ticking = false;
+  function frame(){
+    var y = window.scrollY || window.pageYOffset;
+    nav.classList.toggle('stuck', y > 12);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    pbar.style.transform = 'scaleX(' + (h > 0 ? Math.min(y / h, 1) : 0) + ')';
+    ticking = false;
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(frame); } }
+  if(lenis) lenis.on('scroll', onScroll);
+  window.addEventListener('scroll', onScroll, {passive:true});
+  frame();
 
-  /* ---------- Scroll-Reveal ---------- */
+  /* ─── Mobiles Menü ──────────────────────────────────────── */
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function openMenu(){
+    menu.hidden = false;
+    burger.setAttribute('aria-expanded','true');
+    burger.setAttribute('aria-label','Menü schließen');
+    if(lenis) lenis.stop(); else document.body.style.overflow = 'hidden';
+  }
+  function closeMenu(){
+    if(menu.hidden) return;
+    menu.hidden = true;
+    burger.setAttribute('aria-expanded','false');
+    burger.setAttribute('aria-label','Menü öffnen');
+    if(lenis) lenis.start(); else document.body.style.overflow = '';
+  }
+  burger.addEventListener('click', function(){
+    if(menu.hidden) openMenu(); else closeMenu();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+  window.addEventListener('resize', function(){ if(window.innerWidth >= 1000) closeMenu(); });
+
+  /* ─── Scroll-Reveal ─────────────────────────────────────── */
   var revealables = document.querySelectorAll('.rv');
   if(!('IntersectionObserver' in window) || reduce){
     revealables.forEach(function(el){ el.classList.add('in'); });
@@ -1086,107 +1455,155 @@ footer a:hover{color:var(--c1)}
       entries.forEach(function(e){
         if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, {threshold:.14, rootMargin:'0px 0px -60px 0px'});
+    }, {threshold:.12, rootMargin:'0px 0px -8% 0px'});
     revealables.forEach(function(el){ io.observe(el); });
   }
 
-  /* ---------- Zahlen hochzählen ---------- */
-  var counters = document.querySelectorAll('[data-count]');
+  /* ─── Kennzahlen hochzählen ─────────────────────────────── */
   function runCounter(el){
     var target = parseFloat(el.getAttribute('data-count'));
     var pre = el.getAttribute('data-prefix') || '';
-    var suf = el.getAttribute('data-suffix') || '';
-    if(reduce){ el.textContent = pre + target + suf; return; }
+    var unit = el.querySelector('u');
+    var suffix = unit ? unit.outerHTML : '';
+    if(reduce){ return; }
     var start = performance.now(), dur = 1500;
     function tick(now){
       var p = Math.min((now - start) / dur, 1);
       var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = pre + Math.round(target * eased) + suf;
+      el.innerHTML = pre + Math.round(target * eased) + suffix;
       if(p < 1) requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
   }
-  if('IntersectionObserver' in window){
+  if('IntersectionObserver' in window && !reduce){
     var cio = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(e.isIntersecting){ runCounter(e.target); cio.unobserve(e.target); }
       });
-    }, {threshold:.5});
-    counters.forEach(function(el){ cio.observe(el); });
-  } else {
-    counters.forEach(runCounter);
+    }, {threshold:.55});
+    document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
   }
 
-  /* ---------- Balken in den Stat-Karten ---------- */
-  var tracks = document.querySelectorAll('.track i');
+  /* ─── Messbalken ────────────────────────────────────────── */
+  var meters = document.querySelectorAll('.meter i');
+  function fillMeter(el){ el.style.width = el.getAttribute('data-w') + '%'; }
   if('IntersectionObserver' in window){
-    var tio = new IntersectionObserver(function(entries){
+    var mio = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if(e.isIntersecting){
-          e.target.style.width = e.target.getAttribute('data-w') + '%';
-          tio.unobserve(e.target);
-        }
+        if(e.isIntersecting){ fillMeter(e.target); mio.unobserve(e.target); }
       });
     }, {threshold:.5});
-    tracks.forEach(function(el){ tio.observe(el); });
-  } else {
-    tracks.forEach(function(el){ el.style.width = el.getAttribute('data-w') + '%'; });
-  }
+    meters.forEach(function(el){ mio.observe(el); });
+  } else { meters.forEach(fillMeter); }
 
-  /* ---------- Wartezeit-Timeline ---------- */
+  /* ─── Wartezeit-Balken ──────────────────────────────────── */
   var tl = document.getElementById('tl');
-  if(tl && 'IntersectionObserver' in window){
-    var lio = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if(e.isIntersecting){
-          document.getElementById('tlfill').style.width = '100%';
-          document.getElementById('tlgap').classList.add('in');
-          lio.unobserve(e.target);
-        }
-      });
-    }, {threshold:.4});
-    lio.observe(tl);
-  } else if(tl){
+  function fillTl(){
     document.getElementById('tlfill').style.width = '100%';
     document.getElementById('tlgap').classList.add('in');
   }
+  if(tl && 'IntersectionObserver' in window){
+    var lio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ fillTl(); lio.unobserve(e.target); } });
+    }, {threshold:.35});
+    lio.observe(tl);
+  } else if(tl){ fillTl(); }
 
-  /* ---------- Artefakt-Zeilen gestaffelt einblenden ---------- */
+  /* ─── Berichtszeilen gestaffelt ─────────────────────────── */
   var docx = document.getElementById('docx');
   if(docx){
     var rows = docx.querySelectorAll('.drow');
-    function showRows(){
-      rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('in'); }, reduce ? 0 : i * 170); });
-    }
+    var showRows = function(){
+      rows.forEach(function(r,i){ setTimeout(function(){ r.classList.add('in'); }, reduce ? 0 : i * 70); });
+    };
     if('IntersectionObserver' in window && !reduce){
       var dio = new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if(e.isIntersecting){ showRows(); dio.unobserve(e.target); } });
-      }, {threshold:.35});
+      }, {threshold:.3});
       dio.observe(docx);
     } else { showRows(); }
   }
 
-  /* ---------- Gerätemockup: Schritte durchlaufen ---------- */
-  var panes = [document.getElementById('p1'), document.getElementById('p2'), document.getElementById('p3')];
-  var dots  = document.querySelectorAll('.steps i');
-  var kick  = document.getElementById('scrKick');
-  var title = document.getElementById('scrTitle');
-  var titles = ['Heute erzählen','Muster im Zeitraum','Bericht für das Erstgespräch'];
-  var idx = 0;
-  function step(){
-    idx = (idx + 1) % 3;
-    panes.forEach(function(p,i){ if(p) p.classList.toggle('on', i === idx); });
-    dots.forEach(function(d,i){ d.classList.toggle('on', i === idx); });
-    if(kick)  kick.textContent  = 'Schritt ' + (idx + 1) + ' von 3';
-    if(title) title.textContent = titles[idx];
-  }
-  if(!reduce && panes[0]) setInterval(step, 3800);
+  /* ─── Geräte: Panes umschalten ──────────────────────────── */
+  var TITLES = ['Heute erzählen','Muster im Zeitraum','Bericht für das Erstgespräch'];
 
-  /* ---------- Formular (Platzhalter ohne Backend) ---------- */
+  function makeScreen(paneIds, dotsSel, headId, kickId, titleId){
+    var panes = paneIds.map(function(id){ return document.getElementById(id); });
+    if(!panes[0]) return null;
+    var dots  = document.querySelectorAll(dotsSel);
+    var head  = document.getElementById(headId);
+    var kick  = document.getElementById(kickId);
+    var title = document.getElementById(titleId);
+    var cur = 0;
+    return {
+      set: function(i){
+        if(i === cur) return;
+        cur = i;
+        panes.forEach(function(p,k){ p.classList.toggle('on', k === i); });
+        dots.forEach(function(d,k){ d.classList.toggle('on', k === i); });
+        head.classList.add('swap');
+        setTimeout(function(){
+          kick.textContent  = 'Schritt ' + (i + 1) + ' von 3';
+          title.textContent = TITLES[i];
+          head.classList.remove('swap');
+        }, 200);
+      },
+      next: function(){ this.set((cur + 1) % 3); }
+    };
+  }
+
+  /* Hero: läuft von allein */
+  var hero = makeScreen(['p1','p2','p3'], '.hero .steps-dots i', 'scrHead', 'scrKick', 'scrTitle');
+  if(hero && !reduce) setInterval(function(){ hero.next(); }, 4200);
+
+  /* Szene: folgt dem Scroll, auf Mobil läuft sie wie im Hero */
+  var scene = makeScreen(['q1','q2','q3'], '.scene-stage .steps-dots i', 'scrHead2', 'scrKick2', 'scrTitle2');
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+  var desktop = window.matchMedia('(min-width:960px)');
+
+  if(scene && steps.length && 'IntersectionObserver' in window){
+    var sio = new IntersectionObserver(function(entries){
+      if(!desktop.matches) return;
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        var i = parseInt(e.target.dataset.step, 10);
+        scene.set(i);
+        steps.forEach(function(s,k){ s.classList.toggle('on', k === i); });
+      });
+    }, {rootMargin:'-46% 0px -46% 0px', threshold:0});
+    steps.forEach(function(s){ sio.observe(s); });
+  }
+  /* Auf schmalen Schirmen ist die Szenen-Bühne ausgeblendet —
+     dann markieren wir alle Schritte als aktiv, damit die Leiste steht. */
+  function syncSteps(){
+    if(!desktop.matches) steps.forEach(function(s){ s.classList.add('on'); });
+  }
+  syncSteps();
+  desktop.addEventListener('change', syncSteps);
+
+  /* ─── Zeiger-Parallaxe (nur Hero, nur Maus) ─────────────── */
+  var stage = document.getElementById('stage');
+  var device = document.getElementById('device');
+  if(stage && device && !reduce && window.matchMedia('(hover:hover) and (pointer:fine)').matches && desktop.matches){
+    device.classList.add('tilt');
+    var dir = -1;
+    setInterval(function(){ dir *= -1; device.style.setProperty('--fy', (dir * 7) + 'px'); }, 3500);
+    stage.addEventListener('pointermove', function(e){
+      var r = stage.getBoundingClientRect();
+      device.style.setProperty('--mx', ((e.clientX - r.left) / r.width - .5).toFixed(3));
+      device.style.setProperty('--my', ((e.clientY - r.top) / r.height - .5).toFixed(3));
+    });
+    stage.addEventListener('pointerleave', function(){
+      device.style.setProperty('--mx', 0);
+      device.style.setProperty('--my', 0);
+    });
+  }
+
+  /* ─── Formular (Platzhalter ohne Backend) ───────────────── */
   var KONTAKT_MAIL = "hallo@example.org"; // TODO: echte Adresse eintragen
   var form = document.getElementById('waitlist');
   var fb = document.getElementById('feedback');
-  function say(t){ fb.textContent = t; fb.style.display = 'block'; }
+  function say(t){ fb.textContent = t; fb.hidden = false; }
 
   if(form){
     form.addEventListener('submit', function(e){
